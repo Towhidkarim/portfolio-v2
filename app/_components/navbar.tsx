@@ -15,7 +15,10 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className='container z-10 mx-auto flex h-16 flex-row items-center justify-between px-2 md:mt-5'>
+    <nav
+      id='nav'
+      className='container z-10 mx-auto flex h-16 flex-row items-center justify-between px-2 md:mt-5'
+    >
       <Reveal>
         <Button
           variant='ghost'
