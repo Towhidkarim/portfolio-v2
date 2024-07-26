@@ -9,3 +9,9 @@ export const UserSchema = z.object({
 });
 
 export type TUser = z.infer<typeof UserSchema>;
+
+export type TActionResponse = {
+  ok: boolean;
+  message: string;
+  code?: number;
+};

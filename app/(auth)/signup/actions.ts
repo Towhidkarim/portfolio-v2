@@ -16,17 +16,16 @@ export async function SignUpAction({
   username: string;
   password: string;
 }) {
-  const registrationInfo = { email, username, password };
-  const registrationSchema = z.object({
+  const signUpInfo = { email, username, password };
+  const signUpSchema = z.object({
     email: z.string().email(),
     username: z.string().regex(userNameRegex),
     password: z.string().min(6).max(64),
   });
 
-  const registrationInfoIsValid =
-    registrationSchema.safeParse(registrationInfo);
+  const signUpInfoIsValid = signUpSchema.safeParse(signUpInfo);
 
-  if (!registrationInfoIsValid.success)
+  if (!signUpInfoIsValid.success)
     return {
       ok: false,
       messsage: 'Invalid Credentials',
@@ -36,7 +35,7 @@ export async function SignUpAction({
     const isExisting = await db
       .select()
       .from(users)
-      .where(eq(users.email, registrationInfo.email));
+      .where(eq(users.email, signUpInfo.email));
 
     if (isExisting.length > 0)
       return {
@@ -62,7 +61,7 @@ export async function SignUpAction({
     });
     return {
       ok: true,
-      messsage: 'Registration Succesful!',
+      messsage: 'Signup Succesful!',
     };
   } catch (error) {
     console.log(error);
