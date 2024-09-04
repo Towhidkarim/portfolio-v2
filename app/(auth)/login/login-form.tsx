@@ -47,12 +47,13 @@ export default function LoginForm() {
       if (data.ok) {
         toast('Login Successful', {
           description: 'Redirecting...',
+          duration: 4000,
           action: {
             label: 'Close',
             onClick: () => {},
           },
         });
-        router.push(routes.home);
+        router.push(routes.dashboard);
       } else
         toast('Error Occured', {
           description: data.message,

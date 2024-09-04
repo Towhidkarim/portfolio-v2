@@ -1,0 +1,149 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { TProject } from '@/db/schema';
+
+import FetchProjectsAction from '@/lib/global-actions/FetchProjects';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { Settings } from 'lucide-react';
+import { useState } from 'react';
+import ProjectSettings from './ProjectSettings';
+import { ScrollArea } from '@/components/ui/scroll-area';
+
+export default function ViewProjects() {
+  // const {data, status, mutate: FetchProjects} = useMutation({ mutationFn: FetchProjectsAction})
+  const [currentPage, setCurrentPage] = useState(0);
+  const MAX_PER_PAGE = 10;
+  // const { data, status, isLoading } = useQuery({
+  //   queryFn: async () =>
+  //     await FetchProjectsAction(MAX_PER_PAGE, MAX_PER_PAGE * currentPage),
+  //   queryKey: ['projects-admin'],
+  //   staleTime: 5 * 60 * 1000, //5 mins -> ms
+  // });
+  const data: TProject[] = [
+    {
+      projectName: 'Personal Portfolio',
+      imgUrl: 'https://example.com/images/portfolio.jpg',
+      imgID: 'img123',
+      id: 'proj1',
+      displayIndex: 1,
+      tags: ['React', 'CSS', 'HTML'],
+      summary: 'A personal portfolio showcasing my projects and skills.',
+      description:
+        'This project is a fully responsive personal portfolio website built using React and styled-components. It includes sections like About, Projects, and Contact.',
+      demoLink: 'https://example.com/portfolio',
+      sourceLink: 'https://github.com/user/portfolio',
+    },
+    {
+      projectName: 'E-commerce Website',
+      imgUrl: 'https://example.com/images/ecommerce.jpg',
+      imgID: 'img124',
+      id: 'proj2',
+      displayIndex: 2,
+      tags: ['Next.js', 'TailwindCSS', 'Node.js'],
+      summary:
+        'An e-commerce platform with a modern UI and payment integration.',
+      description:
+        'A fully functional e-commerce website built with Next.js, featuring product listings, a shopping cart, and Stripe payment integration.',
+      demoLink: 'https://example.com/ecommerce',
+      sourceLink: 'https://github.com/user/ecommerce',
+    },
+    {
+      projectName: 'Social Media App',
+      imgUrl: 'https://example.com/images/social.jpg',
+      imgID: 'img125',
+      id: 'proj3',
+      displayIndex: 3,
+      tags: ['React Native', 'Firebase', 'Redux'],
+      summary:
+        'A mobile app for social networking with real-time chat and notifications.',
+      description:
+        'This project is a social media app developed using React Native and Firebase. It includes features like user authentication, real-time messaging, and push notifications.',
+      demoLink: 'https://example.com/socialapp',
+      sourceLink: 'https://github.com/user/socialapp',
+    },
+    {
+      projectName: 'Task Management Tool',
+      imgUrl: 'https://example.com/images/task.jpg',
+      imgID: 'img126',
+      id: 'proj4',
+      displayIndex: 4,
+      tags: ['Vue.js', 'Vuetify', 'Node.js'],
+      summary:
+        'A web application to manage tasks and projects with team collaboration.',
+      description:
+        'A task management tool built with Vue.js and Vuetify, offering features like task assignment, project timelines, and team collaboration.',
+      demoLink: 'https://example.com/taskmanager',
+      sourceLink: 'https://github.com/user/taskmanager',
+    },
+    {
+      projectName: 'Weather Dashboard',
+      imgUrl: 'https://example.com/images/weather.jpg',
+      imgID: 'img127',
+      id: 'proj5',
+      displayIndex: 5,
+      tags: ['React', 'API', 'Chart.js'],
+      summary: 'A dashboard to display weather data for different cities.',
+      description:
+        'This project is a weather dashboard built using React and Chart.js, fetching real-time weather data from an external API and displaying it in a user-friendly interface.',
+      demoLink: 'https://example.com/weatherdashboard',
+      sourceLink: 'https://github.com/user/weatherdashboard',
+    },
+  ];
+
+  return (
+    <section>
+      <h1>All Projects </h1>
+      <div className='flex flex-row flex-wrap gap-5 gap-y-5 px-10 py-5'>
+        {data?.map((item, index) => (
+          <Card key={index} className='group w-80'>
+            <CardHeader className='flex flex-row items-center justify-between pt-4'>
+              <CardTitle className='capitalize'>{item.projectName}</CardTitle>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant='ghost'
+                    className='p-1.5 opacity-0 transition hover:rotate-90 hover:opacity-85 group-hover:opacity-75'
+                  >
+                    <Settings />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className='max-w-xl'>
+                  <ScrollArea className='h-[90vh]'>
+                    <DialogHeader className='my-2'>
+                      <DialogTitle>{item.projectName}</DialogTitle>
+                      <DialogDescription>Settings</DialogDescription>
+                    </DialogHeader>
+                    <ProjectSettings defaultValues={item} />
+                  </ScrollArea>
+                </DialogContent>
+                {/* <DialogClose>Close</DialogClose> */}
+              </Dialog>
+            </CardHeader>
+            <CardContent>
+              <p>Card Content</p>
+            </CardContent>
+            <CardFooter></CardFooter>
+          </Card>
+        ))}
+      </div>
+    </section>
+  );
+}
