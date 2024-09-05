@@ -14,7 +14,7 @@ import FloatingObject from '@/components/framer/FloatingObject';
 
 export default function Hero() {
   return (
-    <section className='my-5 flex h-[70vh] w-full flex-col-reverse items-center justify-center gap-4 opacity-90 md:flex-row'>
+    <section className='my-5 mt-32 flex h-[70vh] w-full flex-col-reverse items-center justify-center gap-4 opacity-90 md:flex-row'>
       <div className='flex w-full flex-col items-center justify-center gap-2 text-center md:w-2/5 md:items-start md:text-left'>
         <Reveal delay={0.15} className=''>
           <span className='= text-xl font-medium text-foreground md:text-2xl'>

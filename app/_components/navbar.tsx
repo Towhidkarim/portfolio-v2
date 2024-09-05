@@ -5,6 +5,16 @@ import Reveal from '../../components/framer/Reveal';
 import JumpingText from '../../components/framer/JumpingText';
 import { AlignRight } from 'lucide-react';
 
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+
 export default function Navbar() {
   const otherOptions = [
     { title: 'Home', url: '/' },
@@ -17,7 +27,7 @@ export default function Navbar() {
   return (
     <nav
       id='nav'
-      className='container z-10 mx-auto flex h-16 flex-row items-center justify-between px-2 md:mt-5'
+      className='container fixed z-10 mx-auto flex h-14 flex-row items-center justify-between px-2 backdrop-blur-lg md:mt-5'
     >
       <Reveal>
         <Button
@@ -39,9 +49,32 @@ export default function Navbar() {
         className='flex h-full flex-row items-center justify-center'
         delay={0.25}
       >
-        <Button variant='ghost' className='md:hidden'>
-          <AlignRight strokeWidth={2.5} />
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant='ghost' className='md:hidden'>
+              <AlignRight strokeWidth={2.5} />
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle className='text-center text-2xl'>Menu</SheetTitle>
+            </SheetHeader>
+            <div className='flex size-full flex-col items-center justify-center gap-4'>
+              {otherOptions.map((value, index) => (
+                <SheetClose asChild>
+                  <Button
+                    variant='ghost'
+                    className='text-md p-8 uppercase md:inline-block'
+                    key={index}
+                    asChild
+                  >
+                    <Link href={value.url}>{value.title}</Link>
+                  </Button>
+                </SheetClose>
+              ))}
+            </div>
+          </SheetContent>
+        </Sheet>
         {otherOptions.map((value, index) => (
           <Button
             variant='ghost'
