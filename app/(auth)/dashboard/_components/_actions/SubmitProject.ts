@@ -44,6 +44,7 @@ export default async function SubmitProjectAction({
       demoLink,
       description,
       displayIndex: 0,
+      enabled: true,
       sourceLink,
       summary,
       tags,

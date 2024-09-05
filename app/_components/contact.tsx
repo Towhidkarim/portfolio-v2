@@ -6,8 +6,42 @@ import SectionTitle from '@/components/ui/section-title';
 import { Textarea } from '@/components/ui/textarea';
 import Image from 'next/image';
 import contactImage from '@/public/images/contact.svg';
+import { useRef, useState } from 'react';
+import SendMailAction from '@/lib/global-actions/SendMail';
+import { toast } from 'sonner';
 
 export default function Contact() {
+  // const [mail, setMail] = useState('');
+  // const [name, setName] = useState('');
+  // const [message, setMessage] = useState('');
+
+  const mail = useRef('');
+  const name = useRef('');
+  const message = useRef('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const formOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const res = await SendMailAction({
+      senderEmail: mail.current,
+      senderName: name.current,
+      message: message.current,
+      id: '',
+    });
+    setIsLoading(false);
+    if (res.ok)
+      toast('Succes!', {
+        description: res.message,
+        action: { label: 'Close', onClick: () => {} },
+      });
+    else
+      toast('Error', {
+        description: res.message,
+        action: { label: 'Close', onClick: () => {} },
+      });
+  };
+
   return (
     <section id='contact' className='my-32'>
       <SectionTitle>Contact</SectionTitle>
@@ -31,17 +65,35 @@ export default function Contact() {
           delay={0.4}
           className='mx-auto w-10/12 p-1 lg:w-2/5'
         >
-          <Input type='text' className='px-4 py-5' placeholder='Your Name' />
-          <br />
-          <Input type='email' className='px-4 py-5' placeholder='Your Email' />
-          <br />
-          <Textarea
-            placeholder='Your message here'
-            className='h-44 max-h-48 min-h-44 px-4 py-4'
-          ></Textarea>
-          <br />
-          <br />
-          <Button className='w-full'>Send Message</Button>
+          <form onSubmit={formOnSubmit}>
+            <Input
+              onChange={(e) => (name.current = e.target.value.toString())}
+              type='text'
+              className='px-4 py-5'
+              placeholder='Your Name'
+              required
+            />
+            <br />
+            <Input
+              onChange={(e) => (mail.current = e.target.value.toString())}
+              type='email'
+              className='px-4 py-5'
+              placeholder='Your Email'
+              required
+            />
+            <br />
+            <Textarea
+              onChange={(e) => (message.current = e.target.value.toString())}
+              placeholder='Your message here'
+              className='h-44 max-h-48 min-h-44 px-4 py-4'
+              required
+            ></Textarea>
+            <br />
+            <br />
+            <Button disabled={isLoading} className='w-full'>
+              Send Message
+            </Button>
+          </form>
         </Reveal>
       </div>
     </section>

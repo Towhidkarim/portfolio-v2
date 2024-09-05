@@ -21,9 +21,10 @@ import FadeEffect from '@/components/framer/FadeEffect';
 import Image from 'next/image';
 import DropZone from '../../../../../components/DropZone';
 import { toast } from 'sonner';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import SubmitProjectAction from '../_actions/SubmitProject';
 import { ProjectSchema } from '@/db/schema';
+import { queryKeys } from '@/lib/constants';
 
 export default function AddProject() {
   // const [displayImageUrl, setDisplayImageUrl] = useState('');
@@ -37,12 +38,14 @@ export default function AddProject() {
     imgUrl: z.string().url().optional(),
     imgID: z.string().optional(),
     displayIndex: z.number(),
+    tags: z.array(z.string()),
     description: z.string().min(10).max(2048).optional(),
     summary: z.string().min(10).max(128),
     demoLink: z.string().url().optional(),
     sourceLink: z.string().url().optional(),
   });
 
+  const queryClient = useQueryClient();
   const {
     data: responseData,
     isPending,
@@ -60,6 +63,7 @@ export default function AddProject() {
     resolver: zodResolver(ProjectSubmitSchema),
     defaultValues: {
       projectName: '',
+      tags: [],
       summary: '',
       displayIndex: 0,
       description: '',
@@ -84,19 +88,19 @@ export default function AddProject() {
       const tempData = formData;
       tempData.imgUrl = projectImageInfo.url;
       tempData.imgID = projectImageInfo.id;
+      tempData.tags = tags;
       const { data, success } = ProjectSchema.safeParse(tempData);
       if (!success) {
         toast('Error', { description: 'Data Validation Faild' });
         return;
       }
+      queryClient.invalidateQueries({ queryKey: [queryKeys.adminProjects] });
       SubmitProject({ data });
     }
   };
   return (
     <section className='mx-auto max-w-lg rounded p-4'>
-      <h1 className='pb-10 text-left text-2xl font-semibold'>
-        Add New Project
-      </h1>
+      <h1 className='pb-10 text-left text-2xl font-bold'>Add New Project</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(formOnSubmit)} className='space-y-8'>
           <FormField
@@ -168,35 +172,6 @@ export default function AddProject() {
               ),
             )}
           </div>
-          {/* <FormField
-            control={form.control}
-            name='imageFile'
-            render={({ field: { onChange, value, ...field } }) => (
-              <FormItem>
-                <FormLabel>Project Image</FormLabel>
-                <FormControl>
-                  <Input
-                    type='file'
-                    multiple={false}
-                    accept='image/*'
-                    disabled={form.formState.isSubmitting}
-                    className='cursor-pointer'
-                    {...field}
-                    onChange={(e) => {
-                      if (!e.target.files || e.target.files?.length <= 0) {
-                        setDisplayImageUrl('');
-                        return;
-                      }
-                      const { displayUrl, file } = getImageInfo(e);
-                      setDisplayImageUrl(displayUrl);
-                      onChange(file);
-                    }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
           <FormLabel className='-mb-10'>Project Image</FormLabel>
           <DropZone setFile={setProjectImageInfo} />
           {/* <div className='relative h-44'>
@@ -207,6 +182,19 @@ export default function AddProject() {
               fill
             />
           </div> */}
+          <FormField
+            control={form.control}
+            name='displayIndex'
+            render={({ field }) => (
+              <FormItem className='w-2/4'>
+                <FormLabel>Display Index</FormLabel>
+                <FormControl>
+                  <Input type='number' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className='flex w-full gap-3'>
             <FormField
               control={form.control}

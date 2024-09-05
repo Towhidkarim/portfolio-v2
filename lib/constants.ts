@@ -7,3 +7,7 @@ export const routes = {
   login: '/login',
   dashboard: '/dashboard',
 };
+
+export const queryKeys = {
+  adminProjects: 'admin-projects',
+};
