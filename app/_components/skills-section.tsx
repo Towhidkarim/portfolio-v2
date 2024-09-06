@@ -34,7 +34,7 @@ export default function SkillSection() {
     { title: 'Drizzle Orm', icon: drizzle },
     { title: 'HTML5', icon: htmlIcon },
     { title: 'CSS3', icon: cssIcon },
-    { title: 'NojeJS', icon: nodeIcon },
+    { title: 'NodeJS', icon: nodeIcon },
     { title: 'BunJS', icon: bunIcon },
   ];
 
