@@ -9,6 +9,7 @@ import contactImage from '@/public/images/contact.svg';
 import { useRef, useState } from 'react';
 import SendMailAction from '@/lib/global-actions/SendMail';
 import { toast } from 'sonner';
+import { LoaderCircle } from 'lucide-react';
 
 export default function Contact() {
   // const [mail, setMail] = useState('');
@@ -90,7 +91,12 @@ export default function Contact() {
             ></Textarea>
             <br />
             <br />
-            <Button disabled={isLoading} className='w-full'>
+            <Button disabled={isLoading} className='w-full transition'>
+              {isLoading ?? (
+                <span className='mx-2 animate-spin'>
+                  <LoaderCircle />
+                </span>
+              )}
               Send Message
             </Button>
           </form>

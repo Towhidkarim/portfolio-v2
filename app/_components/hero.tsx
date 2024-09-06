@@ -11,6 +11,8 @@ import Typo from './typo';
 import MotionDiv from '@/components/framer/MotionDiv';
 import { Button } from '@/components/ui/button';
 import FloatingObject from '@/components/framer/FloatingObject';
+import Link from 'next/link';
+import ScrollToTop from './ScrollToTop';
 
 export default function Hero() {
   return (
@@ -38,7 +40,9 @@ export default function Hero() {
           </h1>
         </Reveal>
         <Reveal delay={0.4}>
-          <Button variant='default'>See More -</Button>
+          <Button variant='default' asChild>
+            <Link href='#skills'>See More -</Link>
+          </Button>
         </Reveal>
       </div>
       <MotionDiv
@@ -47,7 +51,12 @@ export default function Hero() {
         transition={{ delay: 0.75, duration: 0.5, ease: 'easeInOut' }}
         className='pointer-events-none relative -z-10 grid select-none place-items-center md:w-2/5'
       >
-        <Image src={heroImage} alt='hero' className='max-w-full select-none' />
+        <Image
+          src={heroImage}
+          alt='hero'
+          className='max-w-full select-none'
+          priority
+        />
         <FloatingObject className='left-0 top-1/3'>
           <Image src={reactIcon} alt='' />
         </FloatingObject>

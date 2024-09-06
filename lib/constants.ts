@@ -10,4 +10,5 @@ export const routes = {
 
 export const queryKeys = {
   adminProjects: 'admin-projects',
+  publicProjects: 'public-projects',
 };
