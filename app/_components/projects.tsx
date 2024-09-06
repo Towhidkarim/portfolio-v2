@@ -73,6 +73,7 @@ export default function Projects() {
                   src={item.imageUrl}
                   alt={item.name}
                   className='rounded-t-lg object-cover'
+                  loading='eager'
                   priority
                   fill
                 />
