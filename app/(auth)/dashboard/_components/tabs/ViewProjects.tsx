@@ -125,8 +125,8 @@ export default function ViewProjects() {
           </span>
         )}
         {data?.map((item, index) => (
-          <Card key={index} className='group w-80 cursor-default'>
-            <CardHeader className='flex flex-row items-start justify-between pt-4'>
+          <Card key={index} className='group h-64 w-72 cursor-default'>
+            <CardHeader className='flex flex-row items-start justify-between pb-4 pt-4'>
               <div className=''>
                 <CardTitle className='capitalize'>
                   <span

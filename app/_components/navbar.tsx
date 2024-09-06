@@ -30,11 +30,11 @@ export default function Navbar() {
       className='fixed left-1/2 z-50 h-14 w-full -translate-x-1/2 bg-primary-foreground/10 px-2 backdrop-blur-lg'
     >
       <div className='container mx-auto flex flex-row items-center justify-between'>
-        <Reveal>
+        <Reveal className='mt-1'>
           <Button
             variant='ghost'
             asChild
-            className='ml-0 text-2xl font-extrabold md:py-6 md:text-3xl'
+            className='ml-0 mt-1 text-2xl font-extrabold md:py-6 md:text-3xl'
           >
             <Link href={'/'}>
               {/* <JumpingText

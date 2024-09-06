@@ -40,7 +40,7 @@ export default function AddProject() {
     displayIndex: z.number(),
     tags: z.array(z.string()),
     description: z.string().min(10).max(2048).optional(),
-    summary: z.string().min(10).max(128),
+    summary: z.string().min(10).max(512),
     demoLink: z.string().url().optional(),
     sourceLink: z.string().url().optional(),
   });
@@ -89,9 +89,10 @@ export default function AddProject() {
       tempData.imgUrl = projectImageInfo.url;
       tempData.imgID = projectImageInfo.id;
       tempData.tags = tags;
-      const { data, success } = ProjectSchema.safeParse(tempData);
+      const { data, success, error } = ProjectSchema.safeParse(tempData);
       if (!success) {
         toast('Error', { description: 'Data Validation Faild' });
+        console.log(error);
         return;
       }
       queryClient.invalidateQueries({ queryKey: [queryKeys.adminProjects] });
@@ -189,7 +190,14 @@ export default function AddProject() {
               <FormItem className='w-2/4'>
                 <FormLabel>Display Index</FormLabel>
                 <FormControl>
-                  <Input type='number' {...field} />
+                  <Input
+                    type='number'
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange();
+                      form.setValue('displayIndex', Number(e.target.value));
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

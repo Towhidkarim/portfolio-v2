@@ -61,10 +61,11 @@ export const ProjectSchema = createInsertSchema(projects, {
   id: z.string().optional(),
   projectName: z.string().min(3).max(64),
   imgUrl: z.string().url(),
+  displayIndex: z.number(),
   imgID: z.string(),
   description: z.string().min(10).max(2048),
   tags: z.array(z.string()),
-  summary: z.string().min(10).max(128),
+  summary: z.string().min(10).max(512),
   demoLink: z.string().url(),
   sourceLink: z.string().url(),
 });
