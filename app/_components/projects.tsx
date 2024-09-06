@@ -111,13 +111,21 @@ export default function Projects() {
               </div>
               <div className='mx-auto my-5 flex h-[10%] w-full items-center justify-center gap-4 px-10'>
                 <Button variant='outline' className='inline-flex gap-1' asChild>
-                  <Link href={item.demoLink} className='inline-flex gap-1'>
+                  <Link
+                    href={item.demoLink}
+                    target='_blank'
+                    className='inline-flex gap-1'
+                  >
                     <Link2 size={24} />
                     View Demo
                   </Link>
                 </Button>
                 <Button variant='outline' className=''>
-                  <Link href={item.sourceLink} className='inline-flex gap-1'>
+                  <Link
+                    href={item.sourceLink}
+                    target='_blank'
+                    className='inline-flex gap-1'
+                  >
                     <CodeXml />
                     Source Code
                   </Link>
