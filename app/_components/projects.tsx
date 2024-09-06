@@ -13,6 +13,7 @@ import FetchPublicProjectsAction from '@/lib/global-actions/FetchPublicProjects'
 import { queryKeys } from '@/lib/constants';
 import Link from 'next/link';
 import Image from 'next/image';
+import ProjectCardSkeleton from '@/components/ui/project-card-skeleton';
 
 export default function Projects() {
   const [currentTab, setCurrentTab] = useState(0);
@@ -56,6 +57,8 @@ export default function Projects() {
         </div>
       </Reveal>
       <div className='mx-auto my-20 grid w-full grid-cols-1 place-content-between place-items-center gap-16 md:grid-cols-2 xl:grid-cols-3'>
+        {/* <ProjectCardSkeleton /> */}
+        {isLoading ?? [1, 2, 3].map((v, i) => <ProjectCardSkeleton key={i} />)}
         {response?.data?.map((item, index) => (
           <Reveal
             key={index}
