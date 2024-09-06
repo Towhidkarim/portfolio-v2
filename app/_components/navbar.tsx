@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <nav
       id='nav'
-      className='container fixed z-10 mx-auto flex h-14 flex-row items-center justify-between px-2 backdrop-blur-lg md:mt-5'
+      className='container fixed left-1/2 z-10 flex h-14 -translate-x-1/2 flex-row items-center justify-between px-2 backdrop-blur-lg'
     >
       <Reveal>
         <Button
@@ -36,12 +36,13 @@ export default function Navbar() {
           className='ml-0 text-2xl font-extrabold md:py-6 md:text-3xl'
         >
           <Link href={'/'}>
-            <JumpingText
+            {/* <JumpingText
               startDelay={2}
               totalDurationSeconds={0.5}
               yframes={[0, -10, 0]}
               textValue='<Towhid/Karim>'
-            />
+            /> */}
+            {`<Towhid/Karim>`}
           </Link>
         </Button>
       </Reveal>

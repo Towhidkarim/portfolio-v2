@@ -50,13 +50,13 @@ export default function Projects() {
             key={index}
             disableReveal
             delay={0.1 + 0.1 * index}
-            className='w-11/12 min-w-[350px] rounded-l'
+            className='w-11/12 min-w-[340px] rounded-l'
           >
             <div className='flex h-[550px] w-full flex-col gap-3 rounded-lg border'>
               <figure className='h-[50%] w-full rounded-t-lg'>
                 <Skeleton className='rounded-t-l h-full w-full rounded-b-none' />
               </figure>
-              <div className='h-[40%] px-10'>
+              <div className='h-[40%] px-6'>
                 <Reveal delay={0.25} className='w-full'>
                   <div className='flex items-center justify-between'>
                     <h2 className='shrink-0 -translate-y-0.5 text-xl font-bold'>
@@ -81,7 +81,7 @@ export default function Projects() {
                   quibusdam reiciendis consectetur exercitationem minus
                 </Reveal>
               </div>
-              <div className='flex h-[10%] w-full justify-between gap-2 px-10'>
+              <div className='mx-auto my-5 flex h-[10%] w-full items-center justify-center gap-4 px-10'>
                 <Button variant='outline' className='inline-flex gap-1'>
                   <Link2 size={24} />
                   View Demo

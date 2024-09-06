@@ -63,7 +63,7 @@ export default function Contact() {
         <Reveal
           disableReveal
           delay={0.4}
-          className='mx-auto w-10/12 p-1 lg:w-2/5'
+          className='mx-auto w-11/12 p-1 lg:w-2/5'
         >
           <form onSubmit={formOnSubmit}>
             <Input

@@ -52,7 +52,7 @@ export default function Reveal({
         }}
         initial='initialState'
         animate={slider}
-        transition={{ duration: 0.35, ease: 'easeInOut', delay: 0 + delay }}
+        transition={{ duration: 0.35, delay: 0 + delay }}
       ></motion.div>
     </div>
   );

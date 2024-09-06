@@ -33,7 +33,7 @@ export default function SectionTitle({
         className,
       )}
     >
-      <div className='grid w-28 place-items-center md:w-36'>
+      <div className='grid w-24 place-items-center md:w-36'>
         <MotionDiv
           className='h-3 w-full origin-right rounded-full bg-primary'
           initial={{ scaleX: 0 }}
@@ -43,11 +43,11 @@ export default function SectionTitle({
         />
       </div>
       <Reveal className='px-2' delay={revealStartDelay}>
-        <h1 className='my-1 -translate-y-1 text-center text-3xl font-extrabold sm:text-4xl md:text-5xl'>
+        <h1 className='my-1 text-center text-2xl font-extrabold sm:-translate-y-1 sm:text-4xl md:text-5xl'>
           {children}
         </h1>
       </Reveal>
-      <div className='grid w-28 place-items-center md:w-36'>
+      <div className='grid w-24 place-items-center md:w-36'>
         <MotionDiv
           className='h-3 w-full origin-left rounded-full bg-primary'
           initial={{ scaleX: 0 }}

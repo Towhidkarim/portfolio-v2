@@ -21,14 +21,14 @@ export default function AboutMe() {
           <Image
             src={dp}
             alt=''
-            className='pointer-events-none mx-auto h-[450px] w-auto select-none rounded-md object-contain'
+            className='pointer-events-none mx-auto h-[450px] w-auto select-none rounded-lg object-contain'
             loading='eager'
           />
           <br />
           <h4 className='font-lg mb-2 mt-5 text-center text-lg font-semibold'>
             Find me on
           </h4>
-          <div className='mx-auto mb-5 flex w-4/5 justify-around'>
+          <div className='mx-auto mb-5 flex justify-around gap-2 md:w-4/5'>
             <Button asChild>
               <Link
                 target='_blank'
@@ -77,7 +77,7 @@ export default function AboutMe() {
               passion for web development.
             </Reveal>
           </article>
-          <div className='flex w-full grid-cols-2 flex-wrap items-center justify-between gap-x-5 gap-y-4 py-10'>
+          <div className='flex w-full grid-cols-2 flex-wrap items-start justify-between gap-x-5 gap-y-4 py-10'>
             <Reveal delay={0.45} className='w-5/12'>
               <b className='text-lg'>Name</b>
               <br /> Towhid Karim
