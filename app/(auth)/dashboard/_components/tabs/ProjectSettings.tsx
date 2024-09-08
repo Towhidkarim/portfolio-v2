@@ -52,7 +52,7 @@ export default function ProjectSettings({
     displayIndex: z.number(),
     tags: z.array(z.string()),
     description: z.string().min(10).max(2048),
-    summary: z.string().min(10).max(128),
+    summary: z.string().min(10).max(1024),
     demoLink: z.string().url(),
     sourceLink: z.string().url(),
   });
