@@ -74,6 +74,7 @@ export default function Projects() {
                   alt={item.name}
                   className='rounded-t-lg object-cover'
                   loading='eager'
+                  sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                   priority
                   fill
                 />

@@ -14,6 +14,16 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'TowhidKarim | Portfolio',
   description: 'Portfolio',
+  metadataBase: new URL('https://towhidkarim.vercel.app'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+    },
+  },
+  openGraph: {
+    images: '/og-image.png',
+  },
 };
 
 export default function RootLayout({

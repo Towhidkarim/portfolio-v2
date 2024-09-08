@@ -26,6 +26,7 @@ import { Switch } from '@/components/ui/switch';
 import ModifyProjectAction from '@/lib/global-actions/ModifyProjects';
 import { queryKeys } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
+import { LoaderCircle } from 'lucide-react';
 
 export default function ProjectSettings({
   defaultValues,
@@ -290,6 +291,11 @@ export default function ProjectSettings({
             // onClick={() => console.log(form.formState.errors)}
             className='w-full'
           >
+            {isPending && (
+              <span className='mx-auto animate-spin'>
+                <LoaderCircle size={36} />
+              </span>
+            )}
             Save Changes
           </Button>
         </form>

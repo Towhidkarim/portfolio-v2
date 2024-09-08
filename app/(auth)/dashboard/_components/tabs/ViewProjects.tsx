@@ -120,8 +120,8 @@ export default function ViewProjects() {
       <h1 className='mt-4 text-2xl font-bold'>All Projects </h1>
       <div className='flex flex-row flex-wrap place-items-center gap-5 gap-y-5 px-5 py-5'>
         {isLoading && (
-          <span className='mx-auto scale-150 animate-spin'>
-            <LoaderCircle />
+          <span className='mx-auto animate-spin'>
+            <LoaderCircle size={36} />
           </span>
         )}
         {data?.map((item, index) => (
