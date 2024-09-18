@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   openGraph: {
     images: '/og-image.png',
   },
+  other: {
+    'google-site-verification': 'Tw-2CbT7VPlr65XdSv95FvPmSVgTPbm7mVIBGxUYn3Y',
+  },
 };
 
 export default function RootLayout({
