@@ -15,6 +15,13 @@ import photoshopIcon from '@/public/icons/photoshop.svg';
 import illustatorIcon from '@/public/icons/illustrator.svg';
 import unityIcon from '@/public/icons/Unity.svg';
 import flaskIcon from '@/public/icons/Flask.svg';
+import githubicon from '@/public/icons/github.png';
+import docker from '@/public/icons/docker.png';
+import postgresql from '@/public/icons/postgresql.png';
+import zustand from '@/public/icons/zustand.jpg';
+import jotai from '@/public/icons/jotai.png';
+import mongoDBIcon from '@/public/icons/mongo.webp';
+import prismaIcon from '@/public/icons/prisma.png';
 import {
   CircleGauge,
   CodeXml,
@@ -51,6 +58,16 @@ export default function SkillSection() {
     { title: 'Clean Code', icon: <CodeXml /> },
     { title: 'Elegancy', icon: <Component /> },
     { title: 'Performance', icon: <CircleGauge /> },
+  ];
+
+  const subSkills: { title: string; icon: StaticImageData }[] = [
+    { title: 'GitHub', icon: githubicon },
+    { title: 'Docker', icon: docker },
+    { title: 'PostgreSQL', icon: postgresql },
+    { title: 'Jotai', icon: jotai },
+    { title: 'Zustand', icon: zustand },
+    { title: 'MongoDB', icon: mongoDBIcon },
+    { title: 'Prisma', icon: prismaIcon },
   ];
 
   return (
@@ -114,6 +131,31 @@ export default function SkillSection() {
             ))}
           </div>
         </div>
+      </div>
+      <br />
+      <br />
+      <h1 className='mt-10 text-center text-xl font-semibold'>Also</h1>
+      <hr className='mx-auto my-2 h-2 w-24 rounded-full bg-primary' />
+      <div className='mx-auto my-5 flex w-full max-w-4xl flex-row flex-wrap items-center justify-around gap-x-16 gap-y-10'>
+        {subSkills.map((value, index) => (
+          <Reveal
+            delay={0.1 * index}
+            className='mx-auto flex max-w-44 flex-row items-center justify-around gap-4 transition hover:scale-105'
+            disableReveal
+            key={index}
+          >
+            <div className='mx-auto flex w-full cursor-pointer select-none flex-col items-center justify-center gap-2'>
+              <Image
+                src={value.icon}
+                alt={value.title}
+                width={48}
+                height={48}
+                className='pointer-events-none w-12'
+              />
+              <span className='font-bold opacity-90'>{value.title}</span>
+            </div>
+          </Reveal>
+        ))}
       </div>
       <br />
       <br />
