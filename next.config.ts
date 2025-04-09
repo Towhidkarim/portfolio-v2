@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+import { NextConfig } from 'next';
+const nextConfig: NextConfig = {
+  serverExternalPackages: ['@node-rs/argon2'],
   images: {
     remotePatterns: [
       {
@@ -9,8 +11,9 @@ const nextConfig = {
       },
     ],
   },
+
   experimental: {
-    serverComponentsExternalPackages: ['@node-rs/argon2'],
+    reactCompiler: true,
   },
 };
 
