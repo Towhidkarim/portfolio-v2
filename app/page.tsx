@@ -9,6 +9,7 @@ import AboutMe from './_components/aboutme';
 import Contact from './_components/contact';
 import Footer from '@/components/footer';
 import ScrollToTop from './_components/ScrollToTop';
+import CursorFollower from '@/components/framer/CursorFollower';
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
         <br /> <br />
       </div>
       <Footer />
+      <CursorFollower />
       {/* <ScrollToTop /> */}
     </main>
   );
