@@ -25,9 +25,9 @@ export default async function FetchPublicProjectsAction(
     const redis = Redis.fromEnv();
     const cachedProjectsData = await redis.get(redisKeys.publicProjectsData);
     const validatedCache = ProjectDataArraySchema.safeParse(cachedProjectsData);
-    console.log(validatedCache.success);
 
     if (validatedCache.success) return { data: validatedCache.data };
+
     const data = await db
       .select({
         name: projects.projectName,
@@ -44,7 +44,11 @@ export default async function FetchPublicProjectsAction(
       )
       .orderBy(desc(projects.displayIndex));
 
-    redis.set(redisKeys.publicProjectsData, JSON.stringify(data));
+    try {
+      redis.set(redisKeys.publicProjectsData, JSON.stringify(data));
+    } catch (error) {
+      return { data };
+    }
 
     return { data };
   } catch (error) {

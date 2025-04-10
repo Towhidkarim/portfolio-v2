@@ -6,13 +6,13 @@ export const routes = {
   signup: '/signup',
   login: '/login',
   dashboard: '/dashboard',
-};
+} as const;
 
 export const queryKeys = {
   adminProjects: 'admin-projects',
   publicProjects: 'public-projects',
-};
+} as const;
 
 export const redisKeys = {
   publicProjectsData: 'publicProjectsData',
-};
+} as const;
