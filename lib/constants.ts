@@ -12,3 +12,7 @@ export const queryKeys = {
   adminProjects: 'admin-projects',
   publicProjects: 'public-projects',
 };
+
+export const redisKeys = {
+  publicProjectsData: 'publicProjectsData',
+};

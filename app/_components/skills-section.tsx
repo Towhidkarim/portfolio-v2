@@ -1,27 +1,30 @@
 import Reveal from '@/components/framer/Reveal';
 import SectionTitle from '@/components/ui/section-title';
 import Image, { StaticImageData } from 'next/image';
-import reactIcon from '@/public/icons/React.svg';
-import nextIcon from '@/public/icons/nextjs-icon.svg';
-import tailwindIcon from '@/public/icons/Tailwind CSS.svg';
-import tsIcon from '@/public/icons/TypeScript.svg';
-import htmlIcon from '@/public/icons/HTML5.svg';
-import cssIcon from '@/public/icons/CSS3.svg';
-import drizzle from '@/public/icons/drizzle.png';
-import nodeIcon from '@/public/icons/Node.js.svg';
-import bunIcon from '@/public/icons/Bun.svg';
-import pyIcon from '@/public/icons/Python.svg';
-import photoshopIcon from '@/public/icons/photoshop.svg';
-import illustatorIcon from '@/public/icons/illustrator.svg';
-import unityIcon from '@/public/icons/Unity.svg';
-import flaskIcon from '@/public/icons/Flask.svg';
-import githubicon from '@/public/icons/github.png';
-import docker from '@/public/icons/docker.png';
-import postgresql from '@/public/icons/postgresql.png';
-import zustand from '@/public/icons/zustand.jpg';
-import jotai from '@/public/icons/jotai.png';
-import mongoDBIcon from '@/public/icons/mongo.webp';
-import prismaIcon from '@/public/icons/prisma.png';
+import {
+  reactIcon,
+  nextIcon,
+  tailwindIcon,
+  tsIcon,
+  redisIcon,
+  cssIcon,
+  drizzle,
+  nodeIcon,
+  pyIcon,
+  photoshopIcon,
+  illustatorIcon,
+  unityIcon,
+  flaskIcon,
+  githubicon,
+  docker,
+  postgresql,
+  zustand,
+  jotai,
+  mongoDBIcon,
+  prismaIcon,
+  tanstackQuery,
+  shadcn,
+} from '@/lib/icons';
 import {
   CircleGauge,
   CodeXml,
@@ -39,10 +42,10 @@ export default function SkillSection() {
     { title: 'TailwindCSS', icon: tailwindIcon },
     { title: 'TypeScript', icon: tsIcon },
     { title: 'Drizzle Orm', icon: drizzle },
-    { title: 'HTML5', icon: htmlIcon },
-    { title: 'CSS3', icon: cssIcon },
+    { title: 'Docker', icon: docker },
+    { title: 'Redis', icon: redisIcon },
     { title: 'NodeJS', icon: nodeIcon },
-    { title: 'BunJS', icon: bunIcon },
+    { title: 'GitHub', icon: githubicon },
   ];
 
   const skillsForFun: { title: string; icon: StaticImageData }[] = [
@@ -61,8 +64,8 @@ export default function SkillSection() {
   ];
 
   const subSkills: { title: string; icon: StaticImageData }[] = [
-    { title: 'GitHub', icon: githubicon },
-    { title: 'Docker', icon: docker },
+    { title: 'TanStack Query', icon: tanstackQuery },
+    { title: 'Shadcn UI', icon: shadcn },
     { title: 'PostgreSQL', icon: postgresql },
     { title: 'Jotai', icon: jotai },
     { title: 'Zustand', icon: zustand },
@@ -136,11 +139,11 @@ export default function SkillSection() {
       <br />
       <h1 className='mt-10 text-center text-xl font-semibold'>Also</h1>
       <hr className='mx-auto my-2 h-2 w-24 rounded-full bg-primary' />
-      <div className='mx-auto my-5 flex w-full max-w-4xl flex-row flex-wrap items-center justify-around gap-x-16 gap-y-10'>
+      <div className='mx-auto my-5 flex w-full max-w-4xl flex-row flex-wrap items-center justify-center gap-x-16 gap-y-10'>
         {subSkills.map((value, index) => (
           <Reveal
             delay={0.1 * index}
-            className='mx-auto flex max-w-44 flex-row items-center justify-around gap-4 transition hover:scale-105'
+            className='flex max-w-44 flex-row items-center justify-around gap-4 transition hover:scale-105'
             disableReveal
             key={index}
           >
