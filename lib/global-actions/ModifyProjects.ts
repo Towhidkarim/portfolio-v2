@@ -2,10 +2,11 @@
 
 import { redirect } from 'next/navigation';
 import { validateRequest } from '../auth';
-import { routes } from '../constants';
+import { redisKeys, routes } from '../constants';
 import { db } from '@/db';
 import { projects } from '@/db/schema';
 import { eq } from 'drizzle-orm';
+import { Redis } from '@upstash/redis';
 type ModifiedValues = {
   enabled: boolean | undefined;
   projectName: string | undefined;
@@ -29,6 +30,8 @@ export default async function ModifyProjectAction({
 
   try {
     await db.update(projects).set(values).where(eq(projects.id, id));
+    const redis = Redis.fromEnv();
+    await redis.set(redisKeys.publicProjectsData, '');
     return { ok: true, message: 'Changes Saved Succesfully' };
   } catch (error) {
     console.log(error);

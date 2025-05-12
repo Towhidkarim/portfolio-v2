@@ -3,10 +3,11 @@
 import { db } from '@/db';
 import { projects, ProjectSchema } from '@/db/schema';
 import { validateRequest } from '@/lib/auth';
-import { routes } from '@/lib/constants';
+import { redisKeys, routes } from '@/lib/constants';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { generateIdFromEntropySize } from 'lucia';
+import { Redis } from '@upstash/redis';
 
 export default async function SubmitProjectAction({
   data,
@@ -35,7 +36,8 @@ export default async function SubmitProjectAction({
   // if (uploadResponse.error) return { ok: false, error: uploadResponse.error };
   // const imgID = uploadResponse.data.customId;
   // const imgUrl = uploadResponse.data.url;
-
+  const redis = Redis.fromEnv();
+  await redis.set(redisKeys.publicProjectsData, '');
   try {
     await db.insert(projects).values({
       id: generateIdFromEntropySize(10),

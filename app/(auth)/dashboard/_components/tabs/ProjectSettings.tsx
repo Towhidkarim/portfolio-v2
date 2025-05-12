@@ -27,6 +27,7 @@ import ModifyProjectAction from '@/lib/global-actions/ModifyProjects';
 import { queryKeys } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
 import { LoaderCircle } from 'lucide-react';
+import { DeleteProject } from './DeleteProject';
 
 export default function ProjectSettings({
   defaultValues,
@@ -106,22 +107,22 @@ export default function ProjectSettings({
   };
 
   return (
-    <section className='rounded p-4 px-5'>
-      {/* <h1 className='pb-10 text-left text-2xl font-semibold'></h1> */}
+    <section className='p-4 px-5 rounded max-w-[500px]'>
+      {/* <h1 className='pb-10 font-semibold text-2xl text-left'></h1> */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(formOnSubmit)} className='space-y-8'>
           <FormField
             control={form.control}
             name='enabled'
             render={({ field }) => (
-              <FormItem className='flex flex-row items-center justify-center'>
+              <FormItem className='flex flex-row justify-center items-center'>
                 <FormLabel
-                  className='cursor-pointer text-lg'
+                  className='text-lg cursor-pointer'
                   htmlFor='projectEnableSwitch'
                 >
                   Project Display Enabled
                 </FormLabel>
-                <FormControl className='mx-4 -translate-y-1 scale-110'>
+                <FormControl className='mx-4 scale-110 -translate-y-1'>
                   <Switch
                     id='projectEnableSwitch'
                     checked={field.value}
@@ -170,7 +171,7 @@ export default function ProjectSettings({
                 <FormLabel>Project Description</FormLabel>
                 <FormControl>
                   <Textarea
-                    className='max-h-44 min-h-28'
+                    className='min-h-28 max-h-44'
                     placeholder='Project Description'
                     {...field}
                   />
@@ -202,7 +203,7 @@ export default function ProjectSettings({
                 </FormItem>
               )}
             /> */}
-            <FormLabel className='mb-2 mt-4'>
+            <FormLabel className='mt-4 mb-2'>
               Tags (Seperate by comma)
             </FormLabel>
             <Input
@@ -216,7 +217,7 @@ export default function ProjectSettings({
               }}
             />
           </div>
-          <div className='flex h-5 gap-2'>
+          <div className='flex flex-wrap gap-2 h-5'>
             {tags?.map((item, index) =>
               item.trim() ? (
                 <FadeEffect key={index}>
@@ -228,8 +229,9 @@ export default function ProjectSettings({
             )}
           </div>
           <br />
-          <FormLabel className=''>Project Image</FormLabel>
-          <figure className='relative h-96 w-full p-4'>
+          <br />
+          <FormLabel className='mt-10'>Project Image</FormLabel>
+          <figure className='relative p-4 w-full h-96'>
             <Image
               src={imgUrl}
               alt=''
@@ -257,7 +259,7 @@ export default function ProjectSettings({
               </FormItem>
             )}
           />
-          <div className='flex w-full gap-3'>
+          <div className='flex gap-3 w-full'>
             <FormField
               control={form.control}
               name='demoLink'
@@ -298,6 +300,7 @@ export default function ProjectSettings({
             )}
             Save Changes
           </Button>
+          {/* <DeleteProject projectID={id ?? ''} projectName={projectName} /> */}
         </form>
       </Form>
     </section>

@@ -117,7 +117,7 @@ export default function ViewProjects() {
 
   return (
     <section>
-      <h1 className='mt-4 text-2xl font-bold'>All Projects </h1>
+      <h1 className='mt-4 font-bold text-2xl'>All Projects </h1>
       <div className='flex flex-row flex-wrap place-items-center gap-5 gap-y-5 px-5 py-5'>
         {isLoading && (
           <span className='mx-auto animate-spin'>
@@ -125,8 +125,8 @@ export default function ViewProjects() {
           </span>
         )}
         {data?.map((item, index) => (
-          <Card key={index} className='group h-64 w-72 cursor-default'>
-            <CardHeader className='flex flex-row items-start justify-between pb-4 pt-4'>
+          <Card key={index} className='group w-72 h-64 cursor-default'>
+            <CardHeader className='flex flex-row justify-between items-start pt-4 pb-4'>
               <div className=''>
                 <CardTitle className='capitalize'>
                   <span
@@ -136,7 +136,7 @@ export default function ViewProjects() {
                   ></span>
                   {item.projectName}
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className='flex justify-center items-center gap-2'>
                   <span
                     className={cn(
                       'my-0.5 font-semibold',
@@ -145,13 +145,14 @@ export default function ViewProjects() {
                   >
                     {item.enabled ? 'Enabled' : 'Disabled'}
                   </span>
+                  •<span>Priority: {item.displayIndex}</span>
                 </CardDescription>
               </div>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
                     variant='ghost'
-                    className='mt-0 p-1.5 opacity-0 transition hover:rotate-90 hover:opacity-85 group-hover:opacity-75'
+                    className='opacity-0 hover:opacity-85 group-hover:opacity-75 mt-0 p-1.5 hover:rotate-90 transition'
                   >
                     <Settings />
                   </Button>
