@@ -14,6 +14,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { githubicon } from '@/lib/icons';
+import Image from 'next/image';
 
 export default function Navbar() {
   const otherOptions = [
@@ -87,6 +89,15 @@ export default function Navbar() {
               <Link href={value.url}>{value.title}</Link>
             </Button>
           ))}
+          <Button
+            variant='ghost'
+            className='hidden translate-y-1 uppercase md:inline-block'
+            asChild
+          >
+            <Link href='https://github.com/Towhidkarim/' target='_blank'>
+              <Image src={githubicon} alt='github' height={28} width={28} />
+            </Link>
+          </Button>
         </Reveal>
       </div>
     </nav>

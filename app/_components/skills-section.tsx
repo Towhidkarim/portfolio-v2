@@ -24,6 +24,7 @@ import {
   prismaIcon,
   tanstackQuery,
   shadcn,
+  expressIcon,
 } from '@/lib/icons';
 import {
   CircleGauge,
@@ -57,10 +58,10 @@ export default function SkillSection() {
   ];
 
   const features = [
-    { title: 'Responsiveness', icon: <MonitorSmartphone /> },
-    { title: 'Clean Code', icon: <CodeXml /> },
-    { title: 'Elegancy', icon: <Component /> },
-    { title: 'Performance', icon: <CircleGauge /> },
+    { title: 'Responsive Design', icon: <MonitorSmartphone /> },
+    { title: 'Clean & Maintainable Code', icon: <CodeXml /> },
+    { title: 'Elegant UI/UX', icon: <Component /> },
+    { title: 'High Performance', icon: <CircleGauge /> },
   ];
 
   const subSkills: { title: string; icon: StaticImageData }[] = [
@@ -70,6 +71,7 @@ export default function SkillSection() {
     { title: 'Jotai', icon: jotai },
     { title: 'Zustand', icon: zustand },
     { title: 'MongoDB', icon: mongoDBIcon },
+    { title: 'Express', icon: expressIcon },
     { title: 'Prisma', icon: prismaIcon },
   ];
 
@@ -163,7 +165,9 @@ export default function SkillSection() {
       <br />
       <br />
       <Reveal className='mx-auto mb-6 mt-12'>
-        <h4 className='text-center text-xl font-semibold'>Focusing On</h4>
+        <h4 className='text-center text-xl font-semibold'>
+          Core Principles I Deliver
+        </h4>
         <hr className='mx-auto my-2 h-2 w-3/5 rounded-full bg-primary' />
       </Reveal>
       <div className='mx-auto grid grid-cols-1 place-content-start place-items-center gap-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4'>

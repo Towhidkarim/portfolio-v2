@@ -24,6 +24,7 @@ import prismaIcon from '@/public/icons/prisma.png';
 import tanstackQuery from '@/public/icons/tanstack.png';
 import shadcn from '@/public/icons/shadcn.png';
 import redisIcon from '@/public/icons/redis.webp';
+import expressIcon from '@/public/icons/express.png';
 
 export {
   reactIcon,
@@ -50,4 +51,5 @@ export {
   tanstackQuery,
   shadcn,
   redisIcon,
+  expressIcon,
 };
