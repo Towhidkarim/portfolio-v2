@@ -26,6 +26,8 @@ import {
   shadcn,
   expressIcon,
   postman,
+  turso,
+  redux,
 } from '@/lib/icons';
 import {
   CircleGauge,
@@ -80,18 +82,19 @@ export default function SkillSection() {
   const frontendSkills: TSkillprops[] = [
     { title: 'React', icon: reactIcon },
     { title: 'Next.js', icon: nextIcon },
-    { title: 'TailwindCSS', icon: tailwindIcon },
     { title: 'TypeScript', icon: tsIcon },
+    { title: 'TailwindCSS', icon: tailwindIcon },
     { title: 'TanStack Query', icon: tanstackQuery },
     { title: 'Shadcn UI', icon: shadcn },
     { title: 'Jotai', icon: jotai },
     { title: 'Zustand', icon: zustand },
+    { title: 'Redux', icon: redux },
   ];
 
   const backEndSkills: TSkillprops[] = [
     { title: 'NodeJS', icon: nodeIcon },
-    { title: 'Express', icon: expressIcon },
     { title: 'TypeScript', icon: tsIcon },
+    { title: 'Express', icon: expressIcon },
     { title: 'Python', icon: pyIcon },
     { title: 'Flask', icon: flaskIcon },
   ];
@@ -99,6 +102,8 @@ export default function SkillSection() {
     { title: 'Drizzle Orm', icon: drizzle },
     { title: 'Redis', icon: redisIcon },
     { title: 'Prisma', icon: prismaIcon },
+    { title: 'PostgreSQL', icon: postgresql },
+    { title: 'Turso', icon: turso },
     { title: 'MongoDB', icon: mongoDBIcon },
   ];
   const otherSkills: TSkillprops[] = [
@@ -171,13 +176,13 @@ export default function SkillSection() {
       </div>
       <br />
       <br />
-      <div className='flex flex-row flex-wrap items-center justify-around gap-20'>
+      <div className='flex flex-row flex-wrap items-start justify-around gap-20'>
         <div>
           <h2 className='mt-10 text-center text-2xl font-bold'>
             Database and ORMs
           </h2>
           <hr className='mx-auto my-2 h-2 w-24 rounded-full bg-primary' />
-          <div className='mx-auto my-5 flex w-full max-w-4xl flex-row flex-wrap items-center justify-center gap-x-16 gap-y-10'>
+          <div className='mx-auto my-5 flex w-full max-w-xl flex-row flex-wrap items-center justify-center gap-x-16 gap-y-10'>
             {dborm.map((value, index) => (
               <Reveal
                 delay={0.1 * index}

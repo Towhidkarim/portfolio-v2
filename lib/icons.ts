@@ -26,6 +26,8 @@ import shadcn from '@/public/icons/shadcn.png';
 import redisIcon from '@/public/icons/redis.webp';
 import expressIcon from '@/public/icons/express.png';
 import postman from '@/public/icons/Postman.svg';
+import turso from '@/public/icons/turso.png';
+import redux from '@/public/icons/redux.svg';
 
 export {
   reactIcon,
@@ -54,4 +56,6 @@ export {
   redisIcon,
   expressIcon,
   postman,
+  turso,
+  redux,
 };
