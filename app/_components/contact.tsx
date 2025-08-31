@@ -9,7 +9,8 @@ import contactImage from '@/public/images/contact.svg';
 import { useRef, useState } from 'react';
 import SendMailAction from '@/lib/global-actions/SendMail';
 import { toast } from 'sonner';
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle, Mail, PhoneCall } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Contact() {
   // const [mail, setMail] = useState('');
@@ -60,6 +61,24 @@ export default function Contact() {
               Send me a message, give me feedbacks or whatever you may like
             </h2>
           </Reveal>
+          <Reveal className='my-2 w-full' delay={0.25}>
+            {/* <h2 className='text-lg'>
+              <Button variant='link' size='lg' className='px-1 text-lg' asChild>
+                <Link href='mailto:towhidkarim123@gmail.com'>Email Me</Link>
+              </Button>
+              on <span className='font-medium'>towhidkarim123@gmail.com </span>
+            </h2> */}
+            <div className='flex items-center gap-2 text-sm'>
+              <Mail className='h-4 w-4' />
+              <span>towhidkarim123@gmail.com</span>
+            </div>
+          </Reveal>
+          <Reveal className='w-full' delay={0.25}>
+            <div className='flex items-center gap-2 text-sm'>
+              <PhoneCall className='h-4 w-4' />
+              <span>+880 1744-161517</span>
+            </div>
+          </Reveal>
         </div>
         <Reveal
           disableReveal
@@ -92,7 +111,7 @@ export default function Contact() {
             <br />
             <br />
             <Button disabled={isLoading} className='w-full transition'>
-              {isLoading ?? (
+              {isLoading && (
                 <span className='mx-2 animate-spin'>
                   <LoaderCircle />
                 </span>

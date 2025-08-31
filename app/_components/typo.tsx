@@ -5,16 +5,17 @@ export default function Typo() {
   return (
     <TypeAnimation
       preRenderFirstString
+      deletionSpeed={{ type: 'keyStrokeDelayInMs', value: 25 }}
       sequence={[
         // Same substring at the start will only be typed out once, initially
-        'A Web Developer',
+        'A Full-Stack Engineer',
         3000, // wait 1s before replacing "Mice" with "Hamsters"
-        'A Full-Stack Developer',
+        'Crafting Scalable Apps with React & Next.js',
         3000,
         // 'A NextJS Dev',
       ]}
       wrapper='span'
-      speed={25}
+      speed={70}
       repeat={Infinity}
     />
   );

@@ -11,6 +11,7 @@ const ProjectDataSchema = z.object({
   name: z.string(),
   summary: z.string(),
   tags: z.array(z.string()).nullable(),
+  description: z.string(),
   demoLink: z.string(),
   sourceLink: z.string(),
   index: z.number(),
@@ -32,6 +33,7 @@ export default async function FetchPublicProjectsAction(
       .select({
         name: projects.projectName,
         summary: projects.summary,
+        description: projects.description,
         tags: projects.tags,
         demoLink: projects.demoLink,
         sourceLink: projects.sourceLink,

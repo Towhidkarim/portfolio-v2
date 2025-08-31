@@ -16,3 +16,8 @@ export const queryKeys = {
 export const redisKeys = {
   publicProjectsData: 'publicProjectsData',
 } as const;
+
+export const resumeDownloadUrl =
+  'https://drive.google.com/uc?export=download&id=1V4gZ9QlCVPAIJSlIguyUdw0F9NiC78nw';
+export const resumePreviewUrl =
+  'https://drive.google.com/file/d/1V4gZ9QlCVPAIJSlIguyUdw0F9NiC78nw/view';

@@ -25,6 +25,7 @@ import tanstackQuery from '@/public/icons/tanstack.png';
 import shadcn from '@/public/icons/shadcn.png';
 import redisIcon from '@/public/icons/redis.webp';
 import expressIcon from '@/public/icons/express.png';
+import postman from '@/public/icons/Postman.svg';
 
 export {
   reactIcon,
@@ -52,4 +53,5 @@ export {
   shadcn,
   redisIcon,
   expressIcon,
+  postman,
 };

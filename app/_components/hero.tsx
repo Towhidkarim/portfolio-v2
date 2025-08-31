@@ -13,6 +13,8 @@ import { Button } from '@/components/ui/button';
 import FloatingObject from '@/components/framer/FloatingObject';
 import Link from 'next/link';
 import ScrollToTop from './ScrollToTop';
+import { resumeDownloadUrl, resumePreviewUrl } from '@/lib/constants';
+import { Download, Eye } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -39,10 +41,36 @@ export default function Hero() {
             <Typo />
           </h1>
         </Reveal>
-        <Reveal delay={0.4}>
-          <Button variant='default' asChild>
-            <Link href='#skills'>See More -</Link>
-          </Button>
+        <Reveal delay={0.3} className=''>
+          <p className='text-md opacity-80'>
+            I'm a full-stack engineer passionate about building high performant
+            applications and solving problems with elegant solutoins
+          </p>
+        </Reveal>
+        <Reveal delay={0.4} className='my-3'>
+          <div className='flex flex-row items-center justify-center gap-5'>
+            <Button variant='default' asChild>
+              <Link
+                href={resumePreviewUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='flex flex-row items-center justify-center gap-1'
+              >
+                <Eye className='size-5' />
+                Preview Resume
+              </Link>
+            </Button>
+            <Button variant='default' className='' asChild>
+              <Link
+                href={resumeDownloadUrl}
+                download='Towhid_karim_resume.pdf'
+                className='flex flex-row items-center justify-center gap-1'
+              >
+                <Download className='size-5' />
+                Download Resume
+              </Link>
+            </Button>
+          </div>
         </Reveal>
       </div>
       <MotionDiv

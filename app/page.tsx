@@ -10,6 +10,8 @@ import Contact from './_components/contact';
 import Footer from '@/components/footer';
 import ScrollToTop from './_components/ScrollToTop';
 import CursorFollower from '@/components/framer/CursorFollower';
+import { Education } from './_components/education';
+import { BlogSection } from './_components/blog-section';
 
 export default function Home() {
   return (
@@ -23,6 +25,10 @@ export default function Home() {
         <div className='my-40'></div>
         <SkillSection />
         <Projects />
+        <BlogSection />
+        <br />
+        <br />
+        <Education />
         <AboutMe />
         <Contact />
         <br /> <br />

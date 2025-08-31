@@ -25,6 +25,7 @@ import {
   tanstackQuery,
   shadcn,
   expressIcon,
+  postman,
 } from '@/lib/icons';
 import {
   CircleGauge,
@@ -35,6 +36,7 @@ import {
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 // import bunIcon from '@/public/icons/Bun.svg';
+type TSkillprops = { title: string; icon: StaticImageData };
 
 export default function SkillSection() {
   const skillsForWork: { title: string; icon: StaticImageData }[] = [
@@ -75,18 +77,48 @@ export default function SkillSection() {
     { title: 'Prisma', icon: prismaIcon },
   ];
 
+  const frontendSkills: TSkillprops[] = [
+    { title: 'React', icon: reactIcon },
+    { title: 'Next.js', icon: nextIcon },
+    { title: 'TailwindCSS', icon: tailwindIcon },
+    { title: 'TypeScript', icon: tsIcon },
+    { title: 'TanStack Query', icon: tanstackQuery },
+    { title: 'Shadcn UI', icon: shadcn },
+    { title: 'Jotai', icon: jotai },
+    { title: 'Zustand', icon: zustand },
+  ];
+
+  const backEndSkills: TSkillprops[] = [
+    { title: 'NodeJS', icon: nodeIcon },
+    { title: 'Express', icon: expressIcon },
+    { title: 'TypeScript', icon: tsIcon },
+    { title: 'Python', icon: pyIcon },
+    { title: 'Flask', icon: flaskIcon },
+  ];
+  const dborm: TSkillprops[] = [
+    { title: 'Drizzle Orm', icon: drizzle },
+    { title: 'Redis', icon: redisIcon },
+    { title: 'Prisma', icon: prismaIcon },
+    { title: 'MongoDB', icon: mongoDBIcon },
+  ];
+  const otherSkills: TSkillprops[] = [
+    { title: 'Postman', icon: postman },
+    { title: 'GitHub', icon: githubicon },
+    { title: 'Docker', icon: docker },
+  ];
+
   return (
     <section id='skills'>
       <SectionTitle>Skills</SectionTitle>
       <br />
-      <div className='flex w-full flex-col items-start justify-evenly gap-16 gap-y-24 md:flex-row'>
+      <div className='flex w-full flex-col flex-wrap items-start justify-evenly gap-16 gap-y-24 md:flex-row'>
         <div className='flex w-full flex-col items-center justify-center md:w-2/5'>
           <Reveal className='mb-8 mt-2'>
-            <h2 className='text-2xl font-bold'>Use at Work</h2>
+            <h2 className='text-2xl font-bold'>Front End</h2>
             <hr className='mx-auto my-2 h-2 w-3/5 rounded-full bg-primary' />
           </Reveal>
           <div className='grid w-full grid-cols-3 place-items-center gap-12'>
-            {skillsForWork.map((value, index) => (
+            {frontendSkills.map((value, index) => (
               <Reveal
                 delay={0.1 * index}
                 disableReveal
@@ -111,11 +143,11 @@ export default function SkillSection() {
         </div>
         <div className='flex w-full flex-col items-center justify-center md:w-2/5'>
           <Reveal className='mb-8 mt-2'>
-            <h2 className='text-2xl font-bold'>Other Skills</h2>
+            <h2 className='text-2xl font-bold'>Back End</h2>
             <hr className='mx-auto my-2 h-2 w-3/5 rounded-full bg-primary' />
           </Reveal>
           <div className='grid w-full grid-cols-3 place-items-center gap-12'>
-            {skillsForFun.map((value, index) => (
+            {backEndSkills.map((value, index) => (
               <Reveal
                 delay={0.1 * index}
                 className='transition hover:scale-105'
@@ -139,28 +171,59 @@ export default function SkillSection() {
       </div>
       <br />
       <br />
-      <h1 className='mt-10 text-center text-xl font-semibold'>Also</h1>
-      <hr className='mx-auto my-2 h-2 w-24 rounded-full bg-primary' />
-      <div className='mx-auto my-5 flex w-full max-w-4xl flex-row flex-wrap items-center justify-center gap-x-16 gap-y-10'>
-        {subSkills.map((value, index) => (
-          <Reveal
-            delay={0.1 * index}
-            className='flex max-w-44 flex-row items-center justify-around gap-4 transition hover:scale-105'
-            disableReveal
-            key={index}
-          >
-            <div className='mx-auto flex w-full cursor-pointer select-none flex-col items-center justify-center gap-2'>
-              <Image
-                src={value.icon}
-                alt={value.title}
-                width={48}
-                height={48}
-                className='pointer-events-none w-12'
-              />
-              <span className='font-bold opacity-90'>{value.title}</span>
-            </div>
-          </Reveal>
-        ))}
+      <div className='flex flex-row flex-wrap items-center justify-around gap-20'>
+        <div>
+          <h2 className='mt-10 text-center text-2xl font-bold'>
+            Database and ORMs
+          </h2>
+          <hr className='mx-auto my-2 h-2 w-24 rounded-full bg-primary' />
+          <div className='mx-auto my-5 flex w-full max-w-4xl flex-row flex-wrap items-center justify-center gap-x-16 gap-y-10'>
+            {dborm.map((value, index) => (
+              <Reveal
+                delay={0.1 * index}
+                className='flex max-w-44 flex-row items-center justify-around gap-4 transition hover:scale-105'
+                disableReveal
+                key={index}
+              >
+                <div className='mx-auto flex w-full cursor-pointer select-none flex-col items-center justify-center gap-2'>
+                  <Image
+                    src={value.icon}
+                    alt={value.title}
+                    width={48}
+                    height={48}
+                    className='pointer-events-none w-12'
+                  />
+                  <span className='font-bold opacity-90'>{value.title}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 className='mt-10 text-center text-2xl font-bold'>Other Tools</h2>
+          <hr className='mx-auto my-2 h-2 w-24 rounded-full bg-primary' />
+          <div className='mx-auto my-5 flex w-full max-w-4xl flex-row flex-wrap items-center justify-center gap-x-16 gap-y-10'>
+            {otherSkills.map((value, index) => (
+              <Reveal
+                delay={0.1 * index}
+                className='flex max-w-44 flex-row items-center justify-around gap-4 transition hover:scale-105'
+                disableReveal
+                key={index}
+              >
+                <div className='mx-auto flex w-full cursor-pointer select-none flex-col items-center justify-center gap-2'>
+                  <Image
+                    src={value.icon}
+                    alt={value.title}
+                    width={48}
+                    height={48}
+                    className='pointer-events-none w-12'
+                  />
+                  <span className='font-bold opacity-90'>{value.title}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </div>
       <br />
       <br />

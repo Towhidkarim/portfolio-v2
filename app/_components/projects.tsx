@@ -14,6 +14,7 @@ import { queryKeys } from '@/lib/constants';
 import Link from 'next/link';
 import Image from 'next/image';
 import ProjectCardSkeleton from '@/components/ui/project-card-skeleton';
+import { ProjectModal } from './project-modal';
 
 export default function Projects() {
   const [currentTab, setCurrentTab] = useState(0);
@@ -33,7 +34,7 @@ export default function Projects() {
     <section id='projects' className='my-44'>
       <SectionTitle className=''>My Projects</SectionTitle>
       <br />
-      <Reveal className='mx-auto w-full' delay={0.1}>
+      {/* <Reveal className='mx-auto w-full' delay={0.1}>
         <h2 className='my-2 font-semibold text-lg text-center'>Categories</h2>
         <div className='flex flex-wrap justify-center items-center gap-3'>
           {tabs.map((value, index) => (
@@ -55,8 +56,8 @@ export default function Projects() {
             </Button>
           ))}
         </div>
-      </Reveal>
-      <div className='place-content-between place-items-center gap-16 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto my-20 w-full'>
+      </Reveal> */}
+      <div className='mx-auto my-20 grid w-full grid-cols-1 place-content-between place-items-center gap-16 md:grid-cols-2 xl:grid-cols-3'>
         {/* <ProjectCardSkeleton /> */}
         {isLoading
           ? [1, 2, 3].map((v, i) => <ProjectCardSkeleton key={i} />)
@@ -66,29 +67,32 @@ export default function Projects() {
             key={index}
             disableReveal
             delay={0.1 + 0.1 * index}
-            className='rounded-l w-11/12 min-w-[340px]'
+            className='w-11/12 min-w-[340px] rounded-l'
           >
-            <div className='flex flex-col gap-3 border rounded-lg w-full h-[550px]'>
-              <figure className='relative rounded-t-lg w-full h-[50%]'>
+            <div className='group flex h-[550px] w-full flex-col gap-3 rounded-lg border'>
+              <figure className='relative h-[50%] w-full overflow-hidden rounded-t-lg'>
                 {/* <Skeleton className='rounded-t-l rounded-b-none w-full h-full' /> */}
                 <Image
                   src={item.imageUrl}
                   alt={item.name}
-                  className='rounded-t-lg object-cover'
+                  className='rounded-t-lg object-cover transition duration-300 group-hover:scale-[102%]'
                   loading='eager'
                   sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                   priority
                   fill
                 />
+                <div className='absolute right-3 top-3 border-background/60 opacity-0 group-hover:opacity-100'>
+                  <ProjectModal project={item} />
+                </div>
               </figure>
-              <div className='px-6 h-[40%]'>
+              <div className='h-[40%] px-6'>
                 <Reveal delay={0.25} className='w-full'>
-                  <div className='flex justify-between items-center'>
-                    <h2 className='font-bold text-xl -translate-y-0.5 shrink-0'>
+                  <div className='flex items-center justify-between'>
+                    <h2 className='shrink-0 -translate-y-0.5 text-xl font-bold'>
                       {item.name}
                     </h2>
                     <MotionDiv
-                      className='bg-primary mx-2 rounded-full w-full h-1 origin-left'
+                      className='mx-2 h-1 w-full origin-left rounded-full bg-primary'
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: 1 }}
                       transition={{ delay: 1 + 0.25 * index, duration: 0.5 }}
@@ -96,11 +100,11 @@ export default function Projects() {
                   </div>
                 </Reveal>
                 <Reveal delay={0.1} className='my-2'>
-                  <div className='flex flex-wrap gap-2 my-2'>
+                  <div className='my-2 flex flex-wrap gap-2'>
                     {item.tags?.map((value, i) => (
                       <Badge
                         key={i}
-                        className='pr-2 pb-1 capitalize cursor-default'
+                        className='cursor-default pb-1 pr-2 capitalize'
                       >
                         {value}
                       </Badge>
@@ -112,7 +116,7 @@ export default function Projects() {
                   {item.summary}
                 </Reveal>
               </div>
-              <div className='flex justify-center items-center gap-4 mx-auto my-5 px-10 w-full h-[10%]'>
+              <div className='mx-auto my-5 flex h-[10%] w-full items-center justify-center gap-4 px-10'>
                 <Button variant='outline' className='inline-flex gap-1' asChild>
                   <Link
                     href={item.demoLink}
@@ -137,6 +141,11 @@ export default function Projects() {
             </div>
           </Reveal>
         ))}
+      </div>
+      <div className='flex flex-row items-center justify-center'>
+        <Button className='block' asChild>
+          <Link href='/all-projects'>View All</Link>
+        </Button>
       </div>
     </section>
   );
