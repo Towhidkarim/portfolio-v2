@@ -4,21 +4,13 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Calendar, BookOpen } from 'lucide-react';
 import SectionTitle from '@/components/ui/section-title';
+import { blogPosts } from '@/lib/blogs';
 
 export function BlogSection() {
-  const blogPost = {
-    title: 'Understanding TypeScript: A Deep Dive',
-    summary:
-      "Exploring some basic concepts of TypeScript, Explain the difference between any, unknown, and never types in TypeScript and it's impact on projects",
-    publishedDate: '2025',
-    readTime: '2 min read',
-    githubUrl:
-      'https://github.com/Towhidkarim/b5-assignment-1?tab=readme-ov-file#explain-the-difference-between-any-unknown-and-never-types-in-typescript',
-    tags: ['TypeScript', 'JavaScript', 'Web Development', 'Programming'],
-  };
+  const blogPost = blogPosts[0];
 
   const handleBlogClick = () => {
-    window.open(blogPost.githubUrl, '_blank', 'noopener,noreferrer');
+    window.open('/blog', '_blank', 'noopener,noreferrer');
   };
 
   return (
