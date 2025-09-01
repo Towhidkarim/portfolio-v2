@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { redisKeys } from '../constants';
 
 const ProjectDataSchema = z.object({
+  id: z.string(),
   name: z.string(),
   summary: z.string(),
   tags: z.array(z.string()).nullable(),
@@ -31,6 +32,7 @@ export default async function FetchPublicProjectsAction(
 
     const data = await db
       .select({
+        id: projects.id,
         name: projects.projectName,
         summary: projects.summary,
         description: projects.description,

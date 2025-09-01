@@ -5,7 +5,7 @@ import SectionTitle from '@/components/ui/section-title';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Code, CodeXml, Dot, Link2 } from 'lucide-react';
+import { Code, CodeXml, Dot, Eye, Link2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import MotionDiv from '@/components/framer/MotionDiv';
 import { useQuery } from '@tanstack/react-query';
@@ -57,7 +57,7 @@ export default function Projects() {
           ))}
         </div>
       </Reveal> */}
-      <div className='mx-auto my-20 grid w-full grid-cols-1 place-content-between place-items-center gap-16 md:grid-cols-2 xl:grid-cols-3'>
+      <div className='place-content-between place-items-center gap-16 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto my-20 w-full'>
         {/* <ProjectCardSkeleton /> */}
         {isLoading
           ? [1, 2, 3].map((v, i) => <ProjectCardSkeleton key={i} />)
@@ -67,32 +67,42 @@ export default function Projects() {
             key={index}
             disableReveal
             delay={0.1 + 0.1 * index}
-            className='w-11/12 min-w-[340px] rounded-l'
+            className='rounded-l w-11/12 min-w-[340px]'
           >
-            <div className='group flex h-[550px] w-full flex-col gap-3 rounded-lg border'>
-              <figure className='relative h-[50%] w-full overflow-hidden rounded-t-lg'>
+            <div className='group flex flex-col gap-3 border rounded-lg w-full h-[550px]'>
+              <figure className='relative rounded-t-lg w-full h-[50%] overflow-hidden'>
                 {/* <Skeleton className='rounded-t-l rounded-b-none w-full h-full' /> */}
                 <Image
                   src={item.imageUrl}
                   alt={item.name}
-                  className='rounded-t-lg object-cover transition duration-300 group-hover:scale-[102%]'
+                  className='rounded-t-lg object-cover group-hover:scale-[102%] transition duration-300'
                   loading='eager'
                   sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                   priority
                   fill
                 />
-                <div className='absolute right-3 top-3 border-background/60 opacity-0 group-hover:opacity-100'>
-                  <ProjectModal project={item} />
+                <div className='top-3 right-3 absolute opacity-0 group-hover:opacity-100 border-background/60'>
+                  {/* <ProjectModal project={item} /> */}
+                  <Button
+                    size='sm'
+                    className='gap-2 border border-background/60'
+                    asChild
+                  >
+                    <Link href={`/projects/${item.id}`} target='_blank'>
+                      <Eye className='w-4 h-4' />
+                      View Details
+                    </Link>
+                  </Button>
                 </div>
               </figure>
-              <div className='h-[40%] px-6'>
+              <div className='px-6 h-[40%]'>
                 <Reveal delay={0.25} className='w-full'>
-                  <div className='flex items-center justify-between'>
-                    <h2 className='shrink-0 -translate-y-0.5 text-xl font-bold'>
+                  <div className='flex justify-between items-center'>
+                    <h2 className='font-bold text-xl -translate-y-0.5 shrink-0'>
                       {item.name}
                     </h2>
                     <MotionDiv
-                      className='mx-2 h-1 w-full origin-left rounded-full bg-primary'
+                      className='bg-primary mx-2 rounded-full w-full h-1 origin-left'
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: 1 }}
                       transition={{ delay: 1 + 0.25 * index, duration: 0.5 }}
@@ -100,11 +110,11 @@ export default function Projects() {
                   </div>
                 </Reveal>
                 <Reveal delay={0.1} className='my-2'>
-                  <div className='my-2 flex flex-wrap gap-2'>
+                  <div className='flex flex-wrap gap-2 my-2'>
                     {item.tags?.map((value, i) => (
                       <Badge
                         key={i}
-                        className='cursor-default pb-1 pr-2 capitalize'
+                        className='pr-2 pb-1 capitalize cursor-default'
                       >
                         {value}
                       </Badge>
@@ -116,7 +126,7 @@ export default function Projects() {
                   {item.summary}
                 </Reveal>
               </div>
-              <div className='mx-auto my-5 flex h-[10%] w-full items-center justify-center gap-4 px-10'>
+              <div className='flex justify-center items-center gap-4 mx-auto my-5 px-10 w-full h-[10%]'>
                 <Button variant='outline' className='inline-flex gap-1' asChild>
                   <Link
                     href={item.demoLink}
@@ -142,7 +152,7 @@ export default function Projects() {
           </Reveal>
         ))}
       </div>
-      <div className='flex flex-row items-center justify-center'>
+      <div className='flex flex-row justify-center items-center'>
         <Button className='block' asChild>
           <Link href='/all-projects'>View All</Link>
         </Button>
