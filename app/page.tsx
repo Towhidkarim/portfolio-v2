@@ -25,7 +25,7 @@ export default function Home() {
         <div className='my-40'></div>
         <SkillSection />
         <Projects />
-        <BlogSection />
+        {/* <BlogSection /> */}
         <br />
         <br />
         <Education />
