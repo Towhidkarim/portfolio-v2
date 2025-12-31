@@ -9,6 +9,7 @@ import { routes } from '@/lib/constants';
 import AddProject from './_components/tabs/AddProject';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import ViewProjects from './_components/tabs/ViewProjects';
+import Inbox from './_components/tabs/Inbox';
 
 export type TListProps = {
   icon?: React.ReactNode;
@@ -18,7 +19,7 @@ export type TListProps = {
 }[];
 const tabList: TListProps = [
   { icon: <House />, title: 'Home', value: 'home', component: '' },
-  { icon: <MailOpen />, title: 'Inbox', value: 'inbox', component: '' },
+  { icon: <MailOpen />, title: 'Inbox', value: 'inbox', component: <Inbox /> },
   {
     icon: <FolderKanban />,
     title: 'Projects',
