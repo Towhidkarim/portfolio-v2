@@ -56,7 +56,7 @@ export function Education() {
             </div>
             <Reveal delay={0.3}>
               <Badge variant='secondary' className='ml-4'>
-                Current
+                Completed
               </Badge>
             </Reveal>
           </div>
@@ -70,7 +70,7 @@ export function Education() {
                 <div>
                   <p className='font-medium'>Duration</p>
                   <p className='text-sm text-muted-foreground'>
-                    2022 - Present
+                    2022 - 2026
                   </p>
                 </div>
               </div>
@@ -91,19 +91,19 @@ export function Education() {
                 <li className='flex items-start gap-2'>
                   <div className='mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary'></div>
                   <span>
-                    Maintaining exceptional academic performance with 3.99 CGPA
+                    Graduated with exceptional academic performance — 3.99 CGPA
                   </span>
                 </li>
                 <li className='flex items-start gap-2'>
                   <div className='mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary'></div>
                   <span>
-                    Pursuing comprehensive studies in Computer Science and
+                    Completed comprehensive studies in Computer Science and
                     Engineering
                   </span>
                 </li>
                 <li className='flex items-start gap-2'>
                   <div className='mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary'></div>
-                  <span>Expected graduation with honors</span>
+                  <span>Graduated with honors</span>
                 </li>
               </ul>
             </div>

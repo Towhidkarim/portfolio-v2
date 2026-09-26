@@ -49,12 +49,12 @@ export default function Footer() {
               </Button>
             </Reveal>
             <p className='mb-4 max-w-md text-primary-foreground/80 text-sm leading-relaxed'>
-              Computer Science Engineering student at Varendra University with a
+              Computer Science Engineering graduate from Varendra University with a
               passion for full-stack development and creating innovative digital
               solutions.
             </p>
             <p className='text-primary-foreground/60 text-xs'>
-              Currently pursuing CSE • CGPA: 3.99 • Class of 2026
+              BSc in CSE • CGPA: 3.99 • Class of 2026
             </p>
           </div>
 

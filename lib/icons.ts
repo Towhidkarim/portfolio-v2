@@ -1,5 +1,3 @@
-// techIcons.ts
-
 import reactIcon from '@/public/icons/React.svg';
 import nextIcon from '@/public/icons/nextjs-icon.svg';
 import tailwindIcon from '@/public/icons/Tailwind CSS.svg';
@@ -28,6 +26,13 @@ import expressIcon from '@/public/icons/express.png';
 import postman from '@/public/icons/Postman.svg';
 import turso from '@/public/icons/turso.png';
 import redux from '@/public/icons/redux.svg';
+import cloudflareIcon from '@/public/icons/cloudflare.svg';
+import githubActionsIcon from '@/public/icons/githubactions.svg';
+import gitIcon from '@/public/icons/git.svg';
+import reactNativeIcon from '@/public/icons/reactnative.svg';
+import vercelIcon from '@/public/icons/vercel.svg';
+import honoIcon from '@/public/icons/hono.svg';
+import cursorIcon from '@/public/icons/cursor.png';
 
 export {
   reactIcon,
@@ -58,4 +63,11 @@ export {
   postman,
   turso,
   redux,
+  cloudflareIcon,
+  githubActionsIcon,
+  gitIcon,
+  reactNativeIcon,
+  vercelIcon,
+  honoIcon,
+  cursorIcon,
 };

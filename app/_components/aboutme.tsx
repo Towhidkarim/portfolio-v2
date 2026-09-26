@@ -88,7 +88,7 @@ export default function AboutMe() {
             </Reveal>
             <Reveal delay={0.6} className='w-5/12'>
               <b className='text-lg'>Education</b>
-              <br /> BSc in CSE (Ongoing)
+              <br /> BSc in CSE
             </Reveal>
             <Reveal delay={0.7} className='w-1/3'>
               <b className='text-lg'>Experience</b>
