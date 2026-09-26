@@ -9,6 +9,7 @@ import {
   drizzle,
   nodeIcon,
   bunIcon,
+  pyIcon,
   githubicon,
   docker,
   postgresql,
@@ -152,6 +153,7 @@ export default function SkillSection() {
       title: 'AI',
       skills: [
         { title: 'Vercel AI SDK', icon: vercelIcon },
+        { title: 'Python', icon: pyIcon },
         { title: 'LLM Workflows', icon: Brain },
         { title: 'RAG', icon: Library },
         { title: 'Agentic Loops', icon: Bot },
