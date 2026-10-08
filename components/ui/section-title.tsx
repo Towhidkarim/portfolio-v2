@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useEffect } from 'react';
 import MotionDiv from '../framer/MotionDiv';
-import { useAnimation, useInView } from 'framer-motion';
+import { useAnimation, useInView } from 'motion/react';
 import Reveal from '../framer/Reveal';
 import { cn } from '@/lib/utils';
 

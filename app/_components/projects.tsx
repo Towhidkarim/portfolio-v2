@@ -3,7 +3,7 @@ import Reveal from '@/components/framer/Reveal';
 import { Button } from '@/components/ui/button';
 import SectionTitle from '@/components/ui/section-title';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Code, CodeXml, Dot, Eye, Link2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';

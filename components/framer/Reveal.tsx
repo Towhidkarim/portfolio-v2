@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { useState, useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { motion, useInView, useAnimation } from 'motion/react';
 
 export default function Reveal({
   children,

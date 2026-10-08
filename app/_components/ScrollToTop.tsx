@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { useScroll } from 'framer-motion';
+import { useScroll } from 'motion/react';
 import { ArrowUp } from 'lucide-react';
 import React from 'react';
 
