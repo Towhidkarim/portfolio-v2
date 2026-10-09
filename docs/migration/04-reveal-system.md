@@ -7,7 +7,7 @@ Refines the owner's `components/framer/Reveal.tsx`. Visual reference: `design/sc
 1. **Content first.** Text is readable without JavaScript and before hydration. Motion is an enhancement, never a gate.
 2. **One signature, used sparingly.** The curtain is for page-defining moments (hero name, section titles, featured project image): about 7 per page, at most one in view at a time. Everything else rises quietly or stays still.
 3. **Cheap.** Animate only `transform`, `opacity` and `clip-path`; one shared `IntersectionObserver` for the page; play once.
-4. **Directional meaning.** The curtain wipes left to right, the reading direction, in the brand teal.
+4. **Directional meaning.** The curtain wipes left to right, the reading direction, in its own colour token `--curtain` (teal by default, `#14866F` light / `#34D3A6` dark). Change the token to restyle the curtain without touching the other accents.
 5. **Respect the viewer.** Reduced motion turns the curtain into a 150 ms fade.
 6. **Progressive.** Above the fold the hero plays one timed sequence on load (CSS only). Below the fold each element reveals the first time it scrolls into view; siblings in a group follow 60 ms apart. Scroll back up and nothing replays.
 
@@ -145,7 +145,7 @@ export function RevealScan() {
 [data-reveal="curtain"] { position: relative; display: inline-block; }
 [data-reveal="curtain"]::after {
   content: ""; position: absolute; inset: .05em -.12em .02em -.12em;
-  background: var(--brand); border-radius: .12em; transform: scaleX(0); pointer-events: none;
+  background: var(--curtain); border-radius: .12em; transform: scaleX(0); pointer-events: none;
 }
 
 /* ---- motion allowed ---- */

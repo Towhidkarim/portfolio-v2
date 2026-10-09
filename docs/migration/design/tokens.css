@@ -12,6 +12,7 @@
   --brand: #14866F;
   --brandink: #0E6B58;
   --brandsoft: #E8F5F1;
+  --curtain: #14866F; /* Reveal curtain colour; defaults to the brand fill, change independently */
   --card: #FFFFFF;
   --pill: #F1F5F9;
   --pillink: #334155;
@@ -62,6 +63,7 @@
   --brand: #34D3A6;
   --brandink: #4BDDB3;
   --brandsoft: #1A3B36;
+  --curtain: #34D3A6;
   --card: #0E141B;
   --pill: #16202B;
   --pillink: #C5D0DD;

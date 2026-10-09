@@ -18,6 +18,7 @@ See `design/tokens.css` (light `:root`, dark `.dark`). Dark mode is a class on `
 - Brand fill `#14866F` (light) / `#34D3A6` (dark) is for bars, dots, borders and large text. For small text on light use `--brandink` `#0E6B58` (6.4:1 on white).
 - `--panel` (`#0B1118`, dark mode `#0F1A1C`) is the always-dark surface: AI card, contact band, footer. Text on it is `#F2F5F9`, secondary `#A5B1C0`, borders `#1D2733` and `#2A3644`. Accent on panel is `#34D3A6`.
 - `--plate` puts monochrome logos (Next.js, Express, Hono, Vercel, GitHub, Cursor, Prisma) on a light chip in dark mode: `transparent` in light, `#F8FAFC` in dark. The AI card always uses a light plate.
+- `--curtain` is the Reveal curtain colour. It equals the brand fill by default (teal confirmed by the owner) but is a separate token so it can change independently.
 - Heatmap levels `--h0` to `--h4`.
 
 ## Type

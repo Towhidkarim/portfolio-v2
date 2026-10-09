@@ -9,9 +9,9 @@
 body{margin:0}
 a{color:inherit;text-decoration:none}
 .pg,.pg *{box-sizing:border-box}
-.pg{--bg:#FFFFFF;--surface:#F8FAFC;--ink:#020817;--ink2:#475569;--ink3:#64748B;--line:#E2E8F0;--line2:#EEF2F6;--brand:#14866F;--brandink:#0E6B58;--brandsoft:#E8F5F1;--card:#FFFFFF;--pill:#F1F5F9;--pillink:#334155;--plate:transparent;--glow:rgba(20,134,111,.16);--aibg:#0B1118;--nav:rgba(255,255,255,.82);--shadow:0 18px 40px -26px rgba(2,8,23,.35);--h0:#EEF2F6;--h1:#C6E6DD;--h2:#86CDB9;--h3:#3FAA90;--h4:#14866F;--gridline:#80808014;
+.pg{--bg:#FFFFFF;--surface:#F8FAFC;--ink:#020817;--ink2:#475569;--ink3:#64748B;--line:#E2E8F0;--line2:#EEF2F6;--brand:#14866F;--brandink:#0E6B58;--brandsoft:#E8F5F1;--curtain:#14866F;--card:#FFFFFF;--pill:#F1F5F9;--pillink:#334155;--plate:transparent;--glow:rgba(20,134,111,.16);--aibg:#0B1118;--nav:rgba(255,255,255,.82);--shadow:0 18px 40px -26px rgba(2,8,23,.35);--h0:#EEF2F6;--h1:#C6E6DD;--h2:#86CDB9;--h3:#3FAA90;--h4:#14866F;--gridline:#80808014;
  font-family:'Poppins',system-ui,sans-serif;color:var(--ink);background:var(--bg);position:relative;overflow:hidden;display:flex;flex-direction:column}
-.pg.dk{--bg:#090D12;--surface:#0E141B;--ink:#F2F5F9;--ink2:#A5B1C0;--ink3:#8D9BAD;--line:#1D2733;--line2:#151D27;--brand:#34D3A6;--brandink:#4BDDB3;--brandsoft:rgba(52,211,166,.12);--card:#0E141B;--pill:#16202B;--pillink:#C5D0DD;--plate:#F8FAFC;--glow:rgba(52,211,166,.14);--aibg:#0F1A1C;--nav:rgba(9,13,18,.78);--shadow:0 18px 40px -26px rgba(0,0,0,.8);--h0:#16202B;--h1:#12413A;--h2:#1B6B5A;--h3:#27A585;--h4:#34D3A6;--gridline:#ffffff10}
+.pg.dk{--bg:#090D12;--surface:#0E141B;--ink:#F2F5F9;--ink2:#A5B1C0;--ink3:#8D9BAD;--line:#1D2733;--line2:#151D27;--brand:#34D3A6;--brandink:#4BDDB3;--brandsoft:rgba(52,211,166,.12);--curtain:#34D3A6;--card:#0E141B;--pill:#16202B;--pillink:#C5D0DD;--plate:#F8FAFC;--glow:rgba(52,211,166,.14);--aibg:#0F1A1C;--nav:rgba(9,13,18,.78);--shadow:0 18px 40px -26px rgba(0,0,0,.8);--h0:#16202B;--h1:#12413A;--h2:#1B6B5A;--h3:#27A585;--h4:#34D3A6;--gridline:#ffffff10}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
 .tnum{font-variant-numeric:tabular-nums}
 :focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:10px}
@@ -90,14 +90,14 @@ a{color:inherit;text-decoration:none}
 @keyframes ccont{0%,49.9%{opacity:0}50%,100%{opacity:1}}
 .cur{position:relative;display:inline-block}
 .cur .ct{display:block;animation:ccont .9s linear both;animation-delay:var(--d,0s)}
-.cur::after{content:"";position:absolute;inset:3px -6px 1px -6px;background:var(--brand);border-radius:8px;transform:scaleX(0);animation:cwipe .9s linear both;animation-delay:var(--d,0s);pointer-events:none}
+.cur::after{content:"";position:absolute;inset:3px -6px 1px -6px;background:var(--curtain);border-radius:8px;transform:scaleX(0);animation:cwipe .9s linear both;animation-delay:var(--d,0s);pointer-events:none}
 @keyframes lwipe{0%{transform:scaleX(0);transform-origin:left;animation-timing-function:cubic-bezier(.7,0,.2,1)}9%{transform:scaleX(1);transform-origin:left}9.01%{transform:scaleX(1);transform-origin:right;animation-timing-function:cubic-bezier(.7,0,.2,1)}18%{transform:scaleX(0);transform-origin:right}100%{transform:scaleX(0);transform-origin:right}}
 @keyframes lcont{0%,8.9%{opacity:0}9%,90%{opacity:1}95%,100%{opacity:0}}
 @keyframes lrise{0%{opacity:0;transform:translateY(12px)}9%{opacity:1;transform:none}90%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateY(12px)}}
 @keyframes lgrow{0%{transform:scaleX(0)}13%{transform:scaleX(1)}90%{transform:scaleX(1)}96%,100%{transform:scaleX(0)}}
 .lc{position:relative;display:inline-block}
 .lc .lct{display:block;animation:lcont 7s linear infinite}
-.lc::after{content:"";position:absolute;inset:3px -8px 1px -8px;background:var(--brand);border-radius:8px;transform:scaleX(0);animation:lwipe 7s linear infinite;pointer-events:none}
+.lc::after{content:"";position:absolute;inset:3px -8px 1px -8px;background:var(--curtain);border-radius:8px;transform:scaleX(0);animation:lwipe 7s linear infinite;pointer-events:none}
 .lr{animation:lrise 7s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:calc(var(--i)*.12s)}
 .lg{transform-origin:left;animation:lgrow 7s cubic-bezier(.2,.7,.2,1) infinite}
 @media (prefers-reduced-motion:reduce){.cur::after,.lc::after{display:none}}
