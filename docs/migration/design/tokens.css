@@ -1,0 +1,103 @@
+/* Generated from the approved design (design/source/*.html). Light is :root, dark is .dark.
+   Brand fill (--brand) is for bars, dots, large text; use --brandink for small text on light. */
+:root {
+  /* design tokens */
+  --bg: #FFFFFF;
+  --surface: #F8FAFC;
+  --ink: #020817;
+  --ink2: #475569;
+  --ink3: #64748B;
+  --line: #E2E8F0;
+  --line2: #EEF2F6;
+  --brand: #14866F;
+  --brandink: #0E6B58;
+  --brandsoft: #E8F5F1;
+  --card: #FFFFFF;
+  --pill: #F1F5F9;
+  --pillink: #334155;
+  --panel: #0B1118;
+  --plate: transparent;
+  --h0: #EEF2F6;
+  --h1: #C6E6DD;
+  --h2: #86CDB9;
+  --h3: #3FAA90;
+  --h4: #14866F;
+  --gridline: #80808014;
+  --glow: rgba(20,134,111,.16);
+  --nav: rgba(255,255,255,.82);
+  --shadow: 0 18px 40px -26px rgba(2,8,23,.35);
+  /* shadcn/ui variables as HSL triplets, suffixed -hsl so they do not collide with the design tokens (e.g. --card).
+     tailwind.config maps them: colors.card = 'hsl(var(--card-hsl) / <alpha-value>)' */
+  --background-hsl: 0.0 0.0% 100.0%;
+  --foreground-hsl: 222.9 84.0% 4.9%;
+  --card-hsl: 0.0 0.0% 100.0%;
+  --card-foreground-hsl: 222.9 84.0% 4.9%;
+  --popover-hsl: 0.0 0.0% 100.0%;
+  --popover-foreground-hsl: 222.9 84.0% 4.9%;
+  --primary-hsl: 222.9 84.0% 4.9%;
+  --primary-foreground-hsl: 0.0 0.0% 100.0%;
+  --secondary-hsl: 210.0 40.0% 96.1%;
+  --secondary-foreground-hsl: 215.3 25.0% 26.7%;
+  --muted-hsl: 210.0 40.0% 98.0%;
+  --muted-foreground-hsl: 215.4 16.3% 46.9%;
+  --accent-hsl: 161.5 39.4% 93.5%;
+  --accent-foreground-hsl: 167.7 76.9% 23.7%;
+  --destructive-hsl: 0 84.2% 60.2%;
+  --destructive-foreground-hsl: 0 0% 98%;
+  --border-hsl: 214.3 31.8% 91.4%;
+  --input-hsl: 214.3 31.8% 91.4%;
+  --ring-hsl: 167.9 74.0% 30.2%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* design tokens */
+  --bg: #090D12;
+  --surface: #0E141B;
+  --ink: #F2F5F9;
+  --ink2: #A5B1C0;
+  --ink3: #8D9BAD;
+  --line: #1D2733;
+  --line2: #151D27;
+  --brand: #34D3A6;
+  --brandink: #4BDDB3;
+  --brandsoft: #1A3B36;
+  --card: #0E141B;
+  --pill: #16202B;
+  --pillink: #C5D0DD;
+  --panel: #0F1A1C;
+  --plate: #F8FAFC;
+  --h0: #16202B;
+  --h1: #12413A;
+  --h2: #1B6B5A;
+  --h3: #27A585;
+  --h4: #34D3A6;
+  --gridline: #ffffff10;
+  --glow: rgba(52,211,166,.14);
+  --nav: rgba(9,13,18,.78);
+  --shadow: 0 18px 40px -26px rgba(0,0,0,.8);
+  /* shadcn/ui variables as HSL triplets, suffixed -hsl so they do not collide with the design tokens (e.g. --card).
+     tailwind.config maps them: colors.card = 'hsl(var(--card-hsl) / <alpha-value>)' */
+  --background-hsl: 213.3 33.3% 5.3%;
+  --foreground-hsl: 214.3 36.8% 96.3%;
+  --card-hsl: 212.3 31.7% 8.0%;
+  --card-foreground-hsl: 214.3 36.8% 96.3%;
+  --popover-hsl: 212.3 31.7% 8.0%;
+  --popover-foreground-hsl: 214.3 36.8% 96.3%;
+  --primary-hsl: 214.3 36.8% 96.3%;
+  --primary-foreground-hsl: 213.3 33.3% 5.3%;
+  --secondary-hsl: 211.4 32.3% 12.7%;
+  --secondary-foreground-hsl: 212.5 26.1% 82.0%;
+  --muted-hsl: 212.3 31.7% 8.0%;
+  --muted-foreground-hsl: 213.8 16.3% 61.6%;
+  --accent-hsl: 170.9 38.8% 16.7%;
+  --accent-foreground-hsl: 162.7 68.2% 58.0%;
+  --destructive-hsl: 0 84.2% 60.2%;
+  --destructive-foreground-hsl: 0 0% 98%;
+  --border-hsl: 212.7 27.5% 15.7%;
+  --input-hsl: 212.7 27.5% 15.7%;
+  --ring-hsl: 163.0 64.4% 51.6%;
+  --radius: 0.75rem;
+}
+
+/* --panel is the always-dark surface (AI card, contact band, footer). In dark mode it shifts slightly. */

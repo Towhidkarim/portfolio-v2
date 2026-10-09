@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>H5 Reveal system</title>
+<style>@font-face{font-family:'Poppins';font-weight:400;font-style:normal;font-display:swap;src:url(../assets/fonts/poppins-latin-400-normal.woff2) format('woff2')}@font-face{font-family:'Poppins';font-weight:500;font-style:normal;font-display:swap;src:url(../assets/fonts/poppins-latin-500-normal.woff2) format('woff2')}@font-face{font-family:'Poppins';font-weight:600;font-style:normal;font-display:swap;src:url(../assets/fonts/poppins-latin-600-normal.woff2) format('woff2')}@font-face{font-family:'Poppins';font-weight:700;font-style:normal;font-display:swap;src:url(../assets/fonts/poppins-latin-700-normal.woff2) format('woff2')}@font-face{font-family:'Poppins';font-weight:800;font-style:normal;font-display:swap;src:url(../assets/fonts/poppins-latin-800-normal.woff2) format('woff2')}@font-face{font-family:'JetBrains Mono';font-weight:400;font-style:normal;font-display:swap;src:url(../assets/fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2')}@font-face{font-family:'JetBrains Mono';font-weight:500;font-style:normal;font-display:swap;src:url(../assets/fonts/jetbrains-mono-latin-500-normal.woff2) format('woff2')}</style>
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}
+.pg,.pg *{box-sizing:border-box}
+.pg{--bg:#FFFFFF;--surface:#F8FAFC;--ink:#020817;--ink2:#475569;--ink3:#64748B;--line:#E2E8F0;--line2:#EEF2F6;--brand:#14866F;--brandink:#0E6B58;--brandsoft:#E8F5F1;--card:#FFFFFF;--pill:#F1F5F9;--pillink:#334155;--plate:transparent;--glow:rgba(20,134,111,.16);--aibg:#0B1118;--nav:rgba(255,255,255,.82);--shadow:0 18px 40px -26px rgba(2,8,23,.35);--h0:#EEF2F6;--h1:#C6E6DD;--h2:#86CDB9;--h3:#3FAA90;--h4:#14866F;--gridline:#80808014;
+ font-family:'Poppins',system-ui,sans-serif;color:var(--ink);background:var(--bg);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.pg.dk{--bg:#090D12;--surface:#0E141B;--ink:#F2F5F9;--ink2:#A5B1C0;--ink3:#8D9BAD;--line:#1D2733;--line2:#151D27;--brand:#34D3A6;--brandink:#4BDDB3;--brandsoft:rgba(52,211,166,.12);--card:#0E141B;--pill:#16202B;--pillink:#C5D0DD;--plate:#F8FAFC;--glow:rgba(52,211,166,.14);--aibg:#0F1A1C;--nav:rgba(9,13,18,.78);--shadow:0 18px 40px -26px rgba(0,0,0,.8);--h0:#16202B;--h1:#12413A;--h2:#1B6B5A;--h3:#27A585;--h4:#34D3A6;--gridline:#ffffff10}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.tnum{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:10px}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(20,134,111,.5)}50%{box-shadow:0 0 0 7px rgba(20,134,111,0)}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+@keyframes step{0%,20%{background:var(--stepbg);color:var(--steplit);border-color:var(--stepbg)}26%,100%{background:transparent;color:#C5D0DD;border-color:#2A3644}}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-14px)}}
+@keyframes pa{0%{clip-path:inset(0 100% 0 0)}12%{clip-path:inset(0 0 0 0);}44%{clip-path:inset(0 0 0 0)}54%,100%{clip-path:inset(0 100% 0 0)}}
+@keyframes ca{0%{left:0;opacity:1}12%{left:100%;opacity:1}44%{left:100%;opacity:1}54%{left:0;opacity:1}54.1%,100%{left:0;opacity:0}}
+.rv{animation:rise .85s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d,0s)}
+.live{animation:pulse 2.2s ease-out infinite}
+.fl{animation:float 6s ease-in-out infinite}
+.role{position:relative;display:grid}
+.role .ph{grid-area:1/1;position:relative;width:max-content;white-space:nowrap;font-weight:600;color:var(--brandink)}
+.role .tx{display:block}
+.role .cr{position:absolute;top:8%;bottom:8%;width:3px;margin-left:3px}
+.role .cr i{display:block;width:100%;height:100%;background:var(--brand);border-radius:2px;animation:blink 1s steps(1) infinite}
+.role .a .tx{animation:pa 14s linear infinite;animation-timing-function:steps(21,end)}
+.role .a .cr{animation:ca 14s linear infinite;animation-timing-function:steps(21,end)}
+.role .b .tx{animation:pa 14s linear infinite;animation-timing-function:steps(43,end);animation-delay:7s;clip-path:inset(0 100% 0 0)}
+.role .b .cr{animation:ca 14s linear infinite;animation-timing-function:steps(43,end);animation-delay:7s;opacity:0}
+.mqw{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mqt{display:flex;width:max-content;animation:mq 46s linear infinite}
+.mqw:hover .mqt{animation-play-state:paused}
+.mqs{display:flex;gap:12px;padding-right:12px}
+.mi{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 18px 0 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:14px;font-weight:500;color:var(--ink2);white-space:nowrap}
+.mi .ci{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;background:var(--plate)}
+.chip{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 16px 0 9px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:14px;font-weight:500;color:var(--ink);transition:border-color .25s ease,transform .25s ease,box-shadow .25s ease;cursor:default}
+.chip:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:0 10px 22px -14px var(--brand)}
+.chip .ci{width:30px;height:30px;display:grid;place-items:center;border-radius:8px;background:var(--plate);color:var(--brandink)}
+.bc{border:1px solid var(--line);background:var(--card);border-radius:22px;padding:26px}
+.bh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
+.bt{font-size:19px;font-weight:700;letter-spacing:-0.01em}
+.bn{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink3);letter-spacing:.08em}
+.cw{display:flex;flex-wrap:wrap;gap:10px}
+.eb{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brandink);display:flex;align-items:center;gap:12px}
+.eb i{display:block;width:28px;height:1px;background:var(--brand)}
+.h2{margin:14px 0 0;font-size:40px;line-height:1.08;font-weight:800;letter-spacing:-0.03em}
+.sub{margin:14px 0 0;font-size:17px;line-height:1.65;color:var(--ink2);max-width:560px}
+.bar{margin-top:18px;width:56px;height:4px;border-radius:4px;background:var(--brand);transform-origin:left;animation:grow .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:.2s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;padding:0 22px;border-radius:12px;font-size:15px;font-weight:600;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:var(--ink);color:var(--bg);box-shadow:0 10px 24px -14px var(--ink)}
+.btn-o{border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.btn-o:hover{border-color:var(--brand)}
+.btn-b{background:#34D3A6;color:#06241C}
+.pill{display:inline-flex;align-items:center;background:var(--pill);color:var(--pillink);font-size:12.5px;font-weight:500;padding:5px 11px;border-radius:999px}
+.nl{display:inline-flex;align-items:center;height:42px;padding:0 16px;border-radius:999px;font-size:14.5px;font-weight:500;color:var(--ink2);transition:background .2s ease,color .2s ease}
+.nl:hover{background:var(--surface);color:var(--ink)}
+.nl.on{background:var(--brandsoft);color:var(--brandink);font-weight:600}
+.ib{display:grid;place-items:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.ib:hover{border-color:var(--brand)}
+.pc{position:relative;border:1px solid var(--line);border-radius:24px;background:var(--card);overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease}
+.pc:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--brand)}
+.pc:hover .shot{transform:scale(1.03)}
+.shot{transition:transform .6s cubic-bezier(.2,.7,.2,1);transform-origin:center}
+.sk{background:var(--pill);border-radius:6px}
+.hm{display:grid;grid-auto-flow:column;grid-auto-columns:var(--cs);gap:var(--cg)}
+.hc{display:grid;grid-template-rows:repeat(7,var(--cs));gap:var(--cg);animation:pop .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--c)*22ms + .3s)}
+.hc i{display:block;border-radius:3px;background:var(--h0)}
+.hc i.l1{background:var(--h1)}.hc i.l2{background:var(--h2)}.hc i.l3{background:var(--h3)}.hc i.l4{background:var(--h4)}
+.fld{display:block;width:100%;height:48px;border-radius:12px;border:1px solid #2A3644;background:#0B1118;color:#F2F5F9;padding:0 16px;font:500 15px 'Poppins',sans-serif}
+.fld::placeholder{color:#8392A5}
+.fld:focus{border-color:#34D3A6;outline:none;box-shadow:0 0 0 3px rgba(52,211,166,.25)}
+.lbl{display:block;font-size:13px;font-weight:500;color:#A5B1C0;margin-bottom:8px}
+.stp{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;border:1px solid #2A3644;font-size:13px;font-weight:600;color:#C5D0DD;animation:step 6s infinite}
+.cl{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink2)}
+.cl:hover{color:var(--brandink)}
+
+@keyframes cwipe{0%{transform:scaleX(0);transform-origin:left;animation-timing-function:cubic-bezier(.7,0,.2,1)}50%{transform:scaleX(1);transform-origin:left}50.01%{transform:scaleX(1);transform-origin:right;animation-timing-function:cubic-bezier(.7,0,.2,1)}100%{transform:scaleX(0);transform-origin:right}}
+@keyframes ccont{0%,49.9%{opacity:0}50%,100%{opacity:1}}
+.cur{position:relative;display:inline-block}
+.cur .ct{display:block;animation:ccont .9s linear both;animation-delay:var(--d,0s)}
+.cur::after{content:"";position:absolute;inset:3px -6px 1px -6px;background:var(--brand);border-radius:8px;transform:scaleX(0);animation:cwipe .9s linear both;animation-delay:var(--d,0s);pointer-events:none}
+@keyframes lwipe{0%{transform:scaleX(0);transform-origin:left;animation-timing-function:cubic-bezier(.7,0,.2,1)}9%{transform:scaleX(1);transform-origin:left}9.01%{transform:scaleX(1);transform-origin:right;animation-timing-function:cubic-bezier(.7,0,.2,1)}18%{transform:scaleX(0);transform-origin:right}100%{transform:scaleX(0);transform-origin:right}}
+@keyframes lcont{0%,8.9%{opacity:0}9%,90%{opacity:1}95%,100%{opacity:0}}
+@keyframes lrise{0%{opacity:0;transform:translateY(12px)}9%{opacity:1;transform:none}90%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateY(12px)}}
+@keyframes lgrow{0%{transform:scaleX(0)}13%{transform:scaleX(1)}90%{transform:scaleX(1)}96%,100%{transform:scaleX(0)}}
+.lc{position:relative;display:inline-block}
+.lc .lct{display:block;animation:lcont 7s linear infinite}
+.lc::after{content:"";position:absolute;inset:3px -8px 1px -8px;background:var(--brand);border-radius:8px;transform:scaleX(0);animation:lwipe 7s linear infinite;pointer-events:none}
+.lr{animation:lrise 7s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:calc(var(--i)*.12s)}
+.lg{transform-origin:left;animation:lgrow 7s cubic-bezier(.2,.7,.2,1) infinite}
+@media (prefers-reduced-motion:reduce){.cur::after,.lc::after{display:none}}
+@media (prefers-reduced-motion:reduce){.pg *{animation:none!important;transition:none!important}.role .b{display:none}.role .a .tx{clip-path:none}.role .a .cr{opacity:0}}
+</style>
+</head>
+<body style="margin:0">
+<div class="pg" style="width:1280px;height:2700px;padding:72px">
+ <div style="position:absolute;left:0;right:0;top:0;height:460px;background-image:linear-gradient(to right,var(--gridline) 1px,transparent 1px),linear-gradient(to bottom,var(--gridline) 1px,transparent 1px);background-size:32px 32px;-webkit-mask-image:linear-gradient(to bottom,#000,transparent);mask-image:linear-gradient(to bottom,#000,transparent)"></div>
+ <div style="position:relative">
+  <div class="eb"><span>Reveal system</span><i></i><span>Your component, refined</span></div>
+  <h1 style="margin:18px 0 0;font-size:56px;line-height:1.05;font-weight:800;letter-spacing:-0.04em;max-width:900px">A curtain that gets out of the way.</h1>
+  <p class="sub" style="max-width:760px;font-size:18px">Reveal keeps its idea, a block sweeping across to uncover content, and gives it a job: marking the few moments that define the page. Everything else rises quietly or stays still.</p>
+
+  <div style="margin-top:56px"><div style="display:flex;align-items:baseline;gap:18px;margin-bottom:26px"><span class="eb"><span>01</span><i></i><span>Variants</span></span><h2 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.03em">Three effects, one API</h2></div>
+   <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+    <div class="bc" style="padding:28px;display:flex;flex-direction:column"><div style="display:flex;align-items:center;justify-content:space-between"><span class="mono" style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brandink)">curtain</span><span class="mono" style="font-size:11.5px;color:var(--ink3)">loops every 7 s</span></div><div style="height:250px;margin-top:18px;border-radius:16px;background:var(--surface);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;overflow:hidden"><div class="lc" style="font-size:64px;font-weight:800;letter-spacing:-0.04em;line-height:1.1"><span class="lct">Skills</span></div></div><div style="margin-top:20px;font-size:19px;font-weight:700;letter-spacing:-0.01em">For titles and key images</div><div style="margin-top:8px;font-size:14.5px;line-height:1.6;color:var(--ink2)">Teal block wipes in (0.45 s), content swaps beneath it, block exits right (0.45 s). At most one in view.</div></div>
+    <div class="bc" style="padding:28px;display:flex;flex-direction:column"><div style="display:flex;align-items:center;justify-content:space-between"><span class="mono" style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brandink)">rise</span><span class="mono" style="font-size:11.5px;color:var(--ink3)">loops every 7 s</span></div><div style="height:250px;margin-top:18px;border-radius:16px;background:var(--surface);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;overflow:hidden"><div style="width:78%"><div class="lr" style="--i:0;display:flex;align-items:center;gap:12px;padding:12px 14px;margin-top:0px;border:1px solid var(--line);border-radius:12px;background:var(--card)"><span style="width:28px;height:28px;border-radius:8px;background:var(--brandsoft)"></span><span class="sk" style="height:10px;width:62%"></span></div><div class="lr" style="--i:1;display:flex;align-items:center;gap:12px;padding:12px 14px;margin-top:10px;border:1px solid var(--line);border-radius:12px;background:var(--card)"><span style="width:28px;height:28px;border-radius:8px;background:var(--brandsoft)"></span><span class="sk" style="height:10px;width:48%"></span></div><div class="lr" style="--i:2;display:flex;align-items:center;gap:12px;padding:12px 14px;margin-top:10px;border:1px solid var(--line);border-radius:12px;background:var(--card)"><span style="width:28px;height:28px;border-radius:8px;background:var(--brandsoft)"></span><span class="sk" style="height:10px;width:70%"></span></div></div></div><div style="margin-top:20px;font-size:19px;font-weight:700;letter-spacing:-0.01em">For text, cards and chips</div><div style="margin-top:8px;font-size:14.5px;line-height:1.6;color:var(--ink2)">Opacity and 12 px lift over 0.7 s. Siblings follow 60 ms apart so a group reads as one gesture.</div></div>
+    <div class="bc" style="padding:28px;display:flex;flex-direction:column"><div style="display:flex;align-items:center;justify-content:space-between"><span class="mono" style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brandink)">draw</span><span class="mono" style="font-size:11.5px;color:var(--ink3)">loops every 7 s</span></div><div style="height:250px;margin-top:18px;border-radius:16px;background:var(--surface);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;overflow:hidden"><div style="width:78%"><div style="font-size:30px;font-weight:800;letter-spacing:-0.03em">My Projects</div><div class="lg" style="margin-top:12px;width:100%;height:4px;border-radius:4px;background:var(--brand)"></div><div style="margin-top:16px;display:flex;align-items:center;gap:12px"><span style="font-size:15px;font-weight:700">Project name</span><span class="lg" style="flex:1;height:3px;border-radius:3px;background:var(--brand)"></span></div></div></div><div style="margin-top:20px;font-size:19px;font-weight:700;letter-spacing:-0.01em">For bars and progress</div><div style="margin-top:8px;font-size:14.5px;line-height:1.6;color:var(--ink2)">Accent lines grow from the left in 0.9 s, tying titles and project cards to the brand colour.</div></div>
+   </div></div>
+
+  <div style="margin-top:64px;display:grid;grid-template-columns:1.25fr 1fr;gap:16px">
+   <div class="bc" style="padding:30px"><div style="display:flex;align-items:baseline;gap:18px;margin-bottom:26px"><span class="eb"><span>02</span><i></i><span>Anatomy</span></span><h2 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.03em">The curtain, phase by phase</h2></div><div style="display:flex;border:1px solid var(--line);border-radius:16px;overflow:hidden"><div style="flex:45;padding:14px 16px;border-right:1px solid var(--line);background:var(--brandsoft)"><div class="mono" style="font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)">0 to 450 ms</div><div style="margin-top:6px;font-size:15px;font-weight:600">Cover</div><div style="margin-top:4px;font-size:13.5px;color:var(--ink2);line-height:1.5">Teal block scales in from the left. Content is still hidden.</div></div><div style="flex:45;padding:14px 16px;border-right:1px solid var(--line);background:var(--surface)"><div class="mono" style="font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)">450 to 900 ms</div><div style="margin-top:6px;font-size:15px;font-weight:600">Uncover</div><div style="margin-top:4px;font-size:13.5px;color:var(--ink2);line-height:1.5">Content swaps at full cover, block exits to the right.</div></div><div style="flex:30;padding:14px 16px;border-right:1px solid var(--line);"><div class="mono" style="font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)">After</div><div style="margin-top:6px;font-size:15px;font-weight:600">Settle</div><div style="margin-top:4px;font-size:13.5px;color:var(--ink2);line-height:1.5">Block is gone; text is plain and selectable.</div></div></div>
+    <div style="margin-top:18px;font-size:14.5px;line-height:1.65;color:var(--ink2)">Easing is <span class="mono" style="color:var(--ink)">cubic-bezier(.7, 0, .2, 1)</span> on each half. Only <span class="mono" style="color:var(--ink)">transform</span> and <span class="mono" style="color:var(--ink)">opacity</span> animate, so the work stays on the compositor. With reduced motion the block is removed and the content fades in over 150 ms.</div></div>
+   <div class="bc" style="padding:30px"><div style="display:flex;align-items:baseline;gap:18px;margin-bottom:26px"><span class="eb"><span>03</span><i></i><span>Usage</span></span><h2 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.03em">Where each one goes</h2></div><div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15px"><span>Hero name</span><span class="mono" style="font-size:13px;color:var(--brandink);white-space:nowrap">curtain</span></div><div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15px"><span>Section titles (4)</span><span class="mono" style="font-size:13px;color:var(--brandink);white-space:nowrap">curtain</span></div><div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15px"><span>Featured project image</span><span class="mono" style="font-size:13px;color:var(--brandink);white-space:nowrap">curtain</span></div><div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15px"><span>Role line, hero copy, buttons</span><span class="mono" style="font-size:13px;color:var(--brandink);white-space:nowrap">rise, 80 ms stagger</span></div><div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15px"><span>Skill chips, cards, education cards</span><span class="mono" style="font-size:13px;color:var(--brandink);white-space:nowrap">rise, 60 ms stagger</span></div><div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15px"><span>Accent bars, project underline, CGPA bar</span><span class="mono" style="font-size:13px;color:var(--brandink);white-space:nowrap">draw</span></div><div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15px"><span>Everything else</span><span class="mono" style="font-size:13px;color:var(--brandink);white-space:nowrap">none</span></div><div style="border-top:1px solid var(--line)"></div></div>
+  </div>
+
+  <div style="margin-top:64px"><div style="display:flex;align-items:baseline;gap:18px;margin-bottom:26px"><span class="eb"><span>04</span><i></i><span>Why</span></span><h2 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.03em">Today against refined</h2></div><div class="bc" style="padding:30px"><div style="display:grid;grid-template-columns:1fr 1.2fr 1.2fr;font-size:14.5px"><div></div><div class="mono" style="font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);padding-bottom:12px">Today</div><div class="mono" style="font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--brandink);padding-bottom:12px">Refined</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);font-weight:600">Animated property</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);color:var(--ink2)">width (layout every frame)</div><div style="padding:13px 0;border-top:1px solid var(--line)">transform and clip-path only</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);font-weight:600">Before JS runs</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);color:var(--ink2)">Text hidden at opacity 0</div><div style="padding:13px 0;border-top:1px solid var(--line)">Text visible; hidden state needs the js class</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);font-weight:600">Per instance</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);color:var(--ink2)">2 motion divs, 2 animation controllers, 1 in-view hook</div><div style="padding:13px 0;border-top:1px solid var(--line)">1 element with a data attribute</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);font-weight:600">Observers on the page</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);color:var(--ink2)">About 40</div><div style="padding:13px 0;border-top:1px solid var(--line)">1 shared</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);font-weight:600">Curtains on the page</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);color:var(--ink2)">About 40</div><div style="padding:13px 0;border-top:1px solid var(--line)">About 7</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);font-weight:600">Runtime</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);color:var(--ink2)">framer-motion</div><div style="padding:13px 0;border-top:1px solid var(--line)">About 400 bytes of script plus CSS</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);font-weight:600">Reduced motion</div><div style="padding:13px 12px 13px 0;border-top:1px solid var(--line);color:var(--ink2)">Not handled</div><div style="padding:13px 0;border-top:1px solid var(--line)">150 ms fade</div></div></div></div>
+
+  <div style="margin-top:64px"><div style="display:flex;align-items:baseline;gap:18px;margin-bottom:26px"><span class="eb"><span>05</span><i></i><span>Code</span></span><h2 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.03em">What ships</h2></div><div style="background:var(--aibg);border:1px solid #1D2733;border-radius:22px;padding:30px"><pre class="mono" style="margin:0;font-size:13.5px;line-height:1.75;color:#E6EBF1;white-space:pre-wrap"><span style="color:#8D9BAD">// reveal.tsx: server-renderable, no client JS</span>
+<span style="color:#34D3A6">export function</span> Reveal({ as: Tag = <span style="color:#E5C07B">'div'</span>, variant = <span style="color:#E5C07B">'rise'</span>, delay = 0, ...p }) {
+  <span style="color:#34D3A6">return</span> &lt;Tag data-reveal={variant} style={{ <span style="color:#E5C07B">'--d'</span>: `${delay}s` }} {...p} /&gt;
+}
+
+<span style="color:#8D9BAD">// reveal.css</span>
+<span style="color:#34D3A6">@media</span> (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal=<span style="color:#E5C07B">rise</span>]:not([data-in]) { opacity: 0; transform: translateY(12px) }
+  [data-reveal=<span style="color:#E5C07B">rise</span>][data-in] { transition: opacity .7s, transform .7s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d) }
+  [data-reveal=<span style="color:#E5C07B">curtain</span>][data-in]::after { animation: cwipe .9s var(--d) both }
+}
+
+<span style="color:#8D9BAD">// reveal.js, inlined in &lt;head&gt;, about 400 bytes</span>
+document.documentElement.classList.add(<span style="color:#E5C07B">'js'</span>)
+<span style="color:#34D3A6">const</span> io = <span style="color:#34D3A6">new</span> IntersectionObserver((es) =&gt; es.forEach((e) =&gt; {
+  <span style="color:#34D3A6">if</span> (e.isIntersecting) { e.target.setAttribute(<span style="color:#E5C07B">'data-in'</span>, <span style="color:#E5C07B">''</span>); io.unobserve(e.target) }
+}), { rootMargin: <span style="color:#E5C07B">'0px 0px -12% 0px'</span> })
+document.querySelectorAll(<span style="color:#E5C07B">'[data-reveal]'</span>).forEach((el) =&gt; io.observe(el))</pre></div></div>
+ </div>
+</div>
+</body>
+</html>
