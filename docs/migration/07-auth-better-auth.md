@@ -1,5 +1,14 @@
 # Auth: Better Auth on D1
 
+> **As built (Phase 2, 2026-10-10) - read this first; the sketches below are the original intent.**
+> - Role model is Better Auth's **admin plugin with access control**: `src/lib/permissions.ts` (statements + `admin`/`user` roles) feeds both the server `admin()` plugin and the client `adminClient()`. Permission checks go through `auth.api.userHasPermission` (`src/server/session.server.ts`). Gate for `/admin` is `admin: ['access']`.
+> - Config is in `src/server/auth.server.ts` (`authOptions`, `adminPlugin`, `createAuth(deps)`, `getAuth()` per request). Cookie plugin: `tanstackStartCookies` from `better-auth/tanstack-start`, last. Drizzle adapter: `@better-auth/drizzle-adapter`, `provider: 'sqlite'`.
+> - Schema: `src/db/auth-schema.ts` is generated (`bun run auth:generate`), barrel-exported from `src/db/schema.ts`, never hand-edited.
+> - Passwords: `src/server/password.server.ts` re-exports Better Auth's scrypt. Under the `workerd` export condition it is native `node:crypto` scrypt, N=16384, r=16, p=1, 64-byte key, stored as `saltHex:keyHex`. Local wall time about 80 ms per hash/verify; CPU on a deployed free-plan Worker still to be measured (R-04).
+> - Admins: `bun run admin:create | admin:set-password | admin:list` (add `--remote` for the deployed DB). No signup route (`disableSignUp`; `POST /api/auth/sign-up/email` returns 400 `EMAIL_PASSWORD_SIGN_UP_DISABLED`).
+> - Rate limit: `storage: 'database'` (`rate_limit` table), 5 per 60 s on `/sign-in/email`, 30 per 60 s otherwise. No session cookie cache. Session 14 days.
+> - Enforcement: `requires({...})` middleware (`src/server/middleware/auth.middleware.ts`) on every admin server function/route; `/admin` `beforeLoad` is UX only and the layout uses `ssr: 'data-only'`.
+
 Replaces Lucia 3 and `@node-rs/argon2`. One admin account; no public signup.
 
 > **PENDING RESEARCH R-02, R-04, R-05.** Better Auth's API names below come from search summaries; read the current docs (Installation, Drizzle adapter, TanStack Start integration, Email & Password, Rate limit, Cookies, Admin plugin) before coding. Mark deviations in the phase file.

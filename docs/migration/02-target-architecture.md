@@ -166,7 +166,8 @@ bun run seed:dev       insert sample data into LOCAL D1 only (Phase 1)
 bun run db:generate    drizzle-kit generate
 bun run db:migrate:local   wrangler d1 migrations apply portfolio-db --local
 bun run db:migrate:remote  wrangler d1 migrations apply portfolio-db --remote
-bun run auth:generate  better-auth CLI schema generation (R-05)
+bun run auth:generate  better-auth CLI: regenerates src/db/auth-schema.ts (then db:generate, db:migrate:local)
+bun run admin:create   create an admin (add --remote for the deployed DB); also admin:set-password, admin:list
 ```
 
 ## Non-goals

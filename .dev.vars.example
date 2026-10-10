@@ -1,6 +1,7 @@
 # Copy to .dev.vars (gitignored) for local development. Names only, no values.
+# Generate a secret with: openssl rand -base64 32
 BETTER_AUTH_SECRET=
-BETTER_AUTH_URL=
+BETTER_AUTH_URL=http://localhost:3000
 CF_API_TOKEN_PURGE=
 CF_ZONE_ID=
 TURNSTILE_SECRET=

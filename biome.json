@@ -13,7 +13,8 @@
       "**/.vscode/**/*",
       "**/vite.config.ts",
       "**/biome.json",
-      "!**/src/routeTree.gen.ts"
+      "!**/src/routeTree.gen.ts",
+      "!**/src/db/auth-schema.ts"
     ]
   },
   "formatter": {

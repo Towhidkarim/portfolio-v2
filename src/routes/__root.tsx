@@ -3,6 +3,8 @@ import { createRootRoute, HeadContent, Scripts } from '@tanstack/react-router';
 import appCss from '@/styles/globals.css?url';
 
 export const Route = createRootRoute({
+  // Safe default: nothing is cached unless a route opts in (see 12-start-best-practices.md).
+  headers: () => ({ 'Cache-Control': 'private, no-store' }),
   head: () => ({
     meta: [
       {
