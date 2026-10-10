@@ -73,7 +73,7 @@
 [data-reveal="curtain"]::after {
   content: "";
   position: absolute;
-  inset: 0.05em -0.12em 0.02em -0.12em;
+  inset: -0.06em -0.12em -0.1em -0.12em;
   background: var(--curtain);
   border-radius: 0.12em;
   transform: scaleX(0);
