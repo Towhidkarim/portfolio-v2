@@ -14,7 +14,8 @@
       "**/vite.config.ts",
       "**/biome.json",
       "!**/src/routeTree.gen.ts",
-      "!**/src/db/auth-schema.ts"
+      "!**/src/db/auth-schema.ts",
+      "!**/*.svg"
     ]
   },
   "formatter": {

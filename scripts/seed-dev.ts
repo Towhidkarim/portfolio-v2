@@ -32,13 +32,13 @@ try {
       id: imageId,
       r2Key: `seed/${i + 1}.svg`,
       fileName: `${i + 1}.svg`,
-      fileUrl: '/images/hero.svg',
+      fileUrl: '/images/contact.svg',
     });
     await db.insert(projects).values({
       id: crypto.randomUUID(),
       projectName: s.name,
       displayIndex: (samples.length - i) * 10,
-      imgUrl: '/images/hero.svg',
+      imgUrl: '/images/contact.svg',
       imgID: imageId,
       tags: s.tags,
       summary: 'One line on what it does and who it is for.',

@@ -22,6 +22,7 @@
     "admin:create": "bun scripts/admin.ts create",
     "admin:set-password": "bun scripts/admin.ts set-password",
     "admin:list": "bun scripts/admin.ts list",
+    "illustration:build": "node scripts/hero-illustration/build.mjs",
     "check:reveal": "node scripts/check-reveal.mjs",
     "check:a11y": "node scripts/check-a11y.mjs"
   },

@@ -1,5 +1,8 @@
 import { Download, Eye } from 'lucide-react';
 import type { CSSProperties } from 'react';
+// Inlined, so it follows the light/dark class with no extra request. Built by
+// `bun run illustration:build` (scripts/hero-illustration).
+import illustration from '@/assets/hero-illustration.svg?raw';
 import { Reveal } from '@/components/reveal/reveal';
 import { StatusPill } from '@/components/site-primitives/primitives';
 import { Button } from '@/components/ui/button';
@@ -17,8 +20,8 @@ const floating = [
     cls: 'm-float-2 right-[2%] top-[2%]',
   },
   {
-    name: 'Tailwind CSS',
-    src: '/icons/Tailwind CSS.svg',
+    name: 'Claude',
+    src: '/icons/claude.svg',
     cls: 'm-float-3 right-[-2%] top-[62%]',
   },
   {
@@ -118,23 +121,13 @@ export function Hero() {
         </Reveal>
       </div>
 
-      <Reveal
-        immediate
-        index={2}
-        className='relative mx-auto aspect-square w-[330px] max-w-full sm:w-[420px] lg:w-[500px]'
-      >
+      {/* no Reveal here: the illustration plays its own entrance */}
+      <div className='relative mx-auto aspect-square w-[330px] max-w-full sm:w-[420px] lg:w-[500px]'>
         <div
           aria-hidden='true'
-          className='m-glow absolute inset-[12%] rounded-full bg-[var(--glow)] blur-3xl'
-        />
-        <img
-          src='/images/hero.svg'
-          alt=''
-          width={500}
-          height={500}
-          fetchPriority='high'
-          decoding='async'
-          className='relative size-full'
+          className='relative size-full [&>svg]:size-full'
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: our own build-time SVG, no user input
+          dangerouslySetInnerHTML={{ __html: illustration }}
         />
         {floating.map((f) => (
           <span
@@ -142,20 +135,20 @@ export function Hero() {
             className={`${f.cls} absolute grid size-[52px] place-items-center rounded-2xl border border-line bg-card shadow-card sm:size-[60px]`}
           >
             <span
-              className={`grid size-8 place-items-center rounded-lg ${'mono' in f ? 'bg-plate' : ''}`}
+              className={`grid size-9 place-items-center rounded-lg ${'mono' in f ? 'bg-plate' : ''}`}
             >
               <img
                 src={encodeURI(f.src)}
                 alt=''
-                width={26}
-                height={26}
+                width={30}
+                height={30}
                 decoding='async'
-                className='size-[26px] object-contain'
+                className='size-[30px] object-contain'
               />
             </span>
           </span>
         ))}
-      </Reveal>
+      </div>
     </section>
   );
 }
