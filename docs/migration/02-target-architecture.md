@@ -9,7 +9,7 @@ Registry versions checked on 2026-10-09. Pin exact versions in `package.json` on
 | `@tanstack/react-start` | 1.168.60 | requires Vite >= 7, Node >= 22.12 |
 | `@tanstack/react-router` | 1.170.41 | pulled in by Start; keep versions in step |
 | `@tanstack/react-query` | 5.x (repo has ^5.51) | admin only |
-| `vite` | 7.x or 8.x per Start peer range | latest is 8.3.4; use what Start's scaffold pins |
+| `vite` | 8.3.4 (installed) | Start scaffold pins ^8 |
 | `@cloudflare/vite-plugin` | 1.63.1 | peer: wrangler ^4.149 |
 | `wrangler` | 4.149.0 | |
 | `@cloudflare/workers-types` | latest (or `wrangler types`) | prefer generated `worker-configuration.d.ts` |
@@ -156,7 +156,9 @@ bun run dev            vite dev (Workers runtime via the Cloudflare plugin)
 bun run build          vite build
 bun run preview        wrangler dev against the built output
 bun run typecheck      tsc --noEmit
-bun run lint           eslint (flat config, no next plugin)
+bun run lint           biome lint (owner chose Biome over ESLint + Prettier; spaces, 2-wide, single quotes)
+bun run check          biome check (lint + format + import order)
+bun run format         biome format --write
 bun run deploy         build + wrangler deploy
 bun run cf-typegen     wrangler types
 bun run test           vitest (Phase 1 introduces it)

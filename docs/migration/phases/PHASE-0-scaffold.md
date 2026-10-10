@@ -51,7 +51,20 @@ Design, real routes, auth, any production data.
 `git checkout master`; the branch is disposable.
 
 ## Deviations
-(none yet)
+- **Biome replaces ESLint and Prettier** (owner request). `biome.json`: spaces, 2-wide, single quotes, trailing commas, `noUnknownAtRules` off (Tailwind 3 `@tailwind`). `.prettierrc` and `prettier*` deps removed, so Tailwind class sorting is gone for now. Step 6 (ESLint flat config) is not done.
+- **Scaffold command**: `bunx @tanstack/cli create` with `--blank --deployment cloudflare --toolchain biome` (the tool `create-cloudflare` delegates to). Alias is `@/*` only; the scaffold's `#/*` import map was dropped.
+- **Spike A (remote deploy) skipped**: owner wants everything local until deploy time. Do it with the Phase 8 deploy.
+- Spike B/C code was removed after verification (nothing to keep under `src/routes/_spikes`). `src/server/env.ts` (`getEnv()`) is kept.
+- Not installed yet: `better-auth` (Phase 2), `vitest` (Phase 1), React Compiler (Phase 3).
+- `drizzle.config.ts` moved to `legacy/`; Phase 1 writes a D1 one. `.env` (Turso, UploadThing, Upstash secrets) stays untracked at the root for Phase 9.
+- `wrangler.jsonc` carries a placeholder `database_id` (all zeros) that works for local only. Replace via `wrangler d1 create` at deploy.
 
 ## Handoff
-(fill using the template in `00-agent-protocol.md`)
+
+### Handoff (2026-10-10, Claude)
+Done: branch `migrate/tanstack-start` (from the plan branch); legacy parked in `legacy/`; Start + Cloudflare Vite plugin + Biome scaffold with exact pins; bindings `DB` (D1) and `MEDIA` (R2) in `wrangler.jsonc`; `worker-configuration.d.ts` generated; placeholder index route.
+Verified by running: `bun run typecheck`, `bun run lint`, `bun run build` pass. Index loader calling D1 `select 1` and an R2 put/get/delete returned `{"d1":1,"r2":"hello r2"}` under `vite dev` and under `vite build` + `vite preview`. `wrangler d1 execute portfolio-db --local` works.
+Not verified / could not run: remote deploy (Spike A); `wrangler dev` proper (used `vite preview`); the Cache API.
+Deviations from spec: see Deviations.
+Pending research resolved: R-01, R-02, R-09 (partly), R-17 (package manager only).
+Next agent should watch out for: `bun run dev` generates `src/routeTree.gen.ts`, so run it (or `vite build`) before `typecheck` on a fresh clone. Docs mention `eslint`/Prettier in a few places: Biome is the tool. The scaffold uses `shellComponent` in the root route and `getRouter` in `router.tsx`.

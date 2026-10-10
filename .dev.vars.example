@@ -1,0 +1,7 @@
+# Copy to .dev.vars (gitignored) for local development. Names only, no values.
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=
+CF_API_TOKEN_PURGE=
+CF_ZONE_ID=
+TURNSTILE_SECRET=
+PUBLIC_MEDIA_BASE_URL=

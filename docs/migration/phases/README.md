@@ -8,7 +8,7 @@ Update this table in the same commit that finishes a phase.
 
 | # | Phase | Depends on | Estimate | Status | Finished | Commit | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0 | Scaffold, park legacy, spikes | none | 0.5 day | not started | | | |
+| 0 | Scaffold, park legacy, spikes | none | 0.5 day | done (Spike A deferred to Phase 8 by owner) | 2026-10-10 | see git log `phase-0:` | Biome instead of ESLint/Prettier; local D1/R2 only |
 | 1 | Data layer: D1 + Drizzle | 0 | 1 day | not started | | | |
 | 2 | Auth: Better Auth | 0, 1 | 1 day | not started | | | |
 | 3 | Design foundation + Reveal | 0 | 1.5 days | not started | | | |
