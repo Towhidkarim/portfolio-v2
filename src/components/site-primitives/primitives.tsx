@@ -88,7 +88,7 @@ export function Chip({
   return (
     <span
       className={cn(
-        'inline-flex cursor-default items-center rounded-control border border-line bg-card font-medium text-foreground transition-[border-color,transform,box-shadow] duration-250 hover:border-brand hover:shadow-[0_10px_22px_-14px_var(--brand)] motion-safe:hover:-translate-y-0.5',
+        'inline-flex cursor-default items-center rounded-control border border-line bg-card font-medium text-foreground transition-[border-color,translate,transform,box-shadow] duration-300 ease-out hover:border-brand hover:shadow-[0_10px_22px_-14px_var(--brand)] motion-safe:hover:-translate-y-0.5',
         size === 'sm'
           ? 'h-10 gap-2 pr-3.5 pl-[7px] text-[13.5px]'
           : 'h-[46px] gap-2.5 pr-4 pl-[9px] text-sm',

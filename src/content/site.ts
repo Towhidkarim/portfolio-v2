@@ -21,7 +21,7 @@ export const nav = {
     { id: 'about', label: 'About me' },
     { id: 'contact', label: 'Contact' },
   ],
-  cta: 'Hire me',
+  cta: 'Contact me',
 } as const;
 
 export const hero = {

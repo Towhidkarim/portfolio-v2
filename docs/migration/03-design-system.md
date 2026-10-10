@@ -68,7 +68,7 @@ Load only Poppins 400, 500, 600, 700, 800 and JetBrains Mono 400, 500, latin sub
 Order: nav, hero, proof strip, stack marquee, 01 Skills, 02 Projects (+ activity), 03 Education, 04 About, 05 Contact (dark), footer (dark). Each content section has: eyebrow `NN · label`, H2, accent bar, sub line, then content.
 
 ### Navbar
-Floating pill, 1160 wide, 64 high, top margin 20, `position: sticky; top: 16px` (the mock is static), blur backdrop `--nav`. Left logo `<Towhid/Karim>` (20/800). Centre links with **scroll-spy**: an `IntersectionObserver` over `section[id]` marks the link of the section in view; sections have `scroll-margin-top: 96px`. Right: GitHub icon button, theme toggle, `Hire me` (primary, pill radius). Below 768 px: logo, theme toggle, menu button opening a sheet with the same links (44 px targets).
+Floating pill, 1160 wide, 64 high, top margin 20, `position: sticky; top: 16px` (the mock is static), blur backdrop `--nav`. Left logo `<Towhid/Karim>` (20/800). Centre links with **scroll-spy**: an `IntersectionObserver` over `section[id]` marks the link of the section in view; sections have `scroll-margin-top: 96px`. Right: GitHub icon button, theme toggle, `Contact me` (primary, pill radius). Below 768 px: logo, theme toggle, menu button opening a sheet with the same links (44 px targets).
 
 A 3 px `--brand` scroll-progress bar sits at the very top of the viewport (`transform: scaleX(progress)`, rAF-throttled scroll listener or `animation-timeline: scroll()` where supported).
 

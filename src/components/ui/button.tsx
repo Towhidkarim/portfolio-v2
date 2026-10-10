@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 // Design: 48 px high, radius 12, 15/600. default = primary (ink), outline =
 // secondary (bordered), brand = on the always-dark panel.
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-[9px] whitespace-nowrap rounded-control text-[15px] font-semibold transition-[transform,box-shadow,border-color,background-color,color] duration-200 disabled:pointer-events-none disabled:opacity-50 motion-safe:hover:-translate-y-0.5 [&_svg:not([class*='size-'])]:size-[19px] [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "inline-flex shrink-0 items-center justify-center gap-[9px] whitespace-nowrap rounded-control text-[15px] font-semibold transition-[translate,transform,box-shadow,border-color,background-color,color] duration-300 ease-out disabled:pointer-events-none disabled:opacity-50 motion-safe:hover:-translate-y-0.5 [&_svg:not([class*='size-'])]:size-[19px] [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {

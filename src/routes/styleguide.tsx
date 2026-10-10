@@ -356,7 +356,7 @@ function Styleguide() {
         title='Project card (sample)'
         className='mt-6 grid gap-6 md:grid-cols-2'
       >
-        <article className='group overflow-hidden rounded-project border border-line bg-card transition-[transform,box-shadow,border-color] duration-300 hover:border-brand hover:shadow-card motion-safe:hover:-translate-y-1'>
+        <article className='group overflow-hidden rounded-project border border-line bg-card transition-[translate,transform,box-shadow,border-color] duration-300 hover:border-brand hover:shadow-card motion-safe:hover:-translate-y-1'>
           <div className='aspect-[16/10] overflow-hidden bg-pill'>
             <div className='size-full bg-pill transition-transform duration-500 group-hover:scale-[1.03]' />
           </div>

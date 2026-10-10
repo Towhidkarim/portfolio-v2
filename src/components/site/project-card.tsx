@@ -142,7 +142,7 @@ export function ProjectCard({
   eager?: boolean;
 }) {
   return (
-    <article className='group relative flex h-full flex-col overflow-hidden rounded-project border border-line bg-card transition-[transform,box-shadow,border-color] duration-[350ms] hover:border-brand hover:shadow-card motion-safe:hover:-translate-y-1'>
+    <article className='group relative flex h-full flex-col overflow-hidden rounded-project border border-line bg-card transition-[translate,transform,box-shadow,border-color] duration-[350ms] hover:border-brand hover:shadow-card motion-safe:hover:-translate-y-1'>
       <div className='[&_.shot]:origin-center [&_.shot]:transition-transform [&_.shot]:duration-[600ms] group-hover:[&_.shot]:scale-[1.03]'>
         <BrowserShot
           project={project}
@@ -172,7 +172,7 @@ export function FeaturedProject({
   label: string;
 }) {
   return (
-    <article className='group relative grid overflow-hidden rounded-project border border-line bg-card transition-[transform,box-shadow,border-color] duration-[350ms] hover:border-brand hover:shadow-card motion-safe:hover:-translate-y-1 lg:grid-cols-[1.15fr_1fr]'>
+    <article className='group relative grid overflow-hidden rounded-project border border-line bg-card transition-[translate,transform,box-shadow,border-color] duration-[350ms] hover:border-brand hover:shadow-card motion-safe:hover:-translate-y-1 lg:grid-cols-[1.15fr_1fr]'>
       <div className='[&_.shot]:origin-center [&_.shot]:transition-transform [&_.shot]:duration-[600ms] group-hover:[&_.shot]:scale-[1.03]'>
         <BrowserShot
           project={project}

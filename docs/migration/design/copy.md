@@ -15,7 +15,7 @@ Exact strings used in the approved design. Items in `[brackets]` are placeholder
 
 ## Navbar
 
-Logo: `<Towhid/Karim>`. Links: Home, Skills, Projects, About me, Contact. Right: GitHub icon button (`https://github.com/Towhidkarim/`), theme toggle, primary button `Hire me` (links to `#contact`).
+Logo: `<Towhid/Karim>`. Links: Home, Skills, Projects, About me, Contact. Right: GitHub icon button (`https://github.com/Towhidkarim/`), theme toggle, primary button `Contact me` (links to `#contact`).
 
 ## Hero
 
