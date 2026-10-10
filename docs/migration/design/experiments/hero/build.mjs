@@ -1,7 +1,12 @@
 // Experiment: rebuild the hero illustration in the app's palette with an AI-native scene.
 // Usage: node build.mjs   (writes hero-b-light.svg and hero-b-dark.svg next to this file)
+// Env: OUTDIR, TAG (file name suffix), NAVY (sweater colour override) for trying variants.
 // The character and blob outline come from hero-original.svg (Freepik, already in the repo);
-// the monitor, agent card and terminal are drawn here.
+// the monitor, agent card and review card are drawn here.
+//
+// Story, one 6 s loop (matches the HTML Prompt/Plan/Build/Review pills elsewhere on the page):
+//   0.0 s Prompt  | 1.5 s Plan: the reply streams in | 3.0 s Build: diff rows appear one by one
+//   4.5 s Review: two checks tick | 6.0 s fade and restart. A short entrance plays once.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -17,7 +22,8 @@ const palettes = {
   light: {
     outline: '#0B1118',
     frame: '#0B1118',
-    navy: '#0E6B58', // sweater, shoes (was #11143B): the brand ink
+    sweater: '#CDEBE2',
+    shoe: '#0E6B58',
     blobA: '#E3F4EE',
     blobB: '#BFE3D8',
     shadow: '#BFE3D8',
@@ -25,9 +31,8 @@ const palettes = {
     bar: '#141E29',
     dot: '#2A3644',
     card: '#FFFFFF',
-    cardLine: '#E2E8F0',
-    cardInk: '#0B1118',
     cardMut: '#CBD5E1',
+    cardInk: '#0B1118',
     brand: '#14866F',
     mint: '#34D3A6',
     code: { w: '#E6EDF3', g: '#5B6B7D', t: '#34D3A6' },
@@ -36,7 +41,8 @@ const palettes = {
   dark: {
     outline: '#25343F',
     frame: '#2F4450',
-    navy: '#177A66',
+    sweater: '#BFE8DB',
+    shoe: '#177A66',
     blobA: 'rgba(52,211,166,.22)',
     blobB: 'rgba(52,211,166,.06)',
     shadow: 'rgba(52,211,166,.14)',
@@ -44,9 +50,8 @@ const palettes = {
     bar: '#16242A',
     dot: '#34505A',
     card: '#F2F5F9',
-    cardLine: '#C5D0DD',
-    cardInk: '#0B1118',
     cardMut: '#A5B1C0',
+    cardInk: '#0B1118',
     brand: '#14866F',
     mint: '#34D3A6',
     code: { w: '#E6EDF3', g: '#6B7F93', t: '#34D3A6' },
@@ -57,6 +62,10 @@ const palettes = {
 // four-point sparkle centred on (x, y) with radius r
 const spark = (x, y, r, fill, cls = '') =>
   `<path class="${cls}" d="M${x} ${y - r}C${x + r * 0.15} ${y - r * 0.3} ${x + r * 0.3} ${y - r * 0.15} ${x + r} ${y}C${x + r * 0.3} ${y + r * 0.15} ${x + r * 0.15} ${y + r * 0.3} ${x} ${y + r}C${x - r * 0.15} ${y + r * 0.3} ${x - r * 0.3} ${y + r * 0.15} ${x - r} ${y}C${x - r * 0.3} ${y - r * 0.15} ${x - r * 0.15} ${y - r * 0.3} ${x} ${y - r}Z" fill="${fill}" style="transform-origin:${x}px ${y}px"/>`;
+
+// Which code rows play which part of the loop (row index -> class).
+const ADDED = { 4: 'add1', 5: 'add2', 6: 'add3' };
+const REMOVED = 3;
 
 function codeRows(p) {
   const c = p.code;
@@ -75,53 +84,91 @@ function codeRows(p) {
     [[14, 40, c.g]],
     [[0, 12, c.g]],
   ];
-  const added = new Set([4, 5, 6]);
-  const removed = new Set([3]);
   let out = '';
   rows.forEach((segs, i) => {
     const y = 150 + i * 15;
-    if (added.has(i))
-      out += `<rect x="84" y="${y - 4}" width="146" height="14" rx="3" fill="${p.mint}" fill-opacity=".16"/><rect x="84" y="${y - 4}" width="2.5" height="14" rx="1.2" fill="${p.mint}"/>`;
-    if (removed.has(i))
-      out += `<rect x="84" y="${y - 4}" width="146" height="14" rx="3" fill="#F87171" fill-opacity=".14"/><rect x="84" y="${y - 4}" width="2.5" height="14" rx="1.2" fill="#F87171"/>`;
+    const cls = i === REMOVED ? 'rem' : ADDED[i];
+    let row = '';
+    if (ADDED[i])
+      row += `<rect x="84" y="${y - 4}" width="146" height="14" rx="3" fill="${p.mint}" fill-opacity=".16"/><rect x="84" y="${y - 4}" width="2.5" height="14" rx="1.2" fill="${p.mint}"/>`;
+    if (i === REMOVED)
+      row += `<rect x="84" y="${y - 4}" width="146" height="14" rx="3" fill="#F87171" fill-opacity=".14"/><rect x="84" y="${y - 4}" width="2.5" height="14" rx="1.2" fill="#F87171"/>`;
     segs.forEach(([dx, w, col]) => {
-      out += `<rect x="${92 + dx}" y="${y}" width="${w}" height="6" rx="3" fill="${col}"${removed.has(i) ? ' fill-opacity=".55"' : ''}/>`;
+      row += `<rect x="${92 + dx}" y="${y}" width="${w}" height="6" rx="3" fill="${col}"${i === REMOVED ? ' fill-opacity=".55"' : ''}/>`;
     });
-    if (removed.has(i)) out += `<rect x="106" y="${y + 2.4}" width="110" height="1.2" fill="#F87171" fill-opacity=".8"/>`;
+    if (i === REMOVED) row += `<rect x="106" y="${y + 2.4}" width="110" height="1.2" fill="#F87171" fill-opacity=".8"/>`;
+    // untouched rows type in once at load; diff rows are part of the loop
+    out += cls
+      ? `<g class="il-${cls}">${row}</g>`
+      : `<g class="il-type" style="animation-delay:${(0.1 + i * 0.07).toFixed(2)}s">${row}</g>`;
   });
-  // blinking caret after the last added row
-  out += `<rect class="caret" x="${92 + 14 + 40 + 6 + 58}" y="${150 + 6 * 15 - 2}" width="3" height="10" rx="1.2" fill="${p.mint}"/>`;
+  out += `<rect class="il-caret" x="${92 + 14 + 40 + 6 + 58}" y="${150 + 6 * 15 - 2}" width="3" height="10" rx="1.2" fill="${p.mint}"/>`;
   return out;
 }
 
-function build(name) {
-  const p = palettes[name];
-  const character = src
+function recolourCharacter(p) {
+  return src
     .slice(charStart, charEnd)
     .replace(/ class="animable[^"]*"/g, '')
     .replace(/rgb\(38, 50, 56\)/g, p.outline)
-    .replace(/rgb\(17, 20, 59\)/g, p.navy);
+    // sweater and shoes share one source colour: shoes sit low (y > 405)
+    .replace(/<(?:path|rect|ellipse)\b[^>]*>/g, (tag) => {
+      if (!tag.includes('rgb(17, 20, 59)')) return tag;
+      const m = tag.match(/ d="M\s*([\d.]+)[ ,]+([\d.]+)/);
+      const y = m ? Number(m[2]) : 0;
+      return tag.replace(/rgb\(17, 20, 59\)/g, y > 405 ? p.shoe : p.sweater);
+    });
+}
 
-  const steps = ['', '', '', ''];
-  const stepsSvg = steps
-    .map((_, i) => {
-      const x = 270 + i * 34;
-      return `<rect class="step" style="animation-delay:${i * 1.5 - 6}s" x="${x}" y="87" width="30" height="12" rx="6" fill="none" stroke="${p.cardMut}" stroke-width="1"/>`;
-    })
+function build(name) {
+  const p = { ...palettes[name] };
+  if (process.env.NAVY) p.sweater = process.env.NAVY;
+  const character = recolourCharacter(p);
+
+  const stepsSvg = [0, 1, 2, 3]
+    .map(
+      (i) =>
+        `<rect class="il-step" style="animation-delay:${i * 1.5 - 6}s" x="${270 + i * 34}" y="87" width="30" height="12" rx="6" fill="none" stroke="${p.cardMut}" stroke-width="1"/>`,
+    )
     .join('');
+
+  const tick = (cy) =>
+    `<circle cx="66" cy="${cy}" r="7" fill="${p.mint}"/><path d="M62.5 ${cy}l2.6 2.6 4.6-5" stroke="${p.outline}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500" fill="none">
 <style>
-.caret{animation:blink 1s steps(1) infinite}
-.step{animation:step 6s infinite}
-.tw{animation:twinkle 3.2s ease-in-out infinite}
-.tw2{animation:twinkle 3.2s ease-in-out -1.4s infinite}
-.stream{animation:stream 4s cubic-bezier(.4,0,.2,1) infinite}
-@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
-@keyframes step{0%,20%{fill:${p.mint};stroke:${p.mint}}26%,100%{fill:transparent;stroke:${p.cardMut}}}
-@keyframes twinkle{0%,100%{opacity:.35;transform:scale(.7)}50%{opacity:1;transform:scale(1)}}
-@keyframes stream{0%{width:0}60%,100%{width:100px}}
-@media (prefers-reduced-motion:reduce){.caret,.step,.tw,.tw2,.stream{animation:none}.stream{width:100px}}
+.il-caret{animation:il-blink 1s steps(1) infinite}
+.il-step{animation:il-step 6s infinite}
+.il-tw{animation:il-twinkle 3.2s ease-in-out infinite}
+.il-tw2{animation:il-twinkle 3.2s ease-in-out -1.4s infinite}
+.il-type{animation:il-typein .5s cubic-bezier(.2,.7,.2,1) backwards;transform-box:fill-box;transform-origin:left}
+.il-card{animation:il-pop .6s cubic-bezier(.2,.7,.2,1) backwards;transform-box:fill-box;transform-origin:center}
+.il-float{animation:il-float 6s ease-in-out infinite}
+.il-float2{animation:il-float 7s ease-in-out -3s infinite}
+.il-stream{animation:il-stream 6s cubic-bezier(.4,0,.2,1) infinite}
+.il-reply2{animation:il-fade 6s linear infinite}
+.il-add1{animation:il-on 6s linear infinite backwards}
+.il-add2{animation:il-on2 6s linear infinite backwards}
+.il-add3{animation:il-on3 6s linear infinite backwards}
+.il-rem{animation:il-rem 6s linear infinite backwards}
+.il-chk1{animation:il-chk1 6s linear infinite backwards}
+.il-chk2{animation:il-chk2 6s linear infinite backwards}
+.il-chk1,.il-chk2{transform-box:fill-box;transform-origin:center}
+@keyframes il-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes il-step{0%,20%{fill:${p.mint};stroke:${p.mint}}26%,100%{fill:transparent;stroke:${p.cardMut}}}
+@keyframes il-twinkle{0%,100%{opacity:.35;transform:scale(.7)}50%{opacity:1;transform:scale(1)}}
+@keyframes il-typein{from{opacity:0;transform:scaleX(.2)}to{opacity:1;transform:none}}
+@keyframes il-pop{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes il-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes il-stream{0%,22%{width:0}46%,96%{width:100px}100%{width:0}}
+@keyframes il-fade{0%,50%{opacity:0}56%,96%{opacity:1}100%{opacity:0}}
+@keyframes il-rem{0%,44%{opacity:0}48%,96%{opacity:1}100%{opacity:0}}
+@keyframes il-on{0%,50%{opacity:0}53%,96%{opacity:1}100%{opacity:0}}
+@keyframes il-on2{0%,55%{opacity:0}58%,96%{opacity:1}100%{opacity:0}}
+@keyframes il-on3{0%,60%{opacity:0}63%,96%{opacity:1}100%{opacity:0}}
+@keyframes il-chk1{0%,74%{opacity:0;transform:scale(.6)}78%,96%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes il-chk2{0%,84%{opacity:0;transform:scale(.6)}88%,96%{opacity:1;transform:none}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.il-stream{width:100px}}
 </style>
 <defs>
 <linearGradient id="blob" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${p.blobA}"/><stop offset="1" stop-color="${p.blobB}"/></linearGradient>
@@ -139,32 +186,30 @@ function build(name) {
 ${codeRows(p)}
 
 <!-- agent card -->
-<g>
+<g class="il-float"><g class="il-card" style="animation-delay:.35s">
 <rect x="254" y="46" width="170" height="104" rx="16" fill="${p.card}" stroke="${p.outline}" stroke-width="1.1"/>
-${spark(274, 66, 8, p.brand, 'tw')}
+${spark(274, 66, 8, p.brand, 'il-tw')}
 <rect x="288" y="62" width="46" height="7" rx="3.5" fill="${p.cardInk}"/>
 <circle cx="404" cy="66" r="4" fill="${p.mint}"/>
 ${stepsSvg}
 <rect x="270" y="112" width="130" height="24" rx="8" fill="${p.mint}" fill-opacity=".14"/>
-<rect class="stream" x="278" y="120" width="100" height="4" rx="2" fill="${p.brand}"/>
-<rect x="278" y="127" width="64" height="4" rx="2" fill="${p.brand}" fill-opacity=".55"/>
-</g>
+<rect class="il-stream" x="278" y="120" width="100" height="4" rx="2" fill="${p.brand}"/>
+<rect class="il-reply2" x="278" y="127" width="64" height="4" rx="2" fill="${p.brand}" fill-opacity=".55"/>
+</g></g>
 
-<!-- test / review card -->
-<g>
+<!-- review card -->
+<g class="il-float2"><g class="il-card" style="animation-delay:.55s">
 <rect x="46" y="318" width="146" height="64" rx="14" fill="${p.card}" stroke="${p.outline}" stroke-width="1.1"/>
-<circle cx="66" cy="338" r="7" fill="${p.mint}"/><path d="M62.5 338l2.6 2.6 4.6-5" stroke="${p.outline}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="80" y="335" width="84" height="6" rx="3" fill="${p.cardInk}"/>
-<circle cx="66" cy="362" r="7" fill="${p.mint}"/><path d="M62.5 362l2.6 2.6 4.6-5" stroke="${p.outline}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="80" y="359" width="58" height="6" rx="3" fill="${p.cardMut}"/>
-</g>
+<g class="il-chk1">${tick(338)}</g><rect x="80" y="335" width="84" height="6" rx="3" fill="${p.cardInk}"/>
+<g class="il-chk2">${tick(362)}</g><rect x="80" y="359" width="58" height="6" rx="3" fill="${p.cardMut}"/>
+</g></g>
 
 <!-- code badge -->
 <g transform="translate(352 196)"><rect width="42" height="26" rx="8" fill="${p.card}" stroke="${p.outline}" stroke-width="1.1"/><path d="M15 8l-5 5 5 5M27 8l5 5-5 5M22.5 6l-3 14" stroke="${p.outline}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>
 
-${spark(40, 96, 11, p.mint, 'tw')}
-${spark(466, 300, 8, p.mint, 'tw2')}
-${spark(212, 34, 6, p.brand, 'tw2')}
+${spark(40, 96, 11, p.mint, 'il-tw')}
+${spark(466, 300, 8, p.mint, 'il-tw2')}
+${spark(212, 34, 6, p.brand, 'il-tw2')}
 
 <g>${character}</g>
 </svg>
@@ -172,6 +217,9 @@ ${spark(212, 34, 6, p.brand, 'tw2')}
 }
 
 for (const name of ['light', 'dark']) {
-  fs.writeFileSync(path.join(dir, `hero-b-${name}.svg`), build(name));
+  fs.writeFileSync(
+    path.join(process.env.OUTDIR || dir, `hero-b${process.env.TAG || ''}-${name}.svg`),
+    build(name),
+  );
 }
 console.log('written');
