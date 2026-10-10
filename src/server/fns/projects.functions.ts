@@ -11,5 +11,5 @@ export const fetchPublicProjects = createServerFn({ method: 'GET' }).handler(
 );
 
 export const fetchPublicProject = createServerFn({ method: 'GET' })
-  .inputValidator(z.object({ id: z.string().min(1) }))
+  .validator(z.object({ id: z.string().min(1) }))
   .handler(({ data }) => getPublicProject(getDb(), data.id));

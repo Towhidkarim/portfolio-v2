@@ -50,7 +50,7 @@ Delete `drizzle/` and regenerate; local state is under `.wrangler/state` (safe t
 
 ## Deviations
 - **Test package renamed**: Cloudflare renamed `@cloudflare/vitest-pool-workers` to `@cloudflare/vitest-plugin` (v1, Aug 2026). Installed `vitest` 4.1 + `@cloudflare/vitest-plugin` 1.4. Config in `vitest.config.ts`; migrations are applied in `test/apply-migrations.ts` from the real `drizzle/` folder.
-- **File naming** follows `12-start-best-practices.md`: server-only helpers are `*.server.ts` (`env.server.ts`, `db.server.ts`, `queries/*.server.ts`); server function wrappers are `*.functions.ts` under `src/server/fns/`. Validators use `.inputValidator(...)`.
+- **File naming** follows `12-start-best-practices.md`: server-only helpers are `*.server.ts` (`env.server.ts`, `db.server.ts`, `queries/*.server.ts`); server function wrappers are `*.functions.ts` under `src/server/fns/`. Validators use `.validator(...)`.
 - **`createDb(d1)`** lives in `src/db/index.ts` (pure, testable); `getDb()` in `src/server/db.server.ts` reads the binding per call.
 - **Zod schemas split from tables**: tables in `src/db/schema.ts`; `ProjectSchema`/`MailSchema` in `src/db/validation.ts` (drizzle-zod); the public `ContactSchema` is plain zod in `src/lib/schemas.ts` so the public bundle stays free of drizzle.
 - **No raw SQL**: `mail.sentAt` uses `$defaultFn(() => new Date().toISOString())` instead of a `CURRENT_TIMESTAMP` SQL default, so `sentAt`, `readAt` and `archivedAt` are all ISO 8601. Phase 9 must normalise old Turso `sentAt` values (`YYYY-MM-DD HH:MM:SS`) to ISO. Counts use `db.$count`.

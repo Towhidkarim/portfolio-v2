@@ -4,7 +4,7 @@ import { getDb } from '../db.server';
 import { createMail } from '../queries/mails.server';
 
 export const sendContactMail = createServerFn({ method: 'POST' })
-  .inputValidator(ContactSchema)
+  .validator(ContactSchema)
   .handler(async ({ data }) => {
     await createMail(getDb(), data);
     return { ok: true as const };

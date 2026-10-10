@@ -54,7 +54,7 @@ Open items (resolve in the Phase 5 spike **on a deployed Worker**):
 
 ## 4. Start API facts to code against (installed: Start 1.168.60, Router 1.170.41)
 
-- **Server function validation is `.inputValidator(...)`, not `.validator(...)`.** The shipped skills and Cloudflare's Start guide still show `.validator`, but the installed types only expose `inputValidator`. Pass a zod schema directly (zod 3.25 implements Standard Schema).
+- **Server function validation is `.validator(...)`, not `.validator(...)`.** The shipped skills and Cloudflare's Start guide still show `.validator`, but the installed types only expose `validator`. Pass a zod schema directly (zod 3.25 implements Standard Schema).
 - Everything is isomorphic by default; **loaders run on server and client**. DB/R2/secrets live only inside `createServerFn` handlers (or server routes/middleware). Never self-fetch `/api/...` from a loader.
 - Bindings: `import { env, cache } from 'cloudflare:workers'` inside handlers (R-02). Keep the project rule of not reading bindings or secrets at module scope.
 - File layout: `*.functions.ts` for `createServerFn` wrappers (safe to import anywhere), `*.server.ts` for server-only helpers (import-protected by the build). Use `*.server.ts` for `db`, `auth`, `cache`, `media`, `env` helpers; keep shared zod schemas in a client-safe file.
@@ -74,4 +74,4 @@ Open items (resolve in the Phase 5 spike **on a deployed Worker**):
 - Phase 5 becomes: enable `cache`, set headers + tags in middleware, purge by tag in server functions, verify on a deployed Worker. Needs an early first deploy (workers.dev is enough per the docs, confirm). `CF_API_TOKEN_PURGE`, `CF_ZONE_ID` and `src/worker.ts` are only needed on the fallback path.
 - Phase 2: add the `authMiddleware` pattern above; Phase 7 attaches it to every admin function and the upload route.
 - Phase 3: head/theme/Reveal scripts use `ScriptOnce`/head `scripts`; Tailwind 4 `@theme`.
-- Phase 1: use `.inputValidator`, `*.server.ts`/`*.functions.ts` naming, and the `verbatimModuleSyntax` check.
+- Phase 1: use `.validator`, `*.server.ts`/`*.functions.ts` naming, and the `verbatimModuleSyntax` check.
