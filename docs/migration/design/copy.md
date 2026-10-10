@@ -39,7 +39,7 @@ Logo: `<Towhid/Karim>`. Links: Home, Skills, Projects, About me, Contact. Right:
 
 ## Stack marquee (order)
 
-React, Next.js, TypeScript, Tailwind CSS, TanStack Query, TanStack Start, Zustand, Node.js, Bun, Hono, Redis, Drizzle ORM, Prisma, PostgreSQL, Docker, Cloudflare, Claude, Codex, Cursor, Vercel AI SDK, Python. (Redis and Turso are still skills on the site even though the new stack replaces them in production.)
+React, Next.js, TypeScript, Tailwind CSS, TanStack Query, TanStack Start, Zustand, Node.js, Bun, Hono, Cloudflare Workers, Redis, Drizzle ORM, Prisma, PostgreSQL, Docker, Cloudflare, Claude, Codex, Cursor, Vercel AI SDK, Python. (Redis and Turso are still skills on the site even though the new stack replaces them in production.)
 
 ## Skills section
 
@@ -48,7 +48,7 @@ Eyebrow `01 · The stack`, H2 `Skills`, sub `The tools I reach for, grouped by w
 | Card | Count label | Items (icon file in `public/icons`) |
 | --- | --- | --- |
 | Front End | 08 | React (`React.svg`), Next.js (`nextjs-icon.svg`), React Native (`reactnative.svg`), TypeScript (`TypeScript.svg`), Tailwind CSS (`Tailwind CSS.svg`), TanStack Query (`tanstack.png`), Zustand (`zustand.jpg`), shadcn/ui (`shadcn.png`) |
-| Back End | 05 | Node.js (`Node.js.svg`), Bun (`Bun.svg`), Express (`express.png`), Hono (`hono.svg`), Redis (`redis.webp`) |
+| Back End | 06 | Node.js (`Node.js.svg`), Bun (`Bun.svg`), Express (`express.png`), Hono (`hono.svg`), Cloudflare Workers (`cloudflareworkers.svg`), Redis (`redis.webp`) |
 | Database & ORMs | 05 | Drizzle ORM (`drizzle.png`), Prisma (`prisma.png`), PostgreSQL (`postgresql.png`), MongoDB (`mongo.webp`), Turso (`turso.png`) |
 | AI (dark card) | 05 | Vercel AI SDK (`vercel.svg`), Python (`Python.svg`), LLM workflows (lucide `Brain`), RAG (lucide `Library`), Agentic loops (lucide `Bot`) |
 | Tools & DevOps | 06 | Git (`git.svg`), GitHub (`github.png`), GitHub Actions (`githubactions.svg`), Docker (`docker.png`), Cloudflare (`cloudflare.svg`), Cursor (`cursor.png`) |
