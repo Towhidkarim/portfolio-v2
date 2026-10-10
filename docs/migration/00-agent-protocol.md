@@ -4,6 +4,8 @@ Every agent working on this migration follows these rules.
 
 ## Orientation
 
+0. Before writing Start code, read `12-start-best-practices.md` and the version-matched skill files in `node_modules/@tanstack/*/skills/**/SKILL.md` (start-core, server-functions, middleware, execution-model). Note: use `.inputValidator`, not the `.validator` those files show.
+
 1. Read `README.md`, this file, then your phase file in `phases/`.
 2. Read every spec the phase lists under "Read first". Do not skim the pending-research markers.
 3. Check `phases/README.md` for the status table. Do not start a phase whose dependencies are not marked done.

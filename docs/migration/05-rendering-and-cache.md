@@ -1,5 +1,7 @@
 # Rendering and edge cache
 
+> **Superseded in part (2026-10-10):** read `12-start-best-practices.md` first. Cloudflare's Workers Caching (`cache.enabled`, `Cache-Tag`, `cache.purge` from `cloudflare:workers`) replaces the `caches.default` wrapper and the zone purge API below, which are now the **fallback** if Workers Caching is not available on the free plan.
+
 Goal: public pages are served from Cloudflare's edge in a few milliseconds with **no database call per visit**, and an edit in the admin shows up for visitors **immediately**.
 
 > **PENDING RESEARCH R-03** governs most of this file. Every API shape below is intent. Run the Phase 5 spike on a real custom domain before building on it.
