@@ -6,3 +6,5 @@ CF_API_TOKEN_PURGE=
 CF_ZONE_ID=
 TURNSTILE_SECRET=
 PUBLIC_MEDIA_BASE_URL=
+# Read-only GitHub token (no scopes needed) for the contributions graph
+GITHUB_TOKEN=

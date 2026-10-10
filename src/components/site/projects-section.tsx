@@ -59,7 +59,7 @@ export function ProjectsSection({
 }: {
   projects: PublicProject[];
   failed: boolean;
-  contributions: ContributionData;
+  contributions: ContributionData | null;
 }) {
   const [featured, ...rest] = projects;
   return (
@@ -105,9 +105,11 @@ export function ProjectsSection({
           </Button>
         </div>
       ) : null}
-      <Reveal className='mt-8'>
-        <ActivityCard data={contributions} />
-      </Reveal>
+      {contributions ? (
+        <Reveal className='mt-8'>
+          <ActivityCard data={contributions} />
+        </Reveal>
+      ) : null}
     </section>
   );
 }

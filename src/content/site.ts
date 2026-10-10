@@ -1,7 +1,8 @@
 // All page copy lives here, not in JSX. Source: docs/migration/design/copy.md.
 // Items marked "owner to confirm" there are not final.
 
-export const GITHUB_URL = 'https://github.com/Towhidkarim/';
+export const GITHUB_LOGIN = 'Towhidkarim';
+export const GITHUB_URL = `https://github.com/${GITHUB_LOGIN}/`;
 export const FACEBOOK_URL = 'https://fb.me/towhid.karim.1';
 export const EMAIL = 'towhidkarim123@gmail.com';
 export const PHONE = '+880 1744-161517';

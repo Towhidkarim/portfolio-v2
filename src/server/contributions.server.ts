@@ -1,7 +1,5 @@
-// STUB. The real source of GitHub contributions is an owner decision (R-21):
-// GraphQL with a token, or a public contributions API. Until then this returns
-// deterministic illustrative data shaped like the final response, so the card
-// and its server function do not change when the source does.
+// Real data comes from the GitHub GraphQL API (needs GITHUB_TOKEN, no scopes). Without a
+// token (local dev) a deterministic stub with the same shape is returned, flagged isStub.
 
 export type Contributions = {
   /** weeks, oldest first; each week has 7 levels (0 to 4), Sunday first */
@@ -9,7 +7,7 @@ export type Contributions = {
   /** short month label per week index, only where a month starts */
   months: { week: number; label: string }[];
   total: number;
-  isStub: true;
+  isStub: boolean;
 };
 
 const WEEKS = 53;
@@ -66,4 +64,73 @@ export function getContributionsStub(now = new Date()): Contributions {
     }
   }
   return { weeks, months, total, isStub: true };
+}
+
+const LEVELS: Record<string, number> = {
+  NONE: 0,
+  FIRST_QUARTILE: 1,
+  SECOND_QUARTILE: 2,
+  THIRD_QUARTILE: 3,
+  FOURTH_QUARTILE: 4,
+};
+
+const QUERY = `query($login: String!) {
+  user(login: $login) {
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks { contributionDays { contributionLevel date } }
+      }
+    }
+  }
+}`;
+
+type GraphQlResponse = {
+  data?: {
+    user?: {
+      contributionsCollection: {
+        contributionCalendar: {
+          totalContributions: number;
+          weeks: {
+            contributionDays: { contributionLevel: string; date: string }[];
+          }[];
+        };
+      };
+    } | null;
+  };
+};
+
+export async function fetchGithubContributions(
+  token: string,
+  login: string,
+): Promise<Contributions> {
+  const res = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: {
+      Authorization: `bearer ${token}`,
+      'Content-Type': 'application/json',
+      'User-Agent': 'portfolio-v2',
+    },
+    body: JSON.stringify({ query: QUERY, variables: { login } }),
+  });
+  if (!res.ok) throw new Error(`GitHub responded ${res.status}`);
+  const json = (await res.json()) as GraphQlResponse;
+  const calendar =
+    json.data?.user?.contributionsCollection.contributionCalendar;
+  if (!calendar) throw new Error('GitHub returned no contribution calendar');
+
+  const weeks = calendar.weeks.map((w) =>
+    w.contributionDays.map((d) => LEVELS[d.contributionLevel] ?? 0),
+  );
+  const months: Contributions['months'] = [];
+  let lastMonth = -1;
+  calendar.weeks.forEach((w, i) => {
+    const first = w.contributionDays[0]?.date ?? '';
+    const month = new Date(`${first}T00:00:00Z`).getUTCMonth();
+    if (month !== lastMonth) {
+      months.push({ week: i, label: MONTHS[month] });
+      lastMonth = month;
+    }
+  });
+  return { weeks, months, total: calendar.totalContributions, isStub: false };
 }

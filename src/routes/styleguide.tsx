@@ -310,12 +310,16 @@ function Styleguide() {
             ))}
           </div>
         </div>
-        <div className='flex gap-[3px] overflow-hidden' aria-hidden='true'>
+        <Reveal
+          key={`hm-${run}`}
+          className='m-hm overflow-hidden [--cg:3px] [--cs:12px]'
+          aria-hidden='true'
+        >
           {Array.from({ length: 26 }, (_, c) => (
             <div
               // biome-ignore lint/suspicious/noArrayIndexKey: static decorative grid
               key={c}
-              className='m-hm-col grid gap-[3px]'
+              className='m-hm-col grid'
               style={{ '--c': c } as React.CSSProperties}
             >
               {Array.from({ length: 7 }, (_, r) => (
@@ -328,7 +332,7 @@ function Styleguide() {
               ))}
             </div>
           ))}
-        </div>
+        </Reveal>
         <div className='flex flex-wrap gap-2 rounded-card bg-panel p-4'>
           {['Prompt', 'Plan', 'Build', 'Review'].map((s, i) => (
             <span

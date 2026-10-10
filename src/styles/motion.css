@@ -161,10 +161,29 @@
   animation: m-step 6s infinite;
 }
 
-/* activity heatmap: columns pop in 22 ms apart. Set --c to the column index. */
+/* activity heatmap: 7-row columns that pop in 22 ms apart (set --c to the column index).
+   Add Tailwind `grid` (or `hidden sm:grid`) to the column for display. Layout comes from --cs (cell) and --cg (gap). The pop plays when the Reveal ancestor
+   gets data-in (scrolled into view), not at page load. Without JS nothing is hidden. */
+.m-hm {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--cs);
+  gap: var(--cg);
+}
 .m-hm-col {
-  animation: m-pop 0.5s var(--reveal-ease, cubic-bezier(0.2, 0.7, 0.2, 1)) both;
-  animation-delay: calc(var(--c, 0) * 22ms + 0.3s);
+  position: relative;
+  grid-template-rows: repeat(7, var(--cs));
+  gap: var(--cg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.no-io) [data-reveal]:not([data-in]) .m-hm-col {
+    opacity: 0;
+  }
+  [data-reveal][data-in] .m-hm-col {
+    animation: m-pop 0.5s var(--reveal-ease, cubic-bezier(0.2, 0.7, 0.2, 1))
+      both;
+    animation-delay: calc(var(--c, 0) * 22ms + 0.3s);
+  }
 }
 
 /* typewriter: two phrases, 14 s loop. Phrase markup:
@@ -230,7 +249,6 @@
   .m-glow,
   .m-marquee-track,
   .m-step,
-  .m-hm-col,
   .typer-cr i,
   .typer-a .typer-tx,
   .typer-a .typer-cr,
