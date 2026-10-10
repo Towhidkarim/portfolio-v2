@@ -2,7 +2,7 @@
 
 ## Stack and versions
 
-Registry versions checked on 2026-10-09. Pin exact versions in `package.json` once Phase 0 installs them. Majors not listed stay as in the current repo.
+Registry versions checked on 2026-10-09. Pin exact versions in `package.json` once Phase 0 installs them. Policy: latest stable of everything, exact pins (see `00-agent-protocol.md`).
 
 | Package | Version (2026-10-09) | Note |
 | --- | --- | --- |
@@ -172,4 +172,4 @@ bun run admin:create   create an admin (add --remote for the deployed DB); also 
 
 ## Non-goals
 
-No zod 4, no new features beyond the design (blog, comments, analytics), no change to the `projects` data model beyond the additions in `06-data-d1.md`, no RSC (Start's RSC package is experimental).
+No new features beyond the design (blog, comments, analytics), no change to the `projects` data model beyond the additions in `06-data-d1.md`, no RSC (Start's RSC package is experimental).

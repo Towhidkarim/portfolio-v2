@@ -30,7 +30,7 @@ A phase is done only when all of these hold:
 ## Style
 
 - Match the surrounding code: comment density, naming, idiom. TypeScript strict. No `any` without a comment.
-- Keep majors as they are unless the phase says otherwise: Tailwind 4 (owner decision, 2026-10-10), zod 3, lucide-react 0.x, sonner 1.x, react-hook-form 7. The only required bumps are React 19 (already), Vite 7+ and Node 22.12+ (Start's requirements). Upgrading majors is a separate, later task.
+- **Versions policy (owner decision, 2026-10-10): this is a migration, so use the latest stable release of every package** (the registry `latest` dist-tag), pinned exactly. Do not hold a package back to an old major to match the legacy app. Run `bun outdated` at the start of each phase and upgrade before writing code that depends on the package; if an upgrade breaks something, fix the code, and only pin back with a written reason in the phase file. Prereleases (rc, beta) need the owner's approval. Currently on: Tailwind 4, zod 4, TypeScript 7, Vitest 5, lucide-react 1.x, sonner 2, tailwind-merge 3, @hookform/resolvers 5, drizzle-zod 0.8, react-dropzone 20, Biome 2.5.
 - No emoji in UI or code. Icons are lucide or inline SVG.
 - UI follows `03-design-system.md` exactly: tokens, spacing, copy. Do not invent new colours.
 - Accessibility is a requirement, not polish: real buttons and links, labels on inputs, visible focus, AA contrast, reduced motion respected.

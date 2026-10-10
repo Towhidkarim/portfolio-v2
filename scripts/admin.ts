@@ -134,7 +134,7 @@ switch (command) {
   case 'create': {
     const email = str('email');
     const name = str('name');
-    if (!email || !email.includes('@')) fail('--email is required');
+    if (!email?.includes('@')) fail('--email is required');
     if (!name) fail('--name is required');
     await confirmTarget();
     const passwordHash = await hashPassword(await readPassword());
