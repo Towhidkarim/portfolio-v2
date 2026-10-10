@@ -28,7 +28,7 @@ A phase is done only when all of these hold:
 ## Style
 
 - Match the surrounding code: comment density, naming, idiom. TypeScript strict. No `any` without a comment.
-- Keep majors as they are unless the phase says otherwise: Tailwind 3, zod 3, lucide-react 0.x, sonner 1.x, react-hook-form 7. The only required bumps are React 19 (already), Vite 7+ and Node 22.12+ (Start's requirements). Upgrading majors is a separate, later task.
+- Keep majors as they are unless the phase says otherwise: Tailwind 4 (owner decision, 2026-10-10), zod 3, lucide-react 0.x, sonner 1.x, react-hook-form 7. The only required bumps are React 19 (already), Vite 7+ and Node 22.12+ (Start's requirements). Upgrading majors is a separate, later task.
 - No emoji in UI or code. Icons are lucide or inline SVG.
 - UI follows `03-design-system.md` exactly: tokens, spacing, copy. Do not invent new colours.
 - Accessibility is a requirement, not polish: real buttons and links, labels on inputs, visible focus, AA contrast, reduced motion respected.

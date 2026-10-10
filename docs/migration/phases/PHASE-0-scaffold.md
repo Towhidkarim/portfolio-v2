@@ -55,6 +55,7 @@ Design, real routes, auth, any production data.
 - **Scaffold command**: `bunx @tanstack/cli create` with `--blank --deployment cloudflare --toolchain biome` (the tool `create-cloudflare` delegates to). Alias is `@/*` only; the scaffold's `#/*` import map was dropped.
 - **Spike A (remote deploy) skipped**: owner wants everything local until deploy time. Do it with the Phase 8 deploy.
 - Spike B/C code was removed after verification (nothing to keep under `src/routes/_spikes`). `src/server/env.ts` (`getEnv()`) is kept.
+- **Tailwind 4 instead of 3** (owner request, after the scaffold): `tailwindcss` + `@tailwindcss/vite` 4.3.3, `tw-animate-css`; `tailwind.config.ts`, `postcss.config.mjs`, `tailwindcss-animate`, `postcss` removed; `globals.css` is `@import 'tailwindcss'`. Biome `css.parser.tailwindDirectives` on. Tokens and the colour mapping go in `@theme` (Phase 3). The legacy shadcn components are v3-style and get regenerated or restyled in Phase 3/4.
 - Not installed yet: `better-auth` (Phase 2), `vitest` (Phase 1), React Compiler (Phase 3).
 - `drizzle.config.ts` moved to `legacy/`; Phase 1 writes a D1 one. `.env` (Turso, UploadThing, Upstash secrets) stays untracked at the root for Phase 9.
 - `wrangler.jsonc` carries a placeholder `database_id` (all zeros) that works for local only. Replace via `wrangler d1 create` at deploy.

@@ -122,8 +122,8 @@ Target layout is defined in `02-target-architecture.md`. Legend: **port** = move
 | `lib/Providers.tsx` | replace | QueryClient provider in router context, admin only |
 | `lib/constants.ts` | port | `src/lib/constants.ts` (drop `redisKeys`, `queryKeys` kept) |
 | `lib/icons.ts`, `public/icons/*`, `public/images/*` | port | Vite asset imports, same files |
-| `next.config.ts`, `postcss.config.mjs` | delete / port | `vite.config.ts`; PostCSS stays for Tailwind 3 |
-| `tailwind.config.ts` | port | extend with design tokens |
+| `next.config.ts`, `postcss.config.mjs` | delete / port | `vite.config.ts`; Tailwind 4 uses `@tailwindcss/vite`, no PostCSS config |
+| `tailwind.config.ts` | delete | tokens move to `@theme` in `src/styles/globals.css` (Tailwind 4, CSS-first) |
 | `app/globals.css` | rebuild | `src/styles/globals.css` + `tokens.css` + `reveal.css` |
 
 During the migration the old code is parked in `legacy/` (Phase 0) so agents can read it; it is deleted in Phase 9.

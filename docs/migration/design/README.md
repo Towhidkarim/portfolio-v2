@@ -46,7 +46,7 @@ Known limits of the sources: project screenshots are skeleton placeholders; name
 
 - `tokens.css`: `:root` (light) and `.dark` variables, plus shadcn HSL triplets suffixed `-hsl`.
 - `tokens.json`: the same values as data.
-- Tailwind mapping (put in `tailwind.config.ts`, Phase 3):
+- Tailwind mapping (Tailwind 4: express as `@theme` variables in `src/styles/globals.css`, Phase 3; the object below is the intent, translate `colors.x` to `--color-x`, and use `color-mix` or `/ <alpha>` on the `-hsl` triplets as needed):
 
 ```ts
 colors: {

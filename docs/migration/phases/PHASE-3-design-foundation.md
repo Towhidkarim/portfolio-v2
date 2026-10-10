@@ -10,11 +10,11 @@ Phase 0. Can run in parallel with Phases 1 and 2.
 `../03-design-system.md`, `../04-reveal-system.md`, `../design/README.md`, `../design/tokens.css`, `../design/copy.md`, and look at `../design/screens/h0-guideline.png`, `h5-reveal.png`, `h1-desktop.png`.
 
 ## Pending research to resolve first
-**R-09** (Tailwind 3 on Vite, shadcn CLI, React Compiler, path alias), **R-10** (head and inline scripts, font preload), **R-11** (theme script), **R-16** (hydration and re-scan). Record resolutions. **R-21** (CursorFollower: ask the owner; default is to drop it).
+**R-09** (Tailwind 4 on Vite is done in Phase 0; shadcn CLI for v4, React Compiler, path alias), **R-10** (head and inline scripts, font preload), **R-11** (theme script), **R-16** (hydration and re-scan). Record resolutions. **R-21** (CursorFollower: ask the owner; default is to drop it).
 
 ## Steps
 1. - [ ] `src/styles/tokens.css` from `design/tokens.css`; `globals.css` imports tokens, Tailwind layers, `reveal.css`, `motion.css`. Base styles: body background `--bg`, text `--ink`, `scroll-behavior: smooth` (not on both html and main), `:focus-visible` ring, `prefers-reduced-motion` rules.
-2. - [ ] Tailwind config: extend colors per `design/README.md` mapping, `borderRadius` (control 12, card 22, project 24), `fontFamily` (`sans: Poppins`, `mono: JetBrains Mono`), `container` 1160. Keep `tailwindcss-animate`.
+2. - [ ] Tailwind 4 theme (`@theme` in `globals.css`, no `tailwind.config.ts`): extend colors per `design/README.md` mapping, `borderRadius` (control 12, card 22, project 24), `fontFamily` (`sans: Poppins`, `mono: JetBrains Mono`), `container` 1160. Animations come from `tw-animate-css` (already imported).
 3. - [ ] Fonts: import `@fontsource/poppins` weights 400, 500, 600, 700, 800 and `@fontsource/jetbrains-mono` 400, 500 (latin subset files only) and preload the Poppins 400 and 800 woff2 in the root head. No Inter.
 4. - [ ] shadcn primitives: port needed `components/ui/*` from `legacy/components/ui` to `src/components/ui`, restyle to tokens (button variants: default=primary, outline=secondary, plus `brand` for the dark band; card; badge; input/textarea/label; dialog; sheet; alert-dialog; switch; tabs; scroll-area; skeleton; sonner). Remove `cursor-pointer` from non-interactive items.
 5. - [ ] `src/components/reveal/*` and `src/styles/reveal.css` from `04-reveal-system.md`. Implement the `immediate` + `data-immediate` refinement noted there. Add `<RevealScan />` to the root.

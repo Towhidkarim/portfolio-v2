@@ -16,7 +16,7 @@ Registry versions checked on 2026-10-09. Pin exact versions in `package.json` on
 | `better-auth` | 1.7.7 | |
 | `drizzle-orm` | repo ^0.41; registry 0.45.4 | upgrade only if D1 or Better Auth require it (R-06, R-18) |
 | `drizzle-kit` | repo ^0.30; registry 0.31.11 | |
-| `tailwindcss` | stay 3.4 | v4 is a later upgrade (R-09) |
+| `tailwindcss`, `@tailwindcss/vite` | 4.3.3 (installed) | CSS-first config (`@theme`), `tw-animate-css` replaces `tailwindcss-animate` |
 | `react`, `react-dom` | 19.x | |
 | `@vitejs/plugin-react` | version matching Vite | React Compiler via Babel plugin (R-09) |
 | `@fontsource/poppins`, `@fontsource/jetbrains-mono` | 5.3.0 | self-hosted fonts |
@@ -76,7 +76,7 @@ Remove: `next`, `eslint-config-next`, `@t3-oss/env-nextjs`, `lucia`, `@lucia-aut
 │  ├─ styles/             globals.css, tokens.css, reveal.css, motion.css
 │  ├─ router.tsx, entry points per scaffold
 │  └─ worker.ts           custom server entry that wraps Start with the edge cache (Phase 5)
-├─ vite.config.ts, wrangler.jsonc, drizzle.config.ts, tailwind.config.ts, postcss.config.mjs
+├─ vite.config.ts, wrangler.jsonc, drizzle.config.ts (no tailwind/postcss config files: Tailwind 4)
 ├─ .dev.vars (gitignored), .dev.vars.example
 └─ package.json, bun.lock, tsconfig.json
 ```
@@ -171,4 +171,4 @@ bun run auth:generate  better-auth CLI schema generation (R-05)
 
 ## Non-goals
 
-No Tailwind 4 upgrade, no zod 4, no new features beyond the design (blog, comments, analytics), no change to the `projects` data model beyond the additions in `06-data-d1.md`, no RSC (Start's RSC package is experimental).
+No zod 4, no new features beyond the design (blog, comments, analytics), no change to the `projects` data model beyond the additions in `06-data-d1.md`, no RSC (Start's RSC package is experimental).
