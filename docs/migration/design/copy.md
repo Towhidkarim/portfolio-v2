@@ -75,7 +75,7 @@ States: loading skeleton (3 cards), empty `No projects yet.`, error `Projects co
 
 Eyebrow `03 · Academics`, H2 `Education`, sub `My academic journey and achievements.`
 
-1. **BSc in Computer Science & Engineering**, Varendra University, 2022 - 2026, badge `Completed`, `3.99` `/ 4.00 CGPA`, progress 99.75 %, line `Graduated with honors`, pills Data Structures, OOP, Databases, Software Eng., Machine Learning, `+3 more`. Full coursework (modal or detail): Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Software Engineering, Computer Networks, Web Development, Machine Learning, Operating Systems.
+1. **BSc in Computer Science & Engineering**, Varendra University, 2022 - 2026, badge `Top of the class`, `3.99` `/ 4.00 CGPA`, progress 99.75 %, line `Graduated with honors`, pills Data Structures, OOP, Databases, Software Eng., Machine Learning, `+3 more`. Full coursework (modal or detail): Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Software Engineering, Computer Networks, Web Development, Machine Learning, Operating Systems.
 2. **Next Level Web Development, Level 2**, Programming Hero, Batch 5, badge `Top performer`, `100%` `on all assignments`, progress 100 %, line `Top performer in Batch 5`, pills TypeScript, Next.js, Node.js, PostgreSQL, Docker, `+4 more` (full: TypeScript, Next.js, Node.js, Express, PostgreSQL, Prisma, MongoDB, Redux, Docker). Certificate link: `https://web.programming-hero.com/verification?validationNumber=PHL2B5L2B5-00611098`.
 
 ## About section

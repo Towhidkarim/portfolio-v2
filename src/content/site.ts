@@ -101,7 +101,7 @@ export const educationSection = {
       icon: 'graduation',
       title: 'BSc in Computer Science & Engineering',
       org: 'Varendra University · 2022 - 2026',
-      badge: 'Completed',
+      badge: 'Top of the class',
       value: '3.99',
       unit: '/ 4.00 CGPA',
       progress: 99.75,
