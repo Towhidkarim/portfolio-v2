@@ -9,16 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as SiteRouteImport } from './routes/_site'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as StyleguideRouteImport } from './routes/styleguide'
+import { Route as SiteIndexRouteImport } from './routes/_site.index'
+import { Route as SiteAllProjectsRouteImport } from './routes/_site.all-projects'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as SiteProjectsIdRouteImport } from './routes/_site.projects.$id'
 import { Route as ApiAuthSplatRouteImport } from './routes/api.auth.$'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -31,15 +35,40 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StyleguideRoute = StyleguideRouteImport.update({
   id: '/styleguide',
   path: '/styleguide',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteAllProjectsRoute = SiteAllProjectsRouteImport.update({
+  id: '/all-projects',
+  path: '/all-projects',
+  getParentRoute: () => SiteRoute,
+} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
+} as any)
+const SiteProjectsIdRoute = SiteProjectsIdRouteImport.update({
+  id: '/projects/$id',
+  path: '/projects/$id',
+  getParentRoute: () => SiteRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -48,60 +77,98 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof SiteIndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
+  '/all-projects': typeof SiteAllProjectsRoute
   '/admin/': typeof AdminIndexRoute
+  '/projects/$id': typeof SiteProjectsIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
+  '/all-projects': typeof SiteAllProjectsRoute
+  '/': typeof SiteIndexRoute
   '/admin': typeof AdminIndexRoute
+  '/projects/$id': typeof SiteProjectsIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_site': typeof SiteRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/styleguide': typeof StyleguideRoute
+  '/_site/all-projects': typeof SiteAllProjectsRoute
+  '/_site/': typeof SiteIndexRoute
   '/admin/': typeof AdminIndexRoute
+  '/_site/projects/$id': typeof SiteProjectsIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/admin' | '/login' | '/styleguide' | '/admin/' | '/api/auth/$'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/styleguide' | '/admin' | '/api/auth/$'
-  id:
-    | '__root__'
     | '/'
     | '/admin'
     | '/login'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/styleguide'
+    | '/all-projects'
     | '/admin/'
+    | '/projects/$id'
+    | '/api/auth/$'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/login'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/styleguide'
+    | '/all-projects'
+    | '/'
+    | '/admin'
+    | '/projects/$id'
+    | '/api/auth/$'
+  id:
+    | '__root__'
+    | '/_site'
+    | '/admin'
+    | '/login'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/styleguide'
+    | '/_site/all-projects'
+    | '/_site/'
+    | '/admin/'
+    | '/_site/projects/$id'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  SiteRoute: typeof SiteRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
   LoginRoute: typeof LoginRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StyleguideRoute: typeof StyleguideRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
+    '/_site': {
+      id: '/_site'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof SiteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -118,6 +185,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/styleguide': {
       id: '/styleguide'
       path: '/styleguide'
@@ -125,12 +206,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StyleguideRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_site/': {
+      id: '/_site/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/all-projects': {
+      id: '/_site/all-projects'
+      path: '/all-projects'
+      fullPath: '/all-projects'
+      preLoaderRoute: typeof SiteAllProjectsRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/admin/': {
       id: '/admin/'
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/_site/projects/$id': {
+      id: '/_site/projects/$id'
+      path: '/projects/$id'
+      fullPath: '/projects/$id'
+      preLoaderRoute: typeof SiteProjectsIdRouteImport
+      parentRoute: typeof SiteRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -141,6 +243,20 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface SiteRouteChildren {
+  SiteAllProjectsRoute: typeof SiteAllProjectsRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+  SiteProjectsIdRoute: typeof SiteProjectsIdRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteAllProjectsRoute: SiteAllProjectsRoute,
+  SiteIndexRoute: SiteIndexRoute,
+  SiteProjectsIdRoute: SiteProjectsIdRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
 
 interface AdminRouteChildren {
   AdminIndexRoute: typeof AdminIndexRoute
@@ -153,9 +269,11 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  SiteRoute: SiteRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
   LoginRoute: LoginRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   StyleguideRoute: StyleguideRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }

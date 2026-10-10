@@ -1,5 +1,7 @@
 # Design system and page specs
 
+> **Public site as built (Phase 4):** `src/components/site/*`, copy in `src/content/*`, routes under the `_site` layout. See `phases/PHASE-4-public-site.md` Deviations for what differs (stub activity data, no blog, no Turnstile yet).
+
 > **As built (Phase 3):** tokens in `src/styles/tokens.css`, Tailwind mapping (`@theme inline`) in `src/styles/globals.css`, components in `src/components/{ui,site-primitives}`, QA page at `/styleguide`. Differences from this file: global focus outline has no border radius; extra `--danger` text colour for AA; see `phases/PHASE-3-design-foundation.md` Deviations.
 
 Source of truth for visuals: `design/screens/*.png` and `design/source/*.html`. Tokens: `design/tokens.css`. Copy: `design/copy.md`. This file turns them into build rules. When this file and the HTML sources disagree on a number, the HTML source wins; fix this file.

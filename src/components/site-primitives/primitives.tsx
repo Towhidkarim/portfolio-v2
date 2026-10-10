@@ -72,10 +72,13 @@ export function SectionHeader({
 /** Non-clickable stack chip: icon plate + label, lifts on hover. */
 export function Chip({
   icon,
+  plate = true,
   children,
   className,
 }: {
   icon?: ReactNode;
+  /** light plate behind the icon in dark mode (monochrome logos) */
+  plate?: boolean;
   children: ReactNode;
   className?: string;
 }) {
@@ -87,7 +90,12 @@ export function Chip({
       )}
     >
       {icon ? (
-        <span className='grid size-[30px] place-items-center rounded-lg bg-plate text-brand-ink dark:text-[#0E6B58]'>
+        <span
+          className={cn(
+            'grid size-[30px] place-items-center rounded-lg text-brand-ink dark:text-[#0E6B58]',
+            plate && 'bg-plate',
+          )}
+        >
           {icon}
         </span>
       ) : null}
