@@ -8,6 +8,8 @@ Replaces Turso/libSQL. D1 is SQLite, so the schema ports almost unchanged.
 
 5 million rows read per day, 100,000 rows written per day, 5 GB storage for the whole account. An indexed write counts as extra rows written. If a daily limit is reached, queries error until 00:00 UTC. With the edge cache, public reads are rare; only the admin writes. Add indexes so admin and cache-miss queries scan few rows.
 
+> **Phase 1 as built (2026-10-10):** see "Deviations" in `phases/PHASE-1-data-layer.md`. Notably: `*.server.ts` / `*.functions.ts` naming, `createDb(d1)` in `src/db/index.ts`, validation split into `src/db/validation.ts` and `src/lib/schemas.ts`, ISO timestamps with no raw SQL, queries in `src/server/queries/*.server.ts`.
+
 ## Bindings
 
 `wrangler.jsonc`: `"d1_databases": [{ "binding": "DB", "database_name": "portfolio-db", "database_id": "<from wrangler d1 create>", "migrations_dir": "drizzle" }]`

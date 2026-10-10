@@ -49,7 +49,22 @@ Auth tables, admin functions, cache purge, real data import.
 Delete `drizzle/` and regenerate; local state is under `.wrangler/state` (safe to remove).
 
 ## Deviations
-(none yet)
+- **Test package renamed**: Cloudflare renamed `@cloudflare/vitest-pool-workers` to `@cloudflare/vitest-plugin` (v1, Aug 2026). Installed `vitest` 4.1 + `@cloudflare/vitest-plugin` 1.4. Config in `vitest.config.ts`; migrations are applied in `test/apply-migrations.ts` from the real `drizzle/` folder.
+- **File naming** follows `12-start-best-practices.md`: server-only helpers are `*.server.ts` (`env.server.ts`, `db.server.ts`, `queries/*.server.ts`); server function wrappers are `*.functions.ts` under `src/server/fns/`. Validators use `.inputValidator(...)`.
+- **`createDb(d1)`** lives in `src/db/index.ts` (pure, testable); `getDb()` in `src/server/db.server.ts` reads the binding per call.
+- **Zod schemas split from tables**: tables in `src/db/schema.ts`; `ProjectSchema`/`MailSchema` in `src/db/validation.ts` (drizzle-zod); the public `ContactSchema` is plain zod in `src/lib/schemas.ts` so the public bundle stays free of drizzle.
+- **No raw SQL**: `mail.sentAt` uses `$defaultFn(() => new Date().toISOString())` instead of a `CURRENT_TIMESTAMP` SQL default, so `sentAt`, `readAt` and `archivedAt` are all ISO 8601. Phase 9 must normalise old Turso `sentAt` values (`YYYY-MM-DD HH:MM:SS`) to ISO. Counts use `db.$count`.
+- `getPublicProject` does not join `image` (the project row already has `imgUrl`).
+- `deleteProject` returns the R2 key to delete (or null) from one atomic `db.batch`.
+- The seed script uses `getPlatformProxy` from wrangler, which only reaches local state; it refuses `--remote`.
+- `auth-schema.ts` is not in `drizzle.config.ts` yet (Phase 2).
 
 ## Handoff
-(template in `00-agent-protocol.md`)
+
+### Handoff (2026-10-10, Claude)
+Done: `src/db/{schema,validation,index}.ts`, `drizzle.config.ts`, `drizzle/0000_*.sql` (reviewed: matches the schema and both indexes), query modules for projects/mails/images, public server functions (`fetchPublicProjects`, `fetchPublicProject`, `sendContactMail`), `scripts/seed-dev.ts`, the Vitest harness with 10 tests, and scripts `db:generate`, `db:migrate:local`, `db:migrate:remote`, `seed:dev`, `test`.
+Verified by running: `bun run db:migrate:local` on an empty local D1 (tables `image`, `mail`, `project`). `bun run test` 10/10: CRUD, public filtering and order, search/filter/pagination, reorder, batch atomicity (a failing statement rolls back earlier ones), image foreign key enforced, delete returns or keeps the R2 key, mail read/archive/unread/delete/pagination. `bun run seed:dev`. A temporary index loader calling `fetchPublicProjects` rendered the 3 seeded projects via SSR on the production build under `vite preview` (temporary code removed). `grep` of `dist/client` found no `cloudflare:workers` or drizzle strings, so `verbatimModuleSyntax: true` does not leak in this build. Typecheck, lint and build pass; no libsql/dotenv/lucia in `src`.
+Not verified / could not run: `sendContactMail` over HTTP (no UI yet; its query is tested); `db:migrate:remote` and any remote D1; `drizzle-kit studio`.
+Deviations from spec: see Deviations.
+Pending research resolved: R-06, R-18.
+Next agent should watch out for: wrangler loads the untracked root `.env` (legacy Turso/UploadThing/Upstash secrets) into local dev bindings ("Using secrets defined in .env"). Harmless locally, but set `CLOUDFLARE_LOAD_DEV_VARS_FROM_DOT_ENV=false` or move the file before adding Phase 2 secrets. Re-run `bun run cf-typegen` after any `wrangler.jsonc` change.
