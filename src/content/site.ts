@@ -25,7 +25,7 @@ export const nav = {
 } as const;
 
 export const hero = {
-  status: 'Open to new roles',
+  status: 'Software Engineer at Chorcha',
   place: 'Rajshahi',
   hello: "Hello there! I'm",
   name: 'Towhid Karim',
@@ -41,27 +41,26 @@ export const hero = {
 
 export const proof = [
   {
+    value: 'Chorcha',
+    label: 'Software Engineer',
+    detail: 'Full-stack and mobile, since December 2025',
+    word: true,
+    live: true,
+  },
+  {
+    value: '3-5x',
+    label: 'Shipping velocity',
+    detail: 'with AI-native workflows in Cursor',
+  },
+  {
+    value: '75+',
+    label: 'Employees served',
+    detail: 'by an in-house attendance system I built',
+  },
+  {
     value: '3.99',
     label: 'CGPA of 4.00',
     detail: 'BSc in CSE, Varendra University',
-  },
-  {
-    value: '100%',
-    label: 'Assignments',
-    detail: 'Programming Hero Level 2, Batch 5',
-  },
-  {
-    value: 'AI-native',
-    label: 'LLM workflows, RAG',
-    detail: 'and agentic loops in the stack',
-    word: true,
-  },
-  {
-    value: 'Open to roles',
-    label: 'Rajshahi, Bangladesh',
-    detail: 'GMT+6',
-    word: true,
-    live: true,
   },
 ] as const;
 
@@ -141,7 +140,7 @@ export const aboutSection = {
   ],
   facts: [
     ['Name', 'Towhid Karim'],
-    ['Status', 'Looking for employment'],
+    ['Status', 'Software Engineer at Chorcha'],
     ['Education', 'BSc in CSE'],
     ['Focus', 'Full-stack, AI-native'],
   ],
@@ -172,6 +171,7 @@ export const footer = {
 
 export const SITE = {
   name: 'Towhid Karim',
-  jobTitle: 'Full-Stack Engineer',
+  jobTitle: 'Software Engineer',
+  worksFor: 'Chorcha',
   sameAs: [GITHUB_URL, FACEBOOK_URL],
 } as const;

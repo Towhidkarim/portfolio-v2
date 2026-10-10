@@ -33,6 +33,7 @@ export const Route = createFileRoute('/_site/')({
           '@type': 'Person',
           name: SITE.name,
           jobTitle: SITE.jobTitle,
+          worksFor: { '@type': 'Organization', name: SITE.worksFor },
           sameAs: SITE.sameAs,
         }),
       },

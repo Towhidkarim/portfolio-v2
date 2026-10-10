@@ -187,7 +187,7 @@ function Styleguide() {
         <Pill tone='brand'>Featured</Pill>
         <Badge variant='outline'>Outline</Badge>
         <Badge variant='destructive'>Error</Badge>
-        <StatusPill label='Open to new roles' place='Rajshahi' />
+        <StatusPill label='Software Engineer at Chorcha' place='Rajshahi' />
       </Block>
 
       <Block title='Section header (curtain, bar, sub)'>

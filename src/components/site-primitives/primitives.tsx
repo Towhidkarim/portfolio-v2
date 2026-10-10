@@ -133,7 +133,7 @@ const formatTime = (timeZone: string) =>
   }).format(new Date());
 
 /**
- * "Open to new roles | Rajshahi 14:05". The clock only exists in the browser:
+ * "Software Engineer at Chorcha | Rajshahi 14:05". The clock only exists in the browser:
  * the server renders `--:--`, so cached HTML never shows a stale time.
  */
 export function StatusPill({

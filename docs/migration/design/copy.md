@@ -19,7 +19,7 @@ Logo: `<Towhid/Karim>`. Links: Home, Skills, Projects, About me, Contact. Right:
 
 ## Hero
 
-- Status pill: `Open to new roles` | `Rajshahi` + live time `HH:MM` (Asia/Dhaka, computed in the browser after mount; server renders `--:--`)
+- Status pill: `Software Engineer at Chorcha` | `Rajshahi` + live time `HH:MM` (Asia/Dhaka, computed in the browser after mount; server renders `--:--`)
 - `Hello there! I'm`
 - H1: `Towhid Karim`
 - Role line (typewriter, two phrases): `A Full-Stack Engineer`, then `Crafting Scalable Apps with React & Next.js`
@@ -32,14 +32,14 @@ Logo: `<Towhid/Karim>`. Links: Home, Skills, Projects, About me, Contact. Right:
 
 | Value | Label | Detail |
 | --- | --- | --- |
+| `Chorcha` (live dot) | Software Engineer | Full-stack and mobile, since December 2025 |
+| `3-5x` | Shipping velocity | with AI-native workflows in Cursor |
+| `75+` | Employees served | by an in-house attendance system I built |
 | `3.99` | CGPA of 4.00 | BSc in CSE, Varendra University |
-| `100%` | Assignments | Programming Hero Level 2, Batch 5 |
-| `AI-native` | LLM workflows, RAG | and agentic loops in the stack |
-| `Open to roles` (live dot) | Rajshahi, Bangladesh | GMT+6 |
 
 ## Stack marquee (order)
 
-React, Next.js, TypeScript, Tailwind CSS, TanStack Query, Zustand, Node.js, Bun, Hono, Redis, Drizzle ORM, Prisma, PostgreSQL, Docker, Cloudflare, Cursor, Vercel AI SDK, Python. (Redis and Turso are still skills on the site even though the new stack replaces them in production.)
+React, Next.js, TypeScript, Tailwind CSS, TanStack Query, TanStack Start, Zustand, Node.js, Bun, Hono, Redis, Drizzle ORM, Prisma, PostgreSQL, Docker, Cloudflare, Claude, Codex, Cursor, Vercel AI SDK, Python. (Redis and Turso are still skills on the site even though the new stack replaces them in production.)
 
 ## Skills section
 
@@ -85,7 +85,7 @@ Eyebrow `04 · The person`, H2 `About Me`, sub `A little about who is behind the
 - Paragraph 1: `I'm a passionate web developer with a knack for transforming innovative ideas into functional and visually captivating digital experiences. My coding journey started with a fascination for how logic could bring pixels to life.`
 - Paragraph 2: `With a solid foundation in React, Next.js, and Tailwind, I create responsive user interfaces and seamless user experiences, blending aesthetics with functionality. As an avid problem solver, I thrive on tackling new challenges head-on. When not coding, I explore the latest design trends or brainstorm my next project over a cup of coffee.`
 - Dropped from the old site: `Welcome to my portfolio, where I showcase my dedication and passion for web development.`
-- Facts grid: Name `Towhid Karim`; Status `Looking for employment`; Education `BSc in CSE`; Focus `Full-stack, AI-native` (**owner to confirm**; replaces `Experience: Adept`).
+- Facts grid: Name `Towhid Karim`; Status `Software Engineer at Chorcha`; Education `BSc in CSE`; Focus `Full-stack, AI-native` (**owner to confirm**; replaces `Experience: Adept`).
 - Photo: `public/images/dp.jpg` (720x960), alt `Portrait of Towhid Karim`, overlay chip `Rajshahi, Bangladesh`.
 - Buttons: `Github` (`https://github.com/Towhidkarim/`), `Facebook` (`https://fb.me/towhid.karim.1`).
 
@@ -100,3 +100,5 @@ Form: Name (`Your name`), Email (`you@company.com`), Message (`How can I help?`)
 ## Footer
 
 `© 2026 Towhid Karim` | `BSc in CSE • CGPA 3.99 • Class of 2026` | `Back to top`.
+
+> Updated 2026-10-11 (owner): not open to work, now Software Engineer at Chorcha (since December 2025); proof strip replaced; TanStack Start added to Front End; Claude and Codex added to Tools & DevOps before Cursor.
