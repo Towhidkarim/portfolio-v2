@@ -73,10 +73,13 @@ export function SectionHeader({
 export function Chip({
   icon,
   plate = true,
+  size = 'md',
   children,
   className,
 }: {
   icon?: ReactNode;
+  /** `sm` is the denser chip used inside the skills bento */
+  size?: 'md' | 'sm';
   /** light plate behind the icon in dark mode (monochrome logos) */
   plate?: boolean;
   children: ReactNode;
@@ -85,15 +88,20 @@ export function Chip({
   return (
     <span
       className={cn(
-        'inline-flex h-[46px] cursor-default items-center gap-2.5 rounded-control border border-line bg-card pr-4 pl-[9px] text-sm font-medium text-foreground transition-[border-color,transform,box-shadow] duration-250 hover:border-brand hover:shadow-[0_10px_22px_-14px_var(--brand)] motion-safe:hover:-translate-y-0.5',
+        'inline-flex cursor-default items-center rounded-control border border-line bg-card font-medium text-foreground transition-[border-color,transform,box-shadow] duration-250 hover:border-brand hover:shadow-[0_10px_22px_-14px_var(--brand)] motion-safe:hover:-translate-y-0.5',
+        size === 'sm'
+          ? 'h-10 gap-2 pr-3.5 pl-[7px] text-[13.5px]'
+          : 'h-[46px] gap-2.5 pr-4 pl-[9px] text-sm',
         className,
       )}
     >
       {icon ? (
         <span
           className={cn(
-            'grid size-[30px] place-items-center rounded-lg text-brand-ink dark:text-[#0E6B58]',
-            plate && 'bg-plate',
+            'grid place-items-center rounded-lg text-brand-ink',
+            size === 'sm' ? 'size-[26px]' : 'size-[30px]',
+            // a plate is light in dark mode, so its icon colour must be dark there
+            plate && 'bg-plate dark:text-[#0E6B58]',
           )}
         >
           {icon}

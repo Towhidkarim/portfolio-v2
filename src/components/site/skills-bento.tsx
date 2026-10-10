@@ -36,10 +36,14 @@ function BentoCard({
           {String(group.items.length).padStart(2, '0')}
         </span>
       </div>
-      <ul className='flex flex-wrap gap-2.5'>
+      <ul className='flex flex-wrap gap-2'>
         {group.items.map((s) => (
           <li key={s.name}>
-            <Chip plate={Boolean(s.mono)} icon={<SkillIcon skill={s} />}>
+            <Chip
+              size='sm'
+              plate={Boolean(s.mono)}
+              icon={<SkillIcon skill={s} size={18} />}
+            >
               {s.name}
             </Chip>
           </li>

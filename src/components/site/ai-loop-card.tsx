@@ -52,14 +52,14 @@ export function AiLoopCard({ group }: { group: SkillGroup }) {
             </li>
           ))}
         </ol>
-        <ul className='mt-6 flex flex-wrap gap-2.5'>
+        <ul className='mt-6 flex flex-wrap gap-2'>
           {group.items.map((s) => (
             <li
               key={s.name}
-              className='inline-flex h-[46px] items-center gap-2.5 rounded-control border border-[#2A3644] bg-[#0E161E] pr-4 pl-[9px] text-sm font-medium'
+              className='inline-flex h-10 items-center gap-2 rounded-control border border-[#2A3644] bg-[#0E161E] pr-3.5 pl-[7px] text-[13.5px] font-medium'
             >
-              <span className='grid size-[30px] place-items-center rounded-lg bg-[#F8FAFC] text-[#0E6B58]'>
-                <SkillIcon skill={s} />
+              <span className='grid size-[26px] place-items-center rounded-lg bg-[#F8FAFC] text-[#0E6B58]'>
+                <SkillIcon skill={s} size={18} />
               </span>
               {s.name}
             </li>
