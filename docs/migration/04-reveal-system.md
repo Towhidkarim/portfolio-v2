@@ -1,5 +1,7 @@
 # Reveal system
 
+> **As built (Phase 3, 2026-10-10):** `src/components/reveal/*`, `src/styles/reveal.css`, `src/styles/motion.css`. The `immediate` refinement is implemented (`data-in` + `data-immediate`). Never put `[data-reveal]` on an element with its own hover transform/transition: wrap it. Verified by `bun run check:reveal` (criteria 1, 2, 5 plus theme, fonts, hydration, overflow). Criterion 6 (client navigation re-scan) is verified in Phase 4 when two pages use Reveal.
+
 Refines the owner's `components/framer/Reveal.tsx`. Visual reference: `design/screens/h5-reveal.png` and `design/source/h5-reveal.html` (open it: the three demos loop every 7 s). Curtain filmstrip: `design/screens/h5-curtain-frame-1.png` to `-5.png` (t = 0.25, 0.6, 0.95, 1.5, 3 s).
 
 ## Philosophy

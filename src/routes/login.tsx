@@ -1,6 +1,10 @@
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import { z } from 'zod';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { authClient } from '@/lib/auth-client';
 import { safeRedirect } from '@/lib/redirect';
 import { fetchAdminSession } from '@/server/fns/session.functions';
@@ -53,60 +57,69 @@ function LoginPage() {
   }
 
   return (
-    <main className='mx-auto flex min-h-screen max-w-sm flex-col justify-center gap-6 px-4'>
-      <h1 className='text-2xl font-bold'>Sign in</h1>
-      <form onSubmit={onSubmit} className='flex flex-col gap-4' noValidate>
-        <div className='flex flex-col gap-1.5'>
-          <label htmlFor='email' className='text-sm font-medium'>
-            Email
-          </label>
-          <input
-            id='email'
-            name='email'
-            type='email'
-            autoComplete='username'
-            required
-            className='h-12 rounded-xl border px-3'
-          />
-        </div>
-        <div className='flex flex-col gap-1.5'>
-          <label htmlFor='password' className='text-sm font-medium'>
-            Password
-          </label>
-          <div className='flex gap-2'>
-            <input
-              id='password'
-              name='password'
-              type={showPassword ? 'text' : 'password'}
-              autoComplete='current-password'
-              required
-              className='h-12 flex-1 rounded-xl border px-3'
-            />
-            <button
-              type='button'
-              onClick={() => setShowPassword((v) => !v)}
-              aria-pressed={showPassword}
-              className='h-12 rounded-xl border px-3 text-sm'
-            >
-              {showPassword ? 'Hide' : 'Show'}
-            </button>
-          </div>
-        </div>
-        <p
-          role='alert'
-          aria-live='polite'
-          className='min-h-5 text-sm text-red-600'
-        >
-          {error}
+    <main
+      id='main'
+      className='relative flex min-h-screen items-center justify-center px-5'
+    >
+      <div className='absolute top-5 right-5'>
+        <ThemeToggle />
+      </div>
+      <div className='w-full max-w-sm rounded-card border border-line bg-card p-8'>
+        <p className='font-mono text-xs uppercase tracking-[0.14em] text-brand-ink'>
+          Admin
         </p>
-        <button
-          type='submit'
-          disabled={pending}
-          className='h-12 rounded-xl bg-black px-5 font-semibold text-white disabled:opacity-60'
+        <h1 className='mt-2 text-[28px] font-extrabold tracking-[-0.03em]'>
+          Sign in
+        </h1>
+        <form
+          onSubmit={onSubmit}
+          className='mt-6 flex flex-col gap-4'
+          noValidate
         >
-          {pending ? 'Signing in...' : 'Sign in'}
-        </button>
-      </form>
+          <div>
+            <Label htmlFor='email'>Email</Label>
+            <Input
+              id='email'
+              name='email'
+              type='email'
+              autoComplete='username'
+              required
+              aria-invalid={error ? true : undefined}
+            />
+          </div>
+          <div>
+            <Label htmlFor='password'>Password</Label>
+            <div className='flex gap-2'>
+              <Input
+                id='password'
+                name='password'
+                type={showPassword ? 'text' : 'password'}
+                autoComplete='current-password'
+                required
+                aria-invalid={error ? true : undefined}
+              />
+              <Button
+                variant='outline'
+                onClick={() => setShowPassword((v) => !v)}
+                aria-pressed={showPassword}
+                className='px-4'
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </Button>
+            </div>
+          </div>
+          <p
+            role='alert'
+            aria-live='polite'
+            className='min-h-5 text-sm text-danger'
+          >
+            {error}
+          </p>
+          <Button type='submit' disabled={pending} className='w-full'>
+            {pending ? 'Signing in...' : 'Sign in'}
+          </Button>
+        </form>
+      </div>
     </main>
   );
 }

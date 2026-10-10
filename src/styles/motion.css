@@ -1,0 +1,265 @@
+/* Ambient motion from the approved design (docs/migration/design/source/h1-desktop.html).
+ * Fixed per-element values only, no randomness. Everything is disabled or reduced
+ * under prefers-reduced-motion at the bottom of this file. */
+
+@keyframes m-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--brand) 50%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 7px color-mix(in srgb, var(--brand) 0%, transparent);
+  }
+}
+@keyframes m-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes m-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes m-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes m-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes m-step {
+  0%,
+  20% {
+    background: var(--stepbg);
+    color: var(--steplit);
+    border-color: var(--stepbg);
+  }
+  26%,
+  100% {
+    background: transparent;
+    color: #c5d0dd;
+    border-color: #2a3644;
+  }
+}
+@keyframes m-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(18px, -14px);
+  }
+}
+@keyframes m-type {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  12%,
+  44% {
+    clip-path: inset(0 0 0 0);
+  }
+  54%,
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+@keyframes m-caret {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  12%,
+  44% {
+    left: 100%;
+    opacity: 1;
+  }
+  54% {
+    left: 0;
+    opacity: 1;
+  }
+  54.1%,
+  100% {
+    left: 0;
+    opacity: 0;
+  }
+}
+
+/* status pill dot */
+.m-live {
+  animation: m-pulse 2.2s ease-out infinite;
+}
+
+/* floating hero chips: fixed duration/delay per chip */
+.m-float {
+  animation: m-float 6s ease-in-out infinite;
+}
+.m-float-2 {
+  animation: m-float 7s ease-in-out -2s infinite;
+}
+.m-float-3 {
+  animation: m-float 5.5s ease-in-out -1s infinite;
+}
+.m-float-4 {
+  animation: m-float 6.5s ease-in-out -3s infinite;
+}
+
+/* soft glow behind the hero illustration */
+.m-glow {
+  animation: m-drift 12s ease-in-out infinite;
+}
+
+/* stack marquee: duplicate the track, second copy aria-hidden */
+.m-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+.m-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: m-marquee 46s linear infinite;
+}
+.m-marquee:hover .m-marquee-track {
+  animation-play-state: paused;
+}
+
+/* AI loop: four pills highlight in turn, 6 s cycle. Set --stepbg/--steplit and a negative delay per pill. */
+.m-step {
+  animation: m-step 6s infinite;
+}
+
+/* activity heatmap: columns pop in 22 ms apart. Set --c to the column index. */
+.m-hm-col {
+  animation: m-pop 0.5s var(--reveal-ease, cubic-bezier(0.2, 0.7, 0.2, 1)) both;
+  animation-delay: calc(var(--c, 0) * 22ms + 0.3s);
+}
+
+/* typewriter: two phrases, 14 s loop. Phrase markup:
+   <div class="typer"><div class="typer-ph typer-a" style="--n:21"><span class="typer-tx">..</span><span class="typer-cr"><i/></span></div>
+   <div class="typer-ph typer-b" style="--n:43">..</div></div> */
+.typer {
+  position: relative;
+  display: grid;
+}
+.typer-ph {
+  grid-area: 1 / 1;
+  position: relative;
+  width: max-content;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--brandink);
+}
+.typer-tx {
+  display: block;
+}
+.typer-cr {
+  position: absolute;
+  top: 8%;
+  bottom: 8%;
+  width: 3px;
+  margin-left: 3px;
+}
+.typer-cr i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--brand);
+  border-radius: 2px;
+  animation: m-blink 1s steps(1) infinite;
+}
+.typer-a .typer-tx {
+  animation: m-type 14s linear infinite;
+  animation-timing-function: steps(var(--n), end);
+}
+.typer-a .typer-cr {
+  animation: m-caret 14s linear infinite;
+  animation-timing-function: steps(var(--n), end);
+}
+.typer-b .typer-tx {
+  animation: m-type 14s linear infinite;
+  animation-timing-function: steps(var(--n), end);
+  animation-delay: 7s;
+  clip-path: inset(0 100% 0 0);
+}
+.typer-b .typer-cr {
+  animation: m-caret 14s linear infinite;
+  animation-timing-function: steps(var(--n), end);
+  animation-delay: 7s;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m-live,
+  .m-float,
+  .m-float-2,
+  .m-float-3,
+  .m-float-4,
+  .m-glow,
+  .m-marquee-track,
+  .m-step,
+  .m-hm-col,
+  .typer-cr i,
+  .typer-a .typer-tx,
+  .typer-a .typer-cr,
+  .typer-b .typer-tx,
+  .typer-b .typer-cr {
+    animation: none;
+  }
+  .typer-b {
+    display: none;
+  }
+  .typer-a .typer-tx {
+    clip-path: none;
+  }
+  .typer-cr {
+    opacity: 0;
+  }
+  /* static, wrapped list instead of a scrolling strip; the duplicate copy is hidden */
+  .m-marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .m-marquee-track {
+    width: auto;
+    flex-wrap: wrap;
+  }
+  .m-marquee-track > * {
+    flex-wrap: wrap;
+  }
+  .m-marquee-track > [aria-hidden="true"] {
+    display: none;
+  }
+}

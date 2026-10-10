@@ -1,2 +1,156 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
+/* Self-hosted fonts (latin subset only). Poppins 400 and 800 are also preloaded in __root.tsx. */
+@import "@fontsource/poppins/latin-400.css";
+@import "@fontsource/poppins/latin-500.css";
+@import "@fontsource/poppins/latin-600.css";
+@import "@fontsource/poppins/latin-700.css";
+@import "@fontsource/poppins/latin-800.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/jetbrains-mono/latin-500.css";
+
+@import "./tokens.css";
+@import "./reveal.css";
+@import "./motion.css";
+
+/* Dark mode is a `dark` class on <html>, set by the inline theme script. */
+@custom-variant dark (&:is(.dark *));
+
+/* Tokens (tokens.css) -> Tailwind utilities. `inline` keeps utilities pointing
+   at the live CSS variables so light/dark switching needs no extra CSS. */
+@theme inline {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* design tokens */
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-surface: var(--surface);
+  --color-ink2: var(--ink2);
+  --color-ink3: var(--ink3);
+  --color-line: var(--line);
+  --color-line2: var(--line2);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brandink);
+  --color-brand-soft: var(--brandsoft);
+  --color-curtain: var(--curtain);
+  --color-card: var(--card);
+  --color-pill: var(--pill);
+  --color-pill-ink: var(--pillink);
+  --color-panel: var(--panel);
+  --color-plate: var(--plate);
+  --color-nav: var(--nav);
+  /* text-safe red (AA on both backgrounds); the shadcn destructive token is for borders and fills */
+  --color-danger: var(--danger);
+
+  /* shadcn names (HSL triplets in tokens.css) */
+  --color-card-foreground: hsl(var(--card-foreground-hsl));
+  --color-popover: hsl(var(--popover-hsl));
+  --color-popover-foreground: hsl(var(--popover-foreground-hsl));
+  --color-primary: hsl(var(--primary-hsl));
+  --color-primary-foreground: hsl(var(--primary-foreground-hsl));
+  --color-secondary: hsl(var(--secondary-hsl));
+  --color-secondary-foreground: hsl(var(--secondary-foreground-hsl));
+  --color-muted: hsl(var(--muted-hsl));
+  --color-muted-foreground: hsl(var(--muted-foreground-hsl));
+  --color-accent: hsl(var(--accent-hsl));
+  --color-accent-foreground: hsl(var(--accent-foreground-hsl));
+  --color-destructive: hsl(var(--destructive-hsl));
+  --color-destructive-foreground: hsl(var(--destructive-foreground-hsl));
+  --color-border: hsl(var(--border-hsl));
+  --color-input: hsl(var(--input-hsl));
+  --color-ring: hsl(var(--ring-hsl));
+
+  /* radii: controls 12, info cards 22, project cards 24, pills 999 */
+  --radius-control: 12px;
+  --radius-card: 22px;
+  --radius-project: 24px;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-card: var(--shadow);
+  --container-site: 1160px;
+}
+
+:root {
+  --page-pad: 20px;
+  --danger: #b91c1c;
+}
+.dark {
+  --danger: #f87171;
+}
+@media (min-width: 768px) {
+  :root {
+    --page-pad: 40px;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --page-pad: 60px;
+  }
+}
+
+/* 1160 px centred container; the page padding is 60 px at 1280. */
+@utility container {
+  width: min(var(--container-site), 100% - 2 * var(--page-pad));
+  margin-inline: auto;
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--brandsoft);
+    color: var(--brandink);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Utilities the design uses repeatedly */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--gridline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--gridline) 1px, transparent 1px);
+  background-size: 32px 32px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 80% at 50% 0%,
+    #000 20%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(
+    ellipse 70% 80% at 50% 0%,
+    #000 20%,
+    transparent 75%
+  );
+}

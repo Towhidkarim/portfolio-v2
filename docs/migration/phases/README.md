@@ -11,7 +11,7 @@ Update this table in the same commit that finishes a phase.
 | 0 | Scaffold, park legacy, spikes | none | 0.5 day | done (Spike A deferred to Phase 8 by owner) | 2026-10-10 | see git log `phase-0:` | Biome instead of ESLint/Prettier; local D1/R2 only |
 | 1 | Data layer: D1 + Drizzle | 0 | 1 day | done | 2026-10-10 | see git log `phase-1:` | 10 query tests pass on Miniflare D1; local only |
 | 2 | Auth: Better Auth | 0, 1 | 1 day | done (scrypt CPU unmeasured until a deploy) | 2026-10-10 | see git log `phase-2:` | admin plugin + access control; admins via `bun run admin:create` |
-| 3 | Design foundation + Reveal | 0 | 1.5 days | not started | | | |
+| 3 | Design foundation + Reveal | 0 | 1.5 days | done | 2026-10-10 | see git log `phase-3:` | `/styleguide`; 32/32 reveal checks, axe 0 violations, Lighthouse a11y 100 |
 | 4 | Public site | 1, 3 | 2 days | not started | | | |
 | 5 | Edge cache + purge | 1, 4 | 1 day | not started | | | |
 | 6 | Media: R2 | 2 | 0.75 day | not started | | | |

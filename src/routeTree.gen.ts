@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as StyleguideRouteImport } from './routes/styleguide'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api.auth.$'
 
@@ -30,6 +31,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StyleguideRoute = StyleguideRouteImport.update({
+  id: '/styleguide',
+  path: '/styleguide',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -45,12 +51,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
+  '/styleguide': typeof StyleguideRoute
   '/admin/': typeof AdminIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/styleguide': typeof StyleguideRoute
   '/admin': typeof AdminIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
@@ -59,21 +67,31 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
+  '/styleguide': typeof StyleguideRoute
   '/admin/': typeof AdminIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/login' | '/admin/' | '/api/auth/$'
+  fullPaths:
+    '/' | '/admin' | '/login' | '/styleguide' | '/admin/' | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/admin' | '/api/auth/$'
-  id: '__root__' | '/' | '/admin' | '/login' | '/admin/' | '/api/auth/$'
+  to: '/' | '/login' | '/styleguide' | '/admin' | '/api/auth/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/login'
+    | '/styleguide'
+    | '/admin/'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   LoginRoute: typeof LoginRoute
+  StyleguideRoute: typeof StyleguideRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
@@ -98,6 +116,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/styleguide': {
+      id: '/styleguide'
+      path: '/styleguide'
+      fullPath: '/styleguide'
+      preLoaderRoute: typeof StyleguideRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -131,6 +156,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   LoginRoute: LoginRoute,
+  StyleguideRoute: StyleguideRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
