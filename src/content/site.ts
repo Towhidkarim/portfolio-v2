@@ -68,6 +68,7 @@ export const skillsSection = {
   eyebrow: '01 · The stack',
   title: 'Skills',
   sub: 'The tools I reach for, grouped by where they sit in a product.',
+  alsoLabel: 'Also worked with',
   principlesLabel: 'Core principles I deliver',
   aiSub: 'Models in the loop, from first prompt to reviewed code.',
   aiLoop: ['Prompt', 'Plan', 'Build', 'Review'],

@@ -1,4 +1,4 @@
-import { Bot, Brain, Library } from 'lucide-react';
+import { Bot, Brain, FileSignature, KeyRound, Library } from 'lucide-react';
 import type { Skill } from '@/content/skills';
 
 // lucide-react 1.x ships no brand marks, so they are inline SVG.
@@ -32,7 +32,7 @@ export function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-const lucideIcons = { Brain, Library, Bot } as const;
+const lucideIcons = { Brain, Library, Bot, FileSignature, KeyRound } as const;
 
 /** Logo from public/icons (decorative: the label is the adjacent text) or a lucide icon. */
 export function SkillIcon({
