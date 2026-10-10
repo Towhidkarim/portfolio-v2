@@ -11,7 +11,7 @@ export async function insertImage(db: Db, row: Omit<NewImage, 'id'>) {
 }
 
 export async function getImage(db: Db, id: string) {
-  return db.query.images.findFirst({ where: eq(images.id, id) });
+  return db.query.images.findFirst({ where: { id } });
 }
 
 // Statement (not yet run) that deletes the image row only when no project

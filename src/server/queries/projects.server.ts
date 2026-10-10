@@ -8,19 +8,17 @@ export type ProjectStatus = 'all' | 'enabled' | 'disabled';
 
 export async function getPublicProjects(db: Db) {
   return db.query.projects.findMany({
-    where: eq(projects.enabled, true),
-    orderBy: desc(projects.displayIndex),
+    where: { enabled: true },
+    orderBy: { displayIndex: 'desc' },
   });
 }
 
 export async function getPublicProject(db: Db, id: string) {
-  return db.query.projects.findFirst({
-    where: and(eq(projects.id, id), eq(projects.enabled, true)),
-  });
+  return db.query.projects.findFirst({ where: { id, enabled: true } });
 }
 
 export async function getProject(db: Db, id: string) {
-  return db.query.projects.findFirst({ where: eq(projects.id, id) });
+  return db.query.projects.findFirst({ where: { id } });
 }
 
 export async function listProjects(
@@ -38,12 +36,13 @@ export async function listProjects(
     status === 'all' ? undefined : eq(projects.enabled, status === 'enabled'),
   );
   const [rows, total] = await Promise.all([
-    db.query.projects.findMany({
-      where,
-      orderBy: [desc(projects.displayIndex), asc(projects.projectName)],
-      limit: pageSize,
-      offset: (page - 1) * pageSize,
-    }),
+    db
+      .select()
+      .from(projects)
+      .where(where)
+      .orderBy(desc(projects.displayIndex), asc(projects.projectName))
+      .limit(pageSize)
+      .offset((page - 1) * pageSize),
     db.$count(projects, where),
   ]);
   return { rows, total };

@@ -27,12 +27,13 @@ export async function listMails(
   const { filter = 'inbox', page = 1, pageSize = 20 } = opts;
   const where = filterWhere(filter);
   const [rows, total] = await Promise.all([
-    db.query.mails.findMany({
-      where,
-      orderBy: desc(mails.sentAt),
-      limit: pageSize,
-      offset: (page - 1) * pageSize,
-    }),
+    db
+      .select()
+      .from(mails)
+      .where(where)
+      .orderBy(desc(mails.sentAt))
+      .limit(pageSize)
+      .offset((page - 1) * pageSize),
     db.$count(mails, where),
   ]);
   return { rows, total };

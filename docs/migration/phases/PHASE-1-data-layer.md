@@ -58,6 +58,7 @@ Delete `drizzle/` and regenerate; local state is under `.wrangler/state` (safe t
 - `deleteProject` returns the R2 key to delete (or null) from one atomic `db.batch`.
 - The seed script uses `getPlatformProxy` from wrangler, which only reaches local state; it refuses `--remote`.
 - `auth-schema.ts` is not in `drizzle.config.ts` yet (Phase 2).
+- **Superseded by the Drizzle 1.0 upgrade (see Phase 2 deviations and `06-data-d1.md`)**: `drizzle-zod` is gone (`drizzle-orm/zod`), queries use relational queries v2 or the core builder, migrations are nested folders, and the initial migration was regenerated. The data-layer tests are unchanged and still pass (30/30 with the validation tests).
 
 ## Handoff
 

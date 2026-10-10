@@ -14,8 +14,8 @@ Registry versions checked on 2026-10-09. Pin exact versions in `package.json` on
 | `wrangler` | 4.149.0 | |
 | `@cloudflare/workers-types` | latest (or `wrangler types`) | prefer generated `worker-configuration.d.ts` |
 | `better-auth` | 1.7.7 | |
-| `drizzle-orm` | repo ^0.41; registry 0.45.4 | upgrade only if D1 or Better Auth require it (R-06, R-18) |
-| `drizzle-kit` | repo ^0.30; registry 0.31.11 | |
+| `drizzle-orm` | 1.0.0-rc.4 (`rc` tag; owner-approved prerelease) | v1: relations v2 (`defineRelations`), validators in `drizzle-orm/zod`, no `drizzle-zod` package |
+| `drizzle-kit` | 1.0.0-rc.4 | migrations are `drizzle/<timestamp>_<name>/migration.sql` + `snapshot.json` (no `journal.json`) |
 | `tailwindcss`, `@tailwindcss/vite` | 4.3.3 (installed) | CSS-first config (`@theme`), `tw-animate-css` replaces `tailwindcss-animate` |
 | `react`, `react-dom` | 19.x | |
 | `@vitejs/plugin-react` | version matching Vite | React Compiler via Babel plugin (R-09) |

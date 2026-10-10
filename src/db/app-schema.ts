@@ -1,3 +1,4 @@
+import { defineRelations } from 'drizzle-orm';
 import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 // Application tables only. Better Auth tables live in auth-schema.ts (Phase 2).
@@ -52,3 +53,17 @@ export type NewProject = typeof projects.$inferInsert;
 export type Image = typeof images.$inferSelect;
 export type NewImage = typeof images.$inferInsert;
 export type Mail = typeof mails.$inferSelect;
+
+// Relational-query (v2) definitions for the app tables. The generated
+// auth-schema.ts exports its own `authRelations` part; src/db/index.ts merges both.
+export const appRelations = defineRelations(
+  { images, projects, mails },
+  (r) => ({
+    projects: {
+      image: r.one.images({ from: r.projects.imgID, to: r.images.id }),
+    },
+    images: {
+      projects: r.many.projects({ from: r.images.id, to: r.projects.imgID }),
+    },
+  }),
+);
